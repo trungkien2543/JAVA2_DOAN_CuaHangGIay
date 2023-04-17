@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e78ceb5b-40c9-445c-ac5e-113aa6348cc3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT        dbo.HoaDon.*, dbo.NhanVien.MaNV AS Expr1, dbo.NhanVien.TenNV, dbo.ChiTietHoaDon.*, dbo.KhachHang.MaKH AS Expr2, dbo.KhachHang.TenKH
+FROM            dbo.ChiTietHoaDon INNER JOIN
+                         dbo.HoaDon ON dbo.ChiTietHoaDon.MaHoaDon = dbo.HoaDon.MaHoaDon INNER JOIN
+                         dbo.KhachHang ON dbo.HoaDon.MaKH = dbo.KhachHang.MaKH INNER JOIN
+                         dbo.NhanVien ON dbo.HoaDon.MaNV = dbo.NhanVien.MaNV]]>
+	</queryString>
+	<field name="MaHoaDon" class="java.lang.Long"/>
+	<field name="MaNV" class="java.lang.String"/>
+	<field name="MaKH" class="java.lang.String"/>
+	<field name="NgayLap" class="java.sql.Date"/>
+	<field name="ThongTinUuDai" class="java.lang.String"/>
+	<field name="TongTien" class="java.lang.Long"/>
+	<field name="Expr1" class="java.lang.String"/>
+	<field name="TenNV" class="java.lang.String"/>
+	<field name="MaSach" class="java.lang.String"/>
+	<field name="TenSach" class="java.lang.String"/>
+	<field name="GiaSach" class="java.lang.Long"/>
+	<field name="SLMua" class="java.lang.Integer"/>
+	<field name="Expr2" class="java.lang.String"/>
+	<field name="TenKH" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="187" y="19" width="192" height="28" uuid="667c340c-9891-4874-8f89-e14ac7a7c6fb"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hóa đơn bán hàng]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="57" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
