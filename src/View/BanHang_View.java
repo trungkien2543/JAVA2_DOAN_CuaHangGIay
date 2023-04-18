@@ -977,7 +977,7 @@ public class BanHang_View extends javax.swing.JFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         String SDT = txtSDT.getText();
         if(SDT.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Chua nhap so dien thoai cua khach hang");
+            JOptionPane.showMessageDialog(rootPane, "Chua nhap so dien thoai cua khach");
             return;
         }
         
