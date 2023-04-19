@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import BUS.BUSChiTietHoaDon;
+import BUS.BUSHoaDon;
+import BUS.BUSKhachHang;
 import BUS.BUSKhoSach;
 import DAO.DAOChiTietHoaDon;
 import DAO.DAOKhachHang;
@@ -1209,9 +1212,7 @@ public class BanHang_View extends javax.swing.JFrame {
         if(txtTenKH.getText().isEmpty() || txtDiaChi.getText().isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Khong de trong thong tin");
             return;
-        }
-        
-        
+        }  
         DTOKhachHang s = new DTOKhachHang();
         s.setMaKH(txtSDT_NHAP.getText());
         s.setTenKH(txtTenKH.getText());
@@ -1219,13 +1220,11 @@ public class BanHang_View extends javax.swing.JFrame {
         s.setSDT(txtSDT_NHAP.getText());
         s.setTichDiem(0);
         list_kh.add(s);
-        if(new DAOKhachHang().addKhachHang(s)){
-            JOptionPane.showMessageDialog(rootPane, "Them thong tin khach hang thanh cong");
+        if(new BUSKhachHang().addKhachHang(s).equals("Thêm khách hàng thành công")){
             jpNhapThongTinKhach.setVisible(false);
             jpThongTinKhach.setVisible(true);
             btnXacNhanActionPerformed(evt);
         }
-
     }//GEN-LAST:event_btnAddKHActionPerformed
  
     
@@ -1290,13 +1289,8 @@ public class BanHang_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Chua nhap thong tin khach");
             return;
         }
-        Random rd = new Random();
-        String code = Integer.toString(new DAOHoaDon().getMaxMaHoaDon() + 1);
         
-        
-
-
-        lblMaPhieu.setText(code);
+        lblMaPhieu.setText(new BUSHoaDon().getNewCode());
         lblMaKH_HD.setText(lblMaKH.getText());
         lblTenKH_HD.setText(lblTenKH.getText());
         lblTongTien.setText(lblTongTien_Nhap.getText());
@@ -1356,8 +1350,8 @@ public class BanHang_View extends javax.swing.JFrame {
         
         //Reset array list
         list = new BUSKhoSach().getALLSach();
-        list_kh = new DAOKhachHang().getListKH();
-        list_hd = new DAOHoaDon().getListHoaDon();
+        list_kh = new BUSKhachHang().getAllKhachHang();
+        list_hd = new BUSHoaDon().getAllHoaDon();
         
     }
     
@@ -1437,30 +1431,28 @@ public class BanHang_View extends javax.swing.JFrame {
                 
        
         
-        if(new DAOHoaDon().insertHoaDon(s)){
+        JOptionPane.showMessageDialog(rootPane, new BUSHoaDon().addHoaDon(s));
             
-            //Them thong tin hang vao chi tiet hoa don
+        //Them thong tin hang vao chi tiet hoa don
 
-            
-            for (int i = 0; i < tblHoaDon.getRowCount(); i++){
+
+        for (int i = 0; i < tblHoaDon.getRowCount(); i++){
             DTOChiTietHoaDon cthd =  new DTOChiTietHoaDon();
             cthd.setMaHoaDon(Integer.parseInt(lblMaPhieu.getText()));
             cthd.setMaSach((java.lang.String) tblHoaDon.getValueAt(i, 0));
             cthd.setTenSach((java.lang.String) tblHoaDon.getValueAt(i, 1));
             cthd.setGiaSach((int) tblHoaDon.getValueAt(i, 2));
             cthd.setSLMua((int) tblHoaDon.getValueAt(i, 3));
-            
-            if(new DAOChiTietHoaDon().addChiTietHoaDon(cthd)){
-                
+            if(new BUSChiTietHoaDon().addChiTietHoaDon(cthd).equals("Xảy ra lỗi")){
+                JOptionPane.showMessageDialog(rootPane, "Xảy ra lỗi");
+                new BUSChiTietHoaDon().deleteChiTietHoaDon(s);
+                new BUSHoaDon().deleteHoaDon(s);
+                return;
             }
-            
-        }
-            
-            JOptionPane.showMessageDialog(rootPane, "Da thanh toan thanh cong");
-            Reset();
-            return;
         }
         
+        jTabbedPane1.setSelectedIndex(0);
+        Reset();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed

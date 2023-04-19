@@ -82,11 +82,11 @@ public class DAOChiTietHoaDon {
         return false;
     }
     
-    public boolean deleteChiTietHoaDon(String mahoadon){
+    public boolean deleteChiTietHoaDon(int mahoadon){
         String sql = "delete from ChiTietHoaDon where MaHoaDon = ? ";
         try{
             PreparedStatement ps =  conn.prepareStatement(sql);
-            ps.setString(1, mahoadon);
+            ps.setInt(1, mahoadon);
             return ps.executeUpdate() > 0;
         }
         catch(Exception e){
