@@ -21,7 +21,7 @@ public class BUSKhachHang {
     
     public String addKhachHang(DTOKhachHang kh){
         if(khDAO.addKhachHang(kh)){
-            return "Thêm khách hàng thành ";
+            return "Thêm khách hàng thành công";
         }
         return "Thêm khách hàng thất bại";
     }
