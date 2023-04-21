@@ -1195,7 +1195,8 @@ public class BanHang_View extends javax.swing.JFrame {
             
             
             model.removeRow(row);
-            txtFind.setText("");
+            txtFind.setText("nhap ma sach");
+            txtFind.requestFocus();
             return ;
         }
         
@@ -1506,6 +1507,8 @@ public class BanHang_View extends javax.swing.JFrame {
                     model.setValueAt(currencyVN.format(s.thanhtien(sl_int)), selected_row, 4);
 
                     lblTongTien_Nhap.setText(currencyVN.format(TongTien_int));
+                    txtFind.setText("nhap ma sach");
+                    txtFind.requestFocus();
                     return;
                 }
 
