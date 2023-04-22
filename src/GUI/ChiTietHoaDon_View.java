@@ -378,8 +378,8 @@ public class ChiTietHoaDon_View extends javax.swing.JFrame {
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
         try{
-            Map<String,Object> map = new HashMap<String,Object>();
-            JasperReport rpt = JasperCompileManager.compileReport("E:\\nam2\\hocky2\\JAVA2\\BaiGiaoDien\\DOAN_CuaHangSach\\src\\Report\\rptHoaDon.jrxml");
+            Hashtable map = new Hashtable();
+            JasperReport rpt = JasperCompileManager.compileReport("src\\Report\\rptHoaDon.jrxml");
             map.put("sMaHD", lblMaPhieu.getText());
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLCuaHangSach;user=sa;password=123456;" + "encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2;");
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
