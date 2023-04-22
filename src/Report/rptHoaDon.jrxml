@@ -13,7 +13,7 @@ FROM            dbo.ChiTietHoaDon INNER JOIN
                          dbo.KhachHang ON dbo.HoaDon.MaKH = dbo.KhachHang.MaKH INNER JOIN
                          dbo.NhanVien ON dbo.HoaDon.MaNV = dbo.NhanVien.MaNV
 
-WHERE dbo.HoaDon.MaHoaDon = sMaHD]]>
+]]>
 	</queryString>
 	<field name="MaHoaDon" class="java.lang.Long"/>
 	<field name="MaNV" class="java.lang.String"/>

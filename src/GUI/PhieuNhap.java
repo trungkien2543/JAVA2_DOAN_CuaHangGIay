@@ -61,6 +61,8 @@ public class PhieuNhap extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));

@@ -62,6 +62,7 @@ public class NhapThongTinSach extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));

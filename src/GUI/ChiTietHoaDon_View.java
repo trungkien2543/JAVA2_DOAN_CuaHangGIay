@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -112,6 +114,8 @@ public class ChiTietHoaDon_View extends javax.swing.JFrame {
         lblSoTienTra = new javax.swing.JLabel();
         btnThanhToan = new javax.swing.JButton();
         btnInHoaDon = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -374,11 +378,11 @@ public class ChiTietHoaDon_View extends javax.swing.JFrame {
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
         try{
-            Hashtable map = new Hashtable();
-            JasperReport rpt = JasperCompileManager.compileReport("src/Report/rptHoaDon.jrxml");
+            Map<String,Object> map = new HashMap<String,Object>();
+            JasperReport rpt = JasperCompileManager.compileReport("E:\\nam2\\hocky2\\JAVA2\\BaiGiaoDien\\DOAN_CuaHangSach\\src\\Report\\rptHoaDon.jrxml");
             map.put("sMaHD", lblMaPhieu.getText());
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLCuaHangSach;user=sa;password=123456;" + "encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2;");
-            JasperPrint p = JasperFillManager.fillReport(rpt, map,conn);
+            JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
             JasperViewer.viewReport(p,false);
         }
         catch(Exception e){

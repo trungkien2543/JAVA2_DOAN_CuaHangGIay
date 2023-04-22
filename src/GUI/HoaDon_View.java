@@ -93,6 +93,8 @@ public class HoaDon_View extends javax.swing.JFrame {
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));

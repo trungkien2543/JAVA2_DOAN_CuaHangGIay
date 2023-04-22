@@ -127,6 +127,8 @@ public class NhanVien_View extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         thongtinnv.setModel(new javax.swing.table.DefaultTableModel(

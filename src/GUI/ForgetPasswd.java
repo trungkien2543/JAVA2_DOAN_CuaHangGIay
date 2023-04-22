@@ -102,6 +102,8 @@ public class ForgetPasswd extends javax.swing.JFrame {
         txtMK = new javax.swing.JPasswordField();
         txtXacnhanMK = new javax.swing.JPasswordField();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jPanel1.setBackground(new java.awt.Color(153, 102, 0));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 

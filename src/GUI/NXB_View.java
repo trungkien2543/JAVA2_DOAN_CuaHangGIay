@@ -398,6 +398,8 @@ public class NXB_View extends javax.swing.JFrame {
                 .addComponent(jPanelEdit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
