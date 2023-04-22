@@ -163,8 +163,6 @@ public class SuaThongTinSach extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         txtTenSach.addActionListener(new java.awt.event.ActionListener() {

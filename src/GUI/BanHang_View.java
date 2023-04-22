@@ -164,8 +164,6 @@ public class BanHang_View extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));
@@ -1048,8 +1046,6 @@ public class BanHang_View extends javax.swing.JFrame {
                             return;
                         }
 
-
-
                         //Cac loi sai ve so luong de de nguoi dung nhap lai so luong
                         //Kiem tra xem nguoi dung co nhap so luong la ki tu hay khong
                         try{
@@ -1062,6 +1058,10 @@ public class BanHang_View extends javax.swing.JFrame {
                         //kiem tra xem du so luong de ban hay khong
                         if(sl_int > s.getSl()){
                             JOptionPane.showMessageDialog(rootPane, "So luong khong du");
+                            continue;
+                        }
+                        else if(sl_int <=0){
+                            JOptionPane.showMessageDialog(rootPane, "Khong nhap so am");
                             continue;
                         }
                         else{

@@ -31,7 +31,6 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         btnDoiThongTin = new javax.swing.JButton();
         btnDoiMatKhau = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sửa tài khoản");
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));

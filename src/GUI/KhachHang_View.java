@@ -145,8 +145,6 @@ public class KhachHang_View extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));

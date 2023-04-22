@@ -398,8 +398,6 @@ public class NXB_View extends javax.swing.JFrame {
                 .addComponent(jPanelEdit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
@@ -712,7 +710,7 @@ public class NXB_View extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.PREFERRED_SIZE, 1352, Short.MAX_VALUE)
                     .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         BackGroundLayout.setVerticalGroup(

@@ -37,8 +37,6 @@ public class SuaMK_TaiKhoan extends javax.swing.JFrame {
         btnQuayLai = new javax.swing.JButton();
         btnXacNhan = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

@@ -92,8 +92,6 @@ public class KhoSachView extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));
