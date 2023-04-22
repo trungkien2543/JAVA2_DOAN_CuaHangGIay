@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e78ceb5b-40c9-445c-ac5e-113aa6348cc3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="140"/>
 	<queryString>
 		<![CDATA[SELECT        dbo.HoaDon.*, dbo.NhanVien.MaNV AS Expr1, dbo.NhanVien.TenNV, dbo.ChiTietHoaDon.*, dbo.KhachHang.MaKH AS Expr2, dbo.KhachHang.TenKH
 FROM            dbo.ChiTietHoaDon INNER JOIN
@@ -30,7 +30,7 @@ FROM            dbo.ChiTietHoaDon INNER JOIN
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="187" y="19" width="192" height="28" uuid="667c340c-9891-4874-8f89-e14ac7a7c6fb"/>
+				<reportElement x="176" y="17" width="192" height="28" uuid="667c340c-9891-4874-8f89-e14ac7a7c6fb"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Times New Roman" size="24" isBold="true"/>
 				</textElement>
@@ -39,13 +39,168 @@ FROM            dbo.ChiTietHoaDon INNER JOIN
 		</band>
 	</title>
 	<pageHeader>
-		<band height="53" splitType="Stretch"/>
+		<band height="173" splitType="Stretch">
+			<textField>
+				<reportElement x="113" y="0" width="118" height="20" uuid="ce59c8c8-04ad-48cc-95b7-dce71c908091"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaHoaDon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="44" width="118" height="20" uuid="a563fb4c-d63c-453a-9523-debd4741f608"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NgayLap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="142" width="118" height="20" uuid="fa77f449-e186-4dde-9cf3-0ff259b384d4"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="98" width="118" height="20" uuid="9b81dd62-dedf-4e49-8fac-850c7f18dfc2"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ThongTinUuDai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="145" height="20" uuid="b35ed688-ace6-429a-80a0-00be740a0667"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="44" width="145" height="20" uuid="6107930d-9b26-43da-9506-ca633ee4a980"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="98" width="145" height="20" uuid="ea78dc09-0ff4-4e27-af86-c561dec64333"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaNV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="142" width="145" height="20" uuid="4018c59d-bb8c-4eb5-90ea-fd859ddb35b5"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenNV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="c8761412-3da5-4f98-995b-9e1d40e85254"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="44" width="100" height="20" uuid="d214f8f9-a78a-42af-ab6d-642422524692"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="98" width="100" height="20" uuid="87e158e7-44f5-4917-b942-25dfbaca40de"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thông tin ưu đãi:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="142" width="100" height="20" uuid="63a7f36d-6520-4b1b-b57b-f701cb0c2414"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="0" width="100" height="20" uuid="84977485-d3c7-4161-bea9-94a29875269c"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã khách:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="44" width="100" height="20" uuid="2559e320-cc94-4258-9e46-b0466271e9fb"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên khách: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="98" width="100" height="20" uuid="9a621242-94e8-485b-9070-dfa146c9d9ab"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã nhân viên:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="142" width="100" height="20" uuid="f6ee2525-32c5-448e-aabd-765916b2422f"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên nhân viên:]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="57" splitType="Stretch"/>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="63" height="20" uuid="9e2aec08-a17d-4592-bffc-673e62d45399"/>
+				<text><![CDATA[Mã sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="0" width="243" height="20" uuid="464efdbf-e222-4e7e-9726-04fae69615a3"/>
+				<text><![CDATA[Tên sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="0" width="104" height="20" uuid="63e8c8c0-d39b-4183-ab1e-290a851220f4"/>
+				<text><![CDATA[Đơn giá]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="45" height="20" uuid="686288f5-9861-4971-9353-db33c3b9b21e"/>
+				<text><![CDATA[Số lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="e482bb9e-8fc8-4859-8d2f-151109126610"/>
+				<text><![CDATA[Thành tiền]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="208" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="63" height="20" uuid="957f822c-0e15-4a23-b263-64067b6580d0"/>
+				<textFieldExpression><![CDATA[$F{MaSach}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="243" height="20" uuid="7bda1f78-21ed-49f5-b4d6-18d5c1cdbc28"/>
+				<textFieldExpression><![CDATA[$F{TenSach}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="306" y="0" width="104" height="20" uuid="100fa13d-31b1-4298-b520-11d0c390ca98"/>
+				<textFieldExpression><![CDATA[$F{GiaSach}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="45" height="20" uuid="b9dc1800-325d-4a68-bd54-996ccdc8f366"/>
+				<textFieldExpression><![CDATA[$F{SLMua}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="85efa29b-7d71-43aa-8596-c12e1c9653be"/>
+				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
