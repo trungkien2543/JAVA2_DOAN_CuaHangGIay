@@ -24,7 +24,7 @@ public class DTOHoaDon {
         this.NgayLap = null;
     }
 
-    public DTOHoaDon(int maHD, String maNV, String maKH, String ThongTinUuDai, Date NgayLap, int TongTien) {
+    public DTOHoaDon(int maHD, String maNV, String maKH, Date NgayLap, String ThongTinUuDai ,int TongTien) {
         this.maHD = maHD;
         this.maNV = maNV;
         this.maKH = maKH;

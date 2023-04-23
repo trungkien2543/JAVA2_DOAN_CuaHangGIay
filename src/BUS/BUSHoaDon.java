@@ -37,4 +37,8 @@ public class BUSHoaDon {
             
         }
     }
+    
+    public ArrayList<DTOHoaDon> getListTimKiem(String Loai, String From, String To){
+        return hdDAO.TimKiem(Loai, From, To);
+    }
 }

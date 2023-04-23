@@ -6,6 +6,7 @@ package DAO;
 
 
 import DTO.DTOHoaDon;
+import GUI.HoaDon_View;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -119,7 +120,24 @@ public class DAOHoaDon {
         return 0;
     }
     
-
+    public ArrayList<DTOHoaDon> TimKiem(String Loai,String From,String To){
+        ArrayList<DTOHoaDon> list_find = new ArrayList<>();
+        try{
+            String sql = "select * from HoaDon where "+Loai+" between ? and ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, From);
+            ps.setString(2, To);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                DTOHoaDon s = new DTOHoaDon(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5), rs.getInt(6));
+                list_find.add(s);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return list_find;
+    }
     
     public static void main(String[] args) {
         DAOHoaDon s = new DAOHoaDon();

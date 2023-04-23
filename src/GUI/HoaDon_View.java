@@ -4,9 +4,12 @@
  */
 package GUI;
 
+import BUS.BUSHoaDon;
 import DAO.DAOHoaDon;
 import DTO.DTOHoaDon;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +27,10 @@ public class HoaDon_View extends javax.swing.JFrame {
     ArrayList<DTOHoaDon> list = new ArrayList<>();
     Locale localeVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+    
+    //Doi tuong thuoc hien chuyen kiem ngay
+    DateFormat ChuyenNgaySQL = new SimpleDateFormat("MM/dd/yyyy");
+    DateFormat ChuyenNgayShow = new SimpleDateFormat("dd/MM/yyyy");
     /**
      * Creates new form DTOHoaDon
      */
@@ -47,7 +54,7 @@ public class HoaDon_View extends javax.swing.JFrame {
         model.setRowCount(0);
         for (DTOHoaDon s : list){
             model.addRow(new Object[]{
-                        s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+                        s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                     });
         }
     }
@@ -71,8 +78,8 @@ public class HoaDon_View extends javax.swing.JFrame {
         jDateFrom = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         btnNgayLap = new javax.swing.JButton();
+        jDateTo = new com.toedter.calendar.JDateChooser();
         jpTongTien = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -151,8 +158,6 @@ public class HoaDon_View extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Đến: ");
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy\n");
-
         btnNgayLap.setBackground(new java.awt.Color(0, 204, 153));
         btnNgayLap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNgayLap.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,6 +167,8 @@ public class HoaDon_View extends javax.swing.JFrame {
                 btnNgayLapActionPerformed(evt);
             }
         });
+
+        jDateTo.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jpNgayLapLayout = new javax.swing.GroupLayout(jpNgayLap);
         jpNgayLap.setLayout(jpNgayLapLayout);
@@ -174,8 +181,8 @@ public class HoaDon_View extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpNgayLapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                    .addComponent(jDateFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                    .addComponent(jDateTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnNgayLap, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addContainerGap())
@@ -189,7 +196,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpNgayLapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jDateTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNgayLapLayout.createSequentialGroup()
                 .addComponent(btnNgayLap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -533,7 +540,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 for (DTOHoaDon s : list){
                     if(Integer.toString(s.getMaHD()).contains(find)){
                         model.addRow(new Object[]{
-                            s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+                            s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                         });
                     }
                 }
@@ -544,7 +551,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 for (DTOHoaDon s : list){
                     if(s.getMaNV().contains(find)){
                         model.addRow(new Object[]{
-                            s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+                            s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                         });
                     }
                 }
@@ -554,7 +561,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 for (DTOHoaDon s : list){
                     if(s.getMaKH().contains(find)){
                         model.addRow(new Object[]{
-                            s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+                            s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                         });
                     }
                 }
@@ -564,17 +571,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 for (DTOHoaDon s : list){
                     if(s.getThongTinUuDai().contains(find)){
                         model.addRow(new Object[]{
-                            s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
-                        });
-                    }
-                }
-                break;
-            }
-            case "Tổng tiền":{
-                for (DTOHoaDon s : list){
-                    if(Integer.toString(s.getTongTien()).contains(find)){
-                        model.addRow(new Object[]{
-                            s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+                            s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                         });
                     }
                 }
@@ -584,7 +581,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 for (DTOHoaDon s : list){
                     if(Integer.toString(s.getTongTien()).contains(find) || s.getThongTinUuDai().contains(find) || s.getMaKH().contains(find) || s.getMaNV().contains(find) || Integer.toString(s.getMaHD()).contains(find)){
                         model.addRow(new Object[]{
-                            s.getMaHD(),s.getMaNV(),s.getMaKH(),s.getNgayLap(),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+                            s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                         });
                     }
                 }
@@ -617,12 +614,17 @@ public class HoaDon_View extends javax.swing.JFrame {
             txtFind.setEnabled(false);
             jpNgayLap.setVisible(false);
             jpTongTien.setVisible(true);
+            jDateFrom.setDate(null);
+            jDateTo.setDate(null);
 
         }
         else{
             txtFind.setEnabled(true);
             jpNgayLap.setVisible(false);
             jpTongTien.setVisible(false);
+            jDateFrom.setDate(null);
+            jDateTo.setDate(null);
+
         }
         txtFind.setText("");
         txtFind.requestFocus();
@@ -694,6 +696,27 @@ public class HoaDon_View extends javax.swing.JFrame {
 
     private void btnNgayLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayLapActionPerformed
         // TODO add your handling code here:
+
+//        if(jDateFrom.getDate().equals(null) || jDateTo.getDate().equals(null)){
+//            JOptionPane.showMessageDialog(rootPane, "Không để trống lựa chọn");
+//            return;
+//        }
+        Date From = jDateFrom.getDate();
+        Date To = jDateTo.getDate();
+        String From_str = ChuyenNgaySQL.format(From);
+        String To_str = ChuyenNgaySQL.format(To);
+        model.setRowCount(0);
+        ArrayList<DTOHoaDon> list_find = new BUSHoaDon().getListTimKiem("NgayLap",From_str,To_str);
+        for(DTOHoaDon s : list_find){
+            model.addRow(new Object[]{
+                s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+            });
+        }
+        
+      
+        
+        
+        
     }//GEN-LAST:event_btnNgayLapActionPerformed
 
     /**
@@ -744,8 +767,8 @@ public class HoaDon_View extends javax.swing.JFrame {
     private javax.swing.JButton btnTongTien;
     private javax.swing.JComboBox<String> cbxDieuKienLoc;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateFrom;
+    private com.toedter.calendar.JDateChooser jDateTo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
