@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JFrame;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -45,6 +46,7 @@ public class ChiTietHoaDon_View extends javax.swing.JFrame {
         initComponents();
         this.mahd = mahd;
         this.setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
         list_hd = new DAOHoaDon().getListHoaDon();
         list_cthd = new DAOChiTietHoaDon().getListChiTietHoaDon();
         list_kh = new DAOKhachHang().getListKH();
@@ -353,9 +355,9 @@ public class ChiTietHoaDon_View extends javax.swing.JFrame {
             .addGap(0, 1217, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(2, 2, 2)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(2, 2, 2)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
