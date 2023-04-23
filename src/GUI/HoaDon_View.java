@@ -83,8 +83,8 @@ public class HoaDon_View extends javax.swing.JFrame {
         jpTongTien = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtFrom = new javax.swing.JTextField();
+        txtTo = new javax.swing.JTextField();
         btnTongTien = new javax.swing.JButton();
         TieuDe = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -216,6 +216,11 @@ public class HoaDon_View extends javax.swing.JFrame {
         btnTongTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTongTien.setForeground(new java.awt.Color(255, 255, 255));
         btnTongTien.setText("Lọc");
+        btnTongTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTongTienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpTongTienLayout = new javax.swing.GroupLayout(jpTongTien);
         jpTongTien.setLayout(jpTongTienLayout);
@@ -227,11 +232,11 @@ public class HoaDon_View extends javax.swing.JFrame {
                     .addGroup(jpTongTienLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpTongTienLayout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2)))
+                        .addComponent(txtTo)))
                 .addGap(18, 18, 18)
                 .addComponent(btnTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
@@ -241,11 +246,11 @@ public class HoaDon_View extends javax.swing.JFrame {
             .addGroup(jpTongTienLayout.createSequentialGroup()
                 .addGroup(jpTongTienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jpTongTienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jpTongTienLayout.createSequentialGroup()
                 .addComponent(btnTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -579,7 +584,7 @@ public class HoaDon_View extends javax.swing.JFrame {
             }
             default :{
                 for (DTOHoaDon s : list){
-                    if(Integer.toString(s.getTongTien()).contains(find) || s.getThongTinUuDai().contains(find) || s.getMaKH().contains(find) || s.getMaNV().contains(find) || Integer.toString(s.getMaHD()).contains(find)){
+                    if(Integer.toString(s.getTongTien()).contains(find) || s.getThongTinUuDai().contains(find) || s.getMaKH().contains(find) || s.getMaNV().contains(find) || Integer.toString(s.getMaHD()).contains(find) || ChuyenNgayShow.format(s.getNgayLap()).contains(find)){
                         model.addRow(new Object[]{
                             s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
                         });
@@ -609,6 +614,9 @@ public class HoaDon_View extends javax.swing.JFrame {
             txtFind.setEnabled(false);
             jpNgayLap.setVisible(true);
             jpTongTien.setVisible(false);
+            txtFrom.setText("");
+            txtTo.setText("");
+            
         }
         else if(cbxDieuKienLoc.getSelectedItem() == "Tổng tiền"){
             txtFind.setEnabled(false);
@@ -624,6 +632,8 @@ public class HoaDon_View extends javax.swing.JFrame {
             jpTongTien.setVisible(false);
             jDateFrom.setDate(null);
             jDateTo.setDate(null);
+            txtFrom.setText("");
+            txtTo.setText("");
 
         }
         txtFind.setText("");
@@ -697,10 +707,10 @@ public class HoaDon_View extends javax.swing.JFrame {
     private void btnNgayLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayLapActionPerformed
         // TODO add your handling code here:
 
-//        if(jDateFrom.getDate().equals(null) || jDateTo.getDate().equals(null)){
-//            JOptionPane.showMessageDialog(rootPane, "Không để trống lựa chọn");
-//            return;
-//        }
+        if(jDateFrom.getDate() == null || jDateTo.getDate()==null){
+            JOptionPane.showMessageDialog(rootPane, "Không để trống lựa chọn");
+            return;
+        }
         Date From = jDateFrom.getDate();
         Date To = jDateTo.getDate();
         String From_str = ChuyenNgaySQL.format(From);
@@ -718,6 +728,34 @@ public class HoaDon_View extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnNgayLapActionPerformed
+
+    private void btnTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTongTienActionPerformed
+        // TODO add your handling code here:
+        String From = txtFrom.getText();
+        String To = txtTo.getText();
+        if(From.isEmpty() || To.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Không để trống thông tin");
+        }
+        try{
+            int From_int = Integer.parseInt(From);
+            int To_int = Integer.parseInt(To);
+            if(From_int < 0 || To_int < 0){
+                JOptionPane.showMessageDialog(rootPane, "Nhập các số lớn hơn 0");
+                return;
+            }
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(rootPane, "Chỉ nhập số");
+            return;
+        }
+        model.setRowCount(0);
+        ArrayList<DTOHoaDon> list_find = new BUSHoaDon().getListTimKiem("TongTien",From,To);
+        for(DTOHoaDon s : list_find){
+            model.addRow(new Object[]{
+                s.getMaHD(),s.getMaNV(),s.getMaKH(),ChuyenNgayShow.format(s.getNgayLap()),s.getThongTinUuDai(),currencyVN.format(s.getTongTien())
+            });
+        }
+    }//GEN-LAST:event_btnTongTienActionPerformed
 
     /**
      * @param args the command line arguments
@@ -780,8 +818,6 @@ public class HoaDon_View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel jpNgayLap;
     private javax.swing.JPanel jpTongTien;
     private javax.swing.JLabel lbBanSach4;
@@ -794,6 +830,8 @@ public class HoaDon_View extends javax.swing.JFrame {
     private java.awt.PopupMenu popupMenu1;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtFind;
+    private javax.swing.JTextField txtFrom;
+    private javax.swing.JTextField txtTo;
     // End of variables declaration//GEN-END:variables
 
     private CharSequence toString(Date ngayLap) {
