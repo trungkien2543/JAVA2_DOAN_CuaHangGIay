@@ -1350,7 +1350,7 @@ public class BanHang_View extends javax.swing.JFrame {
         SoTienTra = 0;
         
         //Reset array list
-        list = new BUSKhoSach().getALLSach();
+        list = new BUSKhoSach().getAllsach();
         list_kh = new BUSKhachHang().getAllKhachHang();
         list_hd = new BUSHoaDon().getAllHoaDon();
         

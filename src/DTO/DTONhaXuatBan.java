@@ -6,23 +6,27 @@ package DTO;
 
 /**
  *
- * @author ASUS
+ * @author HOME
  */
 public class DTONhaXuatBan {
-    private String ma,ten,diachi,sdt,email;
-    public DTONhaXuatBan(){
-        this.ma = null;
-        this.ten = null;
-        this.diachi = null;
-        this.sdt = null;
-        this.email = null;
+     @Override
+    public String toString() {
+        return "nxb{" + "ma=" + ma + ", ten=" + ten + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", ghiChu=" + email + '}';
+    }
+    private String ma;
+    private String ten;
+    private String diaChi;
+    private String soDienThoai;
+    private String email;
+    
+    public DTONhaXuatBan() {
     }
 
-    public DTONhaXuatBan(String ma, String ten, String diachi, String sdt, String email) {
+    public DTONhaXuatBan(String ma, String ten, String diaChi, String soDienThoai, String email) {
         this.ma = ma;
         this.ten = ten;
-        this.diachi = diachi;
-        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
         this.email = email;
     }
 
@@ -42,20 +46,20 @@ public class DTONhaXuatBan {
         this.ten = ten;
     }
 
-    public String getDiachi() {
-        return diachi;
+    public String getDiaChi() {
+        return diaChi;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
-    public String getSdt() {
-        return sdt;
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
     public String getEmail() {
@@ -65,6 +69,5 @@ public class DTONhaXuatBan {
     public void setEmail(String email) {
         this.email = email;
     }
-    
     
 }

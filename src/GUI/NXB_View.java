@@ -4,9 +4,9 @@
  */
 package GUI;
 
-import DAO.DAONXB;
+import DAO.DAONhaXuatBan;
 import DAO.NXBListener;
-import DTO.DTONXB;
+import DTO.DTONhaXuatBan;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -39,7 +39,7 @@ public class NXB_View extends javax.swing.JFrame {
     private JTextField JtextfieldEmail;
     private JButton jbutton_ok;
     private JLabel jlabelTitle;
-    DAONXB dao = new DAONXB();
+    DAONhaXuatBan dao = new DAONhaXuatBan();
     private JLabel jlabelEditTitle;
     private JLabel jlabelEditMa;
     private JLabel jlabelEditTen;
@@ -136,13 +136,13 @@ public class NXB_View extends javax.swing.JFrame {
         return jButton_ok2;
     }
 
-    public DTONXB dataJFrameAdd() {
+    public DTONhaXuatBan dataJFrameAdd() {
         String ma = JtextfieldMa.getText();
         String ten = JtextfieldTen.getText();
         String diachi = JtextfieldDiaChi.getText();
         String sdt = JtextfieldSDT.getText();
         String email = JtextfieldEmail.getText();
-        DTONXB nxb1 = null;
+        DTONhaXuatBan nxb1 = null;
         if (ma.matches("^NXB-[0-9]{1,}") == false) {
             JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
             return nxb1;
@@ -156,7 +156,7 @@ public class NXB_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng Email!");
             return nxb1;
         }
-        DTONXB nxb = new DTONXB(ma, ten, diachi, sdt, email);
+        DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
         return nxb;
     }
 
@@ -212,13 +212,13 @@ public class NXB_View extends javax.swing.JFrame {
 
     }
 
-    public DTONXB dataJFrameEdit() {
+    public DTONhaXuatBan dataJFrameEdit() {
         String ma = JtextfieldEditMa.getText();
         String ten = JtextfieldEditTen.getText();
         String diachi = JtextfieldEditDiaChi.getText();
         String sdt = JtextfieldEditSDT.getText();
         String email = JtextfieldEditEmail.getText();
-        DTONXB nxb1 = null;      
+        DTONhaXuatBan nxb1 = null;      
         if ((sdt.matches("[0]{1}[0-9]{9,10}") == false) && !sdt.equals("")) {
             JOptionPane.showMessageDialog(null, "Sửa thất bại, sai định dạng số điện thoại!");
             return nxb1;
@@ -228,7 +228,7 @@ public class NXB_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng Email!");
             return nxb1;
         }
-        DTONXB nxb = new DTONXB(ma, ten, diachi, sdt, email);
+        DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
         return nxb;
     }
 
@@ -789,7 +789,7 @@ public class NXB_View extends javax.swing.JFrame {
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
         this.dao.loadDataList();
-        for (DTONXB nxb : this.dao.getDanhSach()) {
+        for (DTONhaXuatBan nxb : this.dao.getDanhSach()) {
             if (id.equals(nxb.getMa())) {
                 JtextfieldEditMa.setText(nxb.getMa());
                 JtextfieldEditTen.setText(nxb.getTen());

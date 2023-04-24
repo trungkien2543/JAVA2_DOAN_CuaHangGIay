@@ -4,8 +4,11 @@
  */
 package GUI;
 
+import BUS.BUSKhoSach;
 import DAO.DAOKhoSach;
+import DAO.DAONhaXuatBan;
 import DTO.DTOKhoSach;
+import DTO.DTONhaXuatBan;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -24,6 +27,7 @@ import javax.swing.JOptionPane;
 public class NhapThongTinSach extends javax.swing.JFrame {
     private static String MaSach;
     ArrayList<DTO.DTOKhoSach> list;
+    ArrayList<DTONhaXuatBan> list_NXB;
     /**
      * Creates new form FormNhapThongTin
      */
@@ -31,6 +35,10 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         initComponents();
         this.MaSach=MaSach;
         list = new DAOKhoSach().getListSach();
+        list_NXB = new DAONhaXuatBan().getListNXB();
+        for(DTONhaXuatBan s : list_NXB){
+            cbxNXB.addItem(s.getTen());
+        }
     }
     
     
@@ -47,7 +55,6 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         txtTenSach = new javax.swing.JTextField();
         txtNamXuatBan = new javax.swing.JTextField();
-        txtNhaXuatBan = new javax.swing.JTextField();
         txtGia = new javax.swing.JTextField();
         txtTheLoai = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -59,6 +66,7 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         txtTenTacGia = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        cbxNXB = new javax.swing.JComboBox<>();
 
         jButton1.setText("jButton1");
 
@@ -115,6 +123,13 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Tên tác giả:");
 
+        cbxNXB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbxNXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNXBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,10 +151,14 @@ public class NhapThongTinSach extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
-                            .addComponent(txtNhaXuatBan)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(cbxNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -170,7 +189,7 @@ public class NhapThongTinSach extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxNXB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -209,8 +228,9 @@ public class NhapThongTinSach extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
-        DTO.DTOKhoSach ks = new DTOKhoSach();
-        if(txtTenSach.getText().isEmpty()||txtNamXuatBan.getText().isEmpty()|| txtTenTacGia.getText().isEmpty() || txtNhaXuatBan.getText().isEmpty() ||txtGia.getText().isEmpty()||txtTheLoai.getText().isEmpty()){
+        DTOKhoSach ks = new DTOKhoSach();
+        
+        if(txtTenSach.getText().isEmpty()||txtNamXuatBan.getText().isEmpty()|| txtTenTacGia.getText().isEmpty() || cbxNXB.getSelectedIndex()==0 ||txtGia.getText().isEmpty()||txtTheLoai.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Khong duoc de trong ");
             return;
         }
@@ -218,14 +238,6 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         try{
             Long gia = Long.valueOf(txtGia.getText());
             int nam=Integer.parseInt(txtNamXuatBan.getText());
-            if(gia<=0){
-                JOptionPane.showMessageDialog(this, "Gia phai lon hon 0");
-                return;
-            }
-            if(nam<0){
-                JOptionPane.showMessageDialog(this, "Nam xuat ban phai lon hon 0");
-                return;
-            }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Gia va nam xuat ban nhap phai la so nguyen");
         }
@@ -233,7 +245,7 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         ks.setTenSach(txtTenSach.getText());
         ks.setNam(Integer.parseInt(txtNamXuatBan.getText()));
         ks.setTenTacGia(txtTenTacGia.getText());
-        ks.setNhaXuatBan(txtNhaXuatBan.getText());
+        ks.setNhaXuatBan((String)cbxNXB.getSelectedItem());
         ks.setGia(Integer.parseInt(txtGia.getText()));
         ks.setTheLoai(txtTheLoai.getText());
         ks.setSl(0);
@@ -242,21 +254,22 @@ public class NhapThongTinSach extends javax.swing.JFrame {
             if(ks.getMaSach().equals(s.getMaSach())){
                 flag = false;
             }
-            
         }
+        String kq = "";
         if(flag==true){
-            if(new DAOKhoSach().addSach(ks)){
-                JOptionPane.showMessageDialog(rootPane, "Nhap hang thanh cong!");
+            kq = new BUSKhoSach().addSach(ks,"add");
+            JOptionPane.showMessageDialog(rootPane, kq);
+            if(kq.equals("Thêm thành công")){
                 this.dispose();
-                return; 
+                return;
             }
         }
         else{
-            if(new DAOKhoSach().editSach(ks)){
-                JOptionPane.showMessageDialog(rootPane, "Nhap hang thanh cong!");
-                list = new DAOKhoSach().getListSach();
+            kq = new BUSKhoSach().addSach(ks,"edit");
+            JOptionPane.showMessageDialog(rootPane, kq);
+            if(kq.equals("Thêm thành công")){
                 this.dispose();
-                return; 
+                return;
             }
         }
         
@@ -270,6 +283,10 @@ public class NhapThongTinSach extends javax.swing.JFrame {
     private void txtTenSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSachActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenSachActionPerformed
+
+    private void cbxNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNXBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxNXBActionPerformed
    
     /*
      * @param args the command line arguments
@@ -300,6 +317,10 @@ public class NhapThongTinSach extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -312,6 +333,7 @@ public class NhapThongTinSach extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.JComboBox<String> cbxNXB;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -322,7 +344,6 @@ public class NhapThongTinSach extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtNamXuatBan;
-    private javax.swing.JTextField txtNhaXuatBan;
     private javax.swing.JTextField txtTenSach;
     private javax.swing.JTextField txtTenTacGia;
     private javax.swing.JTextField txtTheLoai;

@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.DTONXB;
+import DTO.DTONhaXuatBan;
 import GUI.NXB_View;
 import java.awt.Component;
 import java.awt.Frame;
@@ -21,9 +21,9 @@ import javax.swing.table.DefaultTableModel;
 public class NXBListener implements ActionListener {
 
     private NXB_View nxb_view;
-    private DAONXB daoNxb;
+    private DAONhaXuatBan daoNxb;
 
-    public NXBListener(NXB_View nxb_view, DAONXB daoNxb) {
+    public NXBListener(NXB_View nxb_view, DAONhaXuatBan daoNxb) {
         this.nxb_view = nxb_view;
         this.daoNxb = daoNxb;
     }
