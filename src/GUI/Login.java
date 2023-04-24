@@ -5,7 +5,7 @@
 package GUI;
 
 import DTO.DTOTaiKhoan;
-import DAO.DAOTaiKhoan;
+import BUS.BUSTaiKhoan;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     public void initData() {
-        list = new ArrayList<>(new DAOTaiKhoan().getListTK());
+        list = new ArrayList<>(new BUSTaiKhoan().getAllTaiKhoan());
     }
 
     /**

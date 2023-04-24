@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import DAO.DAOKhachHang;
+import BUS.BUSKhachHang;
 import DTO.DTOKhachHang;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,13 +34,12 @@ public class KhachHang_View extends javax.swing.JFrame {
     }
     
     private void initData(){
-        list = new ArrayList<>(new DAOKhachHang().getListKH());
+        list = new ArrayList<>(new BUSKhachHang().getAllKhachHang());
     }
     
     private void loadData(ArrayList<DTOKhachHang> list){
            for (DTO.DTOKhachHang i : list) {
             tblModel.addRow(new Object[]{i.getMaKH(), i.getTenKH(), i.getDiaChi(), i.getSDT(), i.getTichDiem()});
-               System.out.println(i.getTichDiem());
             }
             tblKhachHang.setModel(tblModel);
     }

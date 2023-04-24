@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import DAO.DAOTaiKhoan;
+import BUS.BUSTaiKhoan;
 import DTO.DTOTaiKhoan;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -41,7 +41,7 @@ public class ForgetPasswd extends javax.swing.JFrame {
     public ForgetPasswd() {
         initComponents();
 //        lấy data
-        list = new ArrayList<>(new DAOTaiKhoan().getListTK());
+        list = new ArrayList<>(new BUSTaiKhoan().getAllTaiKhoan());
         daGui = false;
         maXN = null;
         tk = null;
@@ -243,8 +243,8 @@ public class ForgetPasswd extends javax.swing.JFrame {
             maXN = String.format("%06d", number);
 
             System.out.println(maXN);
-            final String username = "adm.booksales.2023@gmail.com";
-            final String password = "kevnkkyoturngzja";
+             final String username = "adm.booksales.2023@gmail.com";
+            final String password = "fdqvpwjwhfmgqgda";
 
             Properties prop = new Properties();
             prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -320,8 +320,7 @@ public class ForgetPasswd extends javax.swing.JFrame {
                 if (txtMaXN.equals(maXN)) {
 //                    kiem tra trung khop mk mới khong
                     if (mk.equals(xnmk)) {
-                        new DAOTaiKhoan().MatKhau(mk, tk.getMaNhanVien());
-                        JOptionPane.showMessageDialog(this, "Thay đổi thành công!");
+                        JOptionPane.showMessageDialog(this, new BUSTaiKhoan().doiMatKhau(mk, tk.getMaNhanVien()));
                         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); //dong form
                     } else {
                         JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không trùng khớp.");
