@@ -52,7 +52,9 @@ public class DAOTaiKhoan {
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 DTOTaiKhoan s = new DTOTaiKhoan(rs.getString("MaNhanVien"), rs.getString("MatKhau"), rs.getString("Email"), rs.getString("TrangThai"),rs.getString("CongViec"));
+               if(s.getEmail()!=null){
                 list.add(s);
+               }
             }
         }
         catch(Exception e){
@@ -87,7 +89,7 @@ public class DAOTaiKhoan {
          return false;
      }
      
-     public boolean updateTaiKhoan(DTOTaiKhoan tk) {
+     public boolean khoaTaiKhoan(DTOTaiKhoan tk) {
     PreparedStatement ps1 = null;
                     boolean result = false;
                     try {
@@ -96,6 +98,60 @@ public class DAOTaiKhoan {
                         ps1.setString(1, tk.getMatKhau());
                         ps1.setString(2, tk.getEmail());
                         ps1.setString(3, "khóa");
+                        ps1.setString(4, tk.getMaNhanVien() );
+                        int rowCount = ps1.executeUpdate();
+                        if (rowCount > 0) {
+                            result = true;
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println("Error: " + ex.getMessage());
+                    } finally {
+                        try {
+                            if (ps1 != null) {
+                                ps1.close();
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println("Error: " + ex.getMessage());
+                        }
+                    }
+                    return result;
+     }
+      public boolean moTaiKhoan(DTOTaiKhoan tk) {
+    PreparedStatement ps1 = null;
+                    boolean result = false;
+                    try {
+                         ps1 = con.prepareStatement("UPDATE TaiKhoan SET  MatKhau = ?, Email = ?,TrangThai  = ? WHERE MaNhanVien = ?");
+                       
+                        ps1.setString(1, tk.getMatKhau());
+                        ps1.setString(2, tk.getEmail());
+                        ps1.setString(3, "mo");
+                        ps1.setString(4, tk.getMaNhanVien() );
+                        int rowCount = ps1.executeUpdate();
+                        if (rowCount > 0) {
+                            result = true;
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println("Error: " + ex.getMessage());
+                    } finally {
+                        try {
+                            if (ps1 != null) {
+                                ps1.close();
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println("Error: " + ex.getMessage());
+                        }
+                    }
+                    return result;
+     }
+     public boolean deletedTaiKhoan(DTOTaiKhoan tk) {
+    PreparedStatement ps1 = null;
+                    boolean result = false;
+                    try {
+                         ps1 = con.prepareStatement("UPDATE TaiKhoan SET  MatKhau = ?, Email = ?,TrangThai  = ? WHERE MaNhanVien = ?");
+                       
+                        ps1.setString(1, null);
+                        ps1.setString(2, null);
+                        ps1.setString(3, null);
                         ps1.setString(4, tk.getMaNhanVien() );
                         int rowCount = ps1.executeUpdate();
                         if (rowCount > 0) {
