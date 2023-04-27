@@ -6,7 +6,6 @@ package GUI;
 
 import BUS.BUSNhaXuatBan;
 import DAO.DAONhaXuatBan;
-import DAO.NXBListener;
 import DTO.DTONhaXuatBan;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -58,7 +57,6 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     private JButton jButton_ok3;
 
     private String id;
-    private JLabel jlabel_update;
     private JButton jbutton_excel;
     private JButton jbutton_Database;
     private JButton jbutton_ok2;
@@ -91,7 +89,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     public void initJFrameAdd() {
         Font font = new Font("Segoe UI", Font.BOLD, 14);
-        jFrameAddNXB.setSize(383, 210);
+        jFrameAddNXB.setSize(383, 245);
         jFrameAddNXB.setResizable(false);
         jFrameAddNXB.setLocationRelativeTo(null);
         jPanelAddData.setLayout(new GridLayout(5, 2));
@@ -139,7 +137,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     public void initJDialogDelete() {
         jDialogDelete.setTitle("Xóa NXB");
-        jDialogDelete.setSize(410, 125);
+        jDialogDelete.setSize(410, 135);
         jDialogDelete.setResizable(false);
         jDialogDelete.setLocationRelativeTo(null);
         Font font = new Font("Segoe UI", Font.BOLD, 14);
@@ -157,7 +155,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     public void initFrameEdit() {
         Font font = new Font("Segoe UI", Font.BOLD, 14);
-        jFrameEdit.setSize(383, 220);
+        jFrameEdit.setSize(383, 250);
         jFrameEdit.setResizable(false);
         jFrameEdit.setLocationRelativeTo(null);
         jPanelEdit2.setLayout(new GridLayout(5, 2));
@@ -204,24 +202,25 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     }
 
     public void initJDialogUpdate() {
+        jDialogUpdate.setLayout(new GridLayout(2,1));
         jDialogUpdate.setTitle("Cập nhật dữ liệu");
         jDialogUpdate.setSize(250, 150);
         jDialogUpdate.setResizable(false);
         jDialogUpdate.setLocationRelativeTo(null);
-        jDialogUpdate.setLayout(new GridLayout(3, 1));
+        jPanelUpdateButton.setLayout(new GridLayout(2, 1));
         Font font = new Font("Segoe UI", Font.BOLD, 14);
-        jlabel_update = new JLabel("Cập nhật dữ liệu", JLabel.CENTER);
-        jlabel_update.setFont(font);
         jbutton_excel = new JButton("Từ Excel");
         jbutton_excel.setFont(font);
         this.jbutton_excel.addActionListener((ActionListener) this);
         jbutton_Database = new JButton("Vào Excel");
         jbutton_Database.setFont(font);
-        this.jbutton_Database.addActionListener((ActionListener) this);
-        jDialogUpdate.add(jlabel_update);
-        jDialogUpdate.add(jbutton_Database);
-        jDialogUpdate.add(jbutton_excel);
-    }       
+        this.jbutton_Database.addActionListener((ActionListener) this);     
+        jPanelUpdateButton.add(jbutton_excel);
+        jPanelUpdateButton.add(jbutton_Database);
+        jDialogUpdate.add(jPanelUpdateTitle);
+        jDialogUpdate.add(jPanelUpdateButton);
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -236,12 +235,12 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
             } else {
                 bus.AddNXB();
             }
-       
+
         }
         if (e.getSource() == jbutton_cancel) {
             jDialogDelete.setVisible(false);
         }
-        
+
         if (e.getSource() == jbutton_ok2) {
             bus.DeleteNXB();
         }
@@ -391,6 +390,9 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         jPanelEdit3 = new javax.swing.JPanel();
         jPanelEdit2 = new javax.swing.JPanel();
         jDialogUpdate = new javax.swing.JDialog();
+        jPanelUpdateTitle = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanelUpdateButton = new javax.swing.JPanel();
         jDialogDelete = new javax.swing.JDialog();
         jPanelDeleteTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -540,15 +542,56 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jPanelEdit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jDialogUpdate.setBackground(new java.awt.Color(153, 204, 0));
+
+        jPanelUpdateTitle.setBackground(new java.awt.Color(153, 204, 0));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Cập nhật dữ liệu...?");
+
+        javax.swing.GroupLayout jPanelUpdateTitleLayout = new javax.swing.GroupLayout(jPanelUpdateTitle);
+        jPanelUpdateTitle.setLayout(jPanelUpdateTitleLayout);
+        jPanelUpdateTitleLayout.setHorizontalGroup(
+            jPanelUpdateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUpdateTitleLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+        jPanelUpdateTitleLayout.setVerticalGroup(
+            jPanelUpdateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUpdateTitleLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        jPanelUpdateButton.setBackground(new java.awt.Color(153, 204, 0));
+
+        javax.swing.GroupLayout jPanelUpdateButtonLayout = new javax.swing.GroupLayout(jPanelUpdateButton);
+        jPanelUpdateButton.setLayout(jPanelUpdateButtonLayout);
+        jPanelUpdateButtonLayout.setHorizontalGroup(
+            jPanelUpdateButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelUpdateButtonLayout.setVerticalGroup(
+            jPanelUpdateButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 53, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jDialogUpdateLayout = new javax.swing.GroupLayout(jDialogUpdate.getContentPane());
         jDialogUpdate.getContentPane().setLayout(jDialogUpdateLayout);
         jDialogUpdateLayout.setHorizontalGroup(
             jDialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanelUpdateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelUpdateTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDialogUpdateLayout.setVerticalGroup(
             jDialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jDialogUpdateLayout.createSequentialGroup()
+                .addComponent(jPanelUpdateTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelUpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanelDeleteTop.setBackground(new java.awt.Color(153, 204, 0));
@@ -701,7 +744,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         btnAdd.setBackground(new java.awt.Color(0, 204, 153));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-to-basket.png"))); // NOI18N
-        btnAdd.setText("Add");
+        btnAdd.setText("Thêm");
         btnAdd.setBorder(null);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -712,7 +755,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         btnDelete.setBackground(new java.awt.Color(0, 204, 153));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
-        btnDelete.setText("Delete");
+        btnDelete.setText("Xóa");
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDeleteMouseClicked(evt);
@@ -727,7 +770,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         jButtonEdit.setBackground(new java.awt.Color(0, 204, 153));
         jButtonEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/options-icon.png"))); // NOI18N
-        jButtonEdit.setText("Repair");
+        jButtonEdit.setText("Sửa");
         jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditActionPerformed(evt);
@@ -927,7 +970,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.PREFERRED_SIZE, 1352, Short.MAX_VALUE)
                     .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         BackGroundLayout.setVerticalGroup(
@@ -1147,6 +1190,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JFrame jFrameEdit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1160,6 +1204,8 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanelEdit1;
     private javax.swing.JPanel jPanelEdit2;
     private javax.swing.JPanel jPanelEdit3;
+    private javax.swing.JPanel jPanelUpdateButton;
+    private javax.swing.JPanel jPanelUpdateTitle;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane_NXB;
     private javax.swing.JTable jTable_NXB;
