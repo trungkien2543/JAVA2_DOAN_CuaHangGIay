@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import BUS.BUSNhaXuatBan;
 import DAO.DAONhaXuatBan;
 import DAO.NXBListener;
 import DTO.DTONhaXuatBan;
@@ -11,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,13 +21,14 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ASUS
  */
-public class NXB_View extends javax.swing.JFrame {
+public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     private JLabel jlabelMa;
     private JLabel jlabelTen;
@@ -40,6 +43,7 @@ public class NXB_View extends javax.swing.JFrame {
     private JButton jbutton_ok;
     private JLabel jlabelTitle;
     DAONhaXuatBan dao = new DAONhaXuatBan();
+    BUSNhaXuatBan bus = new BUSNhaXuatBan(this, dao);
     private JLabel jlabelEditTitle;
     private JLabel jlabelEditMa;
     private JLabel jlabelEditTen;
@@ -51,9 +55,14 @@ public class NXB_View extends javax.swing.JFrame {
     private JTextField JtextfieldEditDiaChi;
     private JTextField JtextfieldEditSDT;
     private JTextField JtextfieldEditEmail;
-    private JButton jButton_ok2;
-   
+    private JButton jButton_ok3;
+
     private String id;
+    private JLabel jlabel_update;
+    private JButton jbutton_excel;
+    private JButton jbutton_Database;
+    private JButton jbutton_ok2;
+    private JButton jbutton_cancel;
 
     public JFrame getjFrameAddNXB() {
         return jFrameAddNXB;
@@ -65,12 +74,14 @@ public class NXB_View extends javax.swing.JFrame {
     public NXB_View() {
 
         initComponents();
-
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
         dao.loadDataListToTable(this);
         this.setVisible(true);
         initJFrameAdd();
         initFrameEdit();
+        initJDialogUpdate();
+        initJDialogDelete();
 
     }
 
@@ -81,6 +92,7 @@ public class NXB_View extends javax.swing.JFrame {
     public void initJFrameAdd() {
         Font font = new Font("Segoe UI", Font.BOLD, 14);
         jFrameAddNXB.setSize(383, 210);
+        jFrameAddNXB.setResizable(false);
         jFrameAddNXB.setLocationRelativeTo(null);
         jPanelAddData.setLayout(new GridLayout(5, 2));
         jPanelAddOK.setLayout(new BorderLayout());
@@ -108,8 +120,7 @@ public class NXB_View extends javax.swing.JFrame {
         JtextfieldSDT = new JTextField();
         JtextfieldEmail = new JTextField();
         jbutton_ok = new JButton("OK");
-        ActionListener ac = new NXBListener(this, this.dao);
-        jbutton_ok.addActionListener(ac);
+        jbutton_ok.addActionListener(this);
         jbutton_ok.setFont(font);
         jPanelAddTitle.add(jlabelTitle);
         jPanelAddData.add(jlabelMa);
@@ -126,52 +137,33 @@ public class NXB_View extends javax.swing.JFrame {
 
     }
 
-   
+    public void initJDialogDelete() {
+        jDialogDelete.setTitle("Xóa NXB");
+        jDialogDelete.setSize(410, 125);
+        jDialogDelete.setResizable(false);
+        jDialogDelete.setLocationRelativeTo(null);
+        Font font = new Font("Segoe UI", Font.BOLD, 14);
+        jbutton_ok2 = new JButton("Xóa");
+        jbutton_cancel = new JButton("Hủy bỏ");
+        jbutton_ok2.setFont(font);
+        jbutton_cancel.setFont(font);
+        jbutton_ok2.addActionListener((ActionListener) this);
+        jbutton_cancel.addActionListener((ActionListener) this);
+        this.jPanelDeleteDown.setLayout(new GridLayout(1, 2));
+        jPanelDeleteDown.add(jbutton_ok2);
+        jPanelDeleteDown.add(jbutton_cancel);
 
-    public JButton getJbutton_ok() {
-        return jbutton_ok;
     }
-
-    public JButton getjButton_ok2() {
-        return jButton_ok2;
-    }
-
-    public DTONhaXuatBan dataJFrameAdd() {
-        String ma = JtextfieldMa.getText();
-        String ten = JtextfieldTen.getText();
-        String diachi = JtextfieldDiaChi.getText();
-        String sdt = JtextfieldSDT.getText();
-        String email = JtextfieldEmail.getText();
-        DTONhaXuatBan nxb1 = null;
-        if (ma.matches("^NXB-[0-9]{1,}") == false) {
-            JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
-            return nxb1;
-        }
-        if (sdt.matches("[0]{1}[0-9]{9,10}") == false) {
-            JOptionPane.showMessageDialog(null, "Thêm thất bại, sai số điện thoại!");
-            return nxb1;
-        }
-        if (email.matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
-
-            JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng Email!");
-            return nxb1;
-        }
-        DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
-        return nxb;
-    }
-
-    
-
-   
 
     public void initFrameEdit() {
         Font font = new Font("Segoe UI", Font.BOLD, 14);
         jFrameEdit.setSize(383, 220);
+        jFrameEdit.setResizable(false);
         jFrameEdit.setLocationRelativeTo(null);
         jPanelEdit2.setLayout(new GridLayout(5, 2));
         jPanelEdit3.setLayout(new BorderLayout());
         jPanelEdit1.setLayout(new BorderLayout());
-        jlabelEditTitle = new JLabel("Vui lòng nhập mã NXB và thông tin cần sửa", JLabel.CENTER);
+        jlabelEditTitle = new JLabel("Vui lòng thay đổi thông tin muốn sửa!", JLabel.CENTER);
         jlabelEditTitle.setFont(font);
         jlabelEditMa = new JLabel("Mã NXB");
         jlabelEditMa.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -193,10 +185,9 @@ public class NXB_View extends javax.swing.JFrame {
         JtextfieldEditDiaChi = new JTextField();
         JtextfieldEditSDT = new JTextField();
         JtextfieldEditEmail = new JTextField();
-        jButton_ok2 = new JButton("OK");
-        ActionListener ac = new NXBListener(this, this.dao);
-        jButton_ok2.addActionListener(ac);
-        jButton_ok2.setFont(font);
+        jButton_ok3 = new JButton("Sửa");
+        jButton_ok3.addActionListener(this);
+        jButton_ok3.setFont(font);
         jPanelEdit1.add(jlabelEditTitle);
         jPanelEdit2.add(jlabelEditMa);
         jPanelEdit2.add(JtextfieldEditMa);
@@ -208,34 +199,179 @@ public class NXB_View extends javax.swing.JFrame {
         jPanelEdit2.add(JtextfieldEditSDT);
         jPanelEdit2.add(jlabelEditEmail);
         jPanelEdit2.add(JtextfieldEditEmail);
-        jPanelEdit3.add(jButton_ok2);
+        jPanelEdit3.add(jButton_ok3);
 
     }
 
-    public DTONhaXuatBan dataJFrameEdit() {
-        String ma = JtextfieldEditMa.getText();
-        String ten = JtextfieldEditTen.getText();
-        String diachi = JtextfieldEditDiaChi.getText();
-        String sdt = JtextfieldEditSDT.getText();
-        String email = JtextfieldEditEmail.getText();
-        DTONhaXuatBan nxb1 = null;      
-        if ((sdt.matches("[0]{1}[0-9]{9,10}") == false) && !sdt.equals("")) {
-            JOptionPane.showMessageDialog(null, "Sửa thất bại, sai định dạng số điện thoại!");
-            return nxb1;
-        }
-        if (email.matches("[a-zA-z0-9]{1,}@gmail.com$") == false && !email.equals("")) {
+    public void initJDialogUpdate() {
+        jDialogUpdate.setTitle("Cập nhật dữ liệu");
+        jDialogUpdate.setSize(250, 150);
+        jDialogUpdate.setResizable(false);
+        jDialogUpdate.setLocationRelativeTo(null);
+        jDialogUpdate.setLayout(new GridLayout(3, 1));
+        Font font = new Font("Segoe UI", Font.BOLD, 14);
+        jlabel_update = new JLabel("Cập nhật dữ liệu", JLabel.CENTER);
+        jlabel_update.setFont(font);
+        jbutton_excel = new JButton("Từ Excel");
+        jbutton_excel.setFont(font);
+        this.jbutton_excel.addActionListener((ActionListener) this);
+        jbutton_Database = new JButton("Vào Excel");
+        jbutton_Database.setFont(font);
+        this.jbutton_Database.addActionListener((ActionListener) this);
+        jDialogUpdate.add(jlabel_update);
+        jDialogUpdate.add(jbutton_Database);
+        jDialogUpdate.add(jbutton_excel);
+    }       
 
-            JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng Email!");
-            return nxb1;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.jbutton_ok) {
+            if (JtextfieldMa.getText().equals("")
+                    || JtextfieldTen.getText().equals("")
+                    || JtextfieldDiaChi.getText().equals("")
+                    || JtextfieldSDT.getText().equals("")
+                    || JtextfieldEmail.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin!");
+
+            } else {
+                bus.AddNXB();
+            }
+       
         }
-        DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
-        return nxb;
+        if (e.getSource() == jbutton_cancel) {
+            jDialogDelete.setVisible(false);
+        }
+        
+        if (e.getSource() == jbutton_ok2) {
+            bus.DeleteNXB();
+        }
+        if (e.getSource() == jButton_ok3) {
+            bus.EditNXB();
+        }
+
+        if (e.getSource() == jbutton_excel) {
+            bus.Excel_Database();
+        }
+        if (e.getSource() == jbutton_Database) {
+            bus.Database_Excel();
+        }
     }
 
     public JFrame getjFrameEdit() {
         return jFrameEdit;
     }
 
+    public JButton getJbutton_ok() {
+        return jbutton_ok;
+    }
+
+    public JButton getjButton_ok3() {
+        return jButton_ok3;
+    }
+
+    public JTextField getJtextfieldMa() {
+        return JtextfieldMa;
+    }
+
+    public void setJtextfieldMa(JTextField JtextfieldMa) {
+        this.JtextfieldMa = JtextfieldMa;
+    }
+
+    public JTextField getJtextfieldDiaChi() {
+        return JtextfieldDiaChi;
+    }
+
+    public void setJtextfieldDiaChi(JTextField JtextfieldDiaChi) {
+        this.JtextfieldDiaChi = JtextfieldDiaChi;
+    }
+
+    public JTextField getJtextfieldSDT() {
+        return JtextfieldSDT;
+    }
+
+    public void setJtextfieldSDT(JTextField JtextfieldSDT) {
+        this.JtextfieldSDT = JtextfieldSDT;
+    }
+
+    public JTextField getJtextfieldEmail() {
+        return JtextfieldEmail;
+    }
+
+    public void setJtextfieldEmail(JTextField JtextfieldEmail) {
+        this.JtextfieldEmail = JtextfieldEmail;
+    }
+
+    public JTextField getJtextfieldEditTen() {
+        return JtextfieldEditTen;
+    }
+
+    public void setJtextfieldEditTen(JTextField JtextfieldEditTen) {
+        this.JtextfieldEditTen = JtextfieldEditTen;
+    }
+
+    public JTextField getJtextfieldEditDiaChi() {
+        return JtextfieldEditDiaChi;
+    }
+
+    public void setJtextfieldEditDiaChi(JTextField JtextfieldEditDiaChi) {
+        this.JtextfieldEditDiaChi = JtextfieldEditDiaChi;
+    }
+
+    public JTextField getJtextfieldEditSDT() {
+        return JtextfieldEditSDT;
+    }
+
+    public void setJtextfieldEditSDT(JTextField JtextfieldEditSDT) {
+        this.JtextfieldEditSDT = JtextfieldEditSDT;
+    }
+
+    public JTextField getJtextfieldEditEmail() {
+        return JtextfieldEditEmail;
+    }
+
+    public void setJtextfieldEditEmail(JTextField JtextfieldEditEmail) {
+        this.JtextfieldEditEmail = JtextfieldEditEmail;
+    }
+
+    public JDialog getjDialogDelete() {
+        return jDialogDelete;
+    }
+
+    public void setjDialogDelete(JDialog jDialogDelete) {
+        this.jDialogDelete = jDialogDelete;
+    }
+
+    public JDialog getjDialogUpdate() {
+        return jDialogUpdate;
+    }
+
+    public void setjDialogUpdate(JDialog jDialogUpdate) {
+        this.jDialogUpdate = jDialogUpdate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public JTextField getJtextfieldTen() {
+        return JtextfieldTen;
+    }
+
+    public void setJtextfieldTen(JTextField JtextfieldTen) {
+        this.JtextfieldTen = JtextfieldTen;
+    }
+
+    public JTextField getJtextfieldEditMa() {
+        return JtextfieldEditMa;
+    }
+
+    public void setJtextfieldEditMa(JTextField JtextfieldEditMa) {
+        this.JtextfieldEditMa = JtextfieldEditMa;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -254,6 +390,11 @@ public class NXB_View extends javax.swing.JFrame {
         jPanelEdit1 = new javax.swing.JPanel();
         jPanelEdit3 = new javax.swing.JPanel();
         jPanelEdit2 = new javax.swing.JPanel();
+        jDialogUpdate = new javax.swing.JDialog();
+        jDialogDelete = new javax.swing.JDialog();
+        jPanelDeleteTop = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanelDeleteDown = new javax.swing.JPanel();
         BackGround = new javax.swing.JPanel();
         TieuDe = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -269,6 +410,7 @@ public class NXB_View extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         ThanhMenu4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         lbNhanVien4 = new javax.swing.JLabel();
@@ -396,6 +538,67 @@ public class NXB_View extends javax.swing.JFrame {
                 .addComponent(jPanelEdit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelEdit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout jDialogUpdateLayout = new javax.swing.GroupLayout(jDialogUpdate.getContentPane());
+        jDialogUpdate.getContentPane().setLayout(jDialogUpdateLayout);
+        jDialogUpdateLayout.setHorizontalGroup(
+            jDialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialogUpdateLayout.setVerticalGroup(
+            jDialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jPanelDeleteTop.setBackground(new java.awt.Color(153, 204, 0));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Bạn thật sự muốn xóa không?");
+
+        javax.swing.GroupLayout jPanelDeleteTopLayout = new javax.swing.GroupLayout(jPanelDeleteTop);
+        jPanelDeleteTop.setLayout(jPanelDeleteTopLayout);
+        jPanelDeleteTopLayout.setHorizontalGroup(
+            jPanelDeleteTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDeleteTopLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel1)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+        jPanelDeleteTopLayout.setVerticalGroup(
+            jPanelDeleteTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDeleteTopLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jPanelDeleteDown.setBackground(new java.awt.Color(153, 204, 0));
+
+        javax.swing.GroupLayout jPanelDeleteDownLayout = new javax.swing.GroupLayout(jPanelDeleteDown);
+        jPanelDeleteDown.setLayout(jPanelDeleteDownLayout);
+        jPanelDeleteDownLayout.setHorizontalGroup(
+            jPanelDeleteDownLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelDeleteDownLayout.setVerticalGroup(
+            jPanelDeleteDownLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 29, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialogDeleteLayout = new javax.swing.GroupLayout(jDialogDelete.getContentPane());
+        jDialogDelete.getContentPane().setLayout(jDialogDeleteLayout);
+        jDialogDeleteLayout.setHorizontalGroup(
+            jDialogDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelDeleteTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDeleteDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogDeleteLayout.setVerticalGroup(
+            jDialogDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogDeleteLayout.createSequentialGroup()
+                .addComponent(jPanelDeleteTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelDeleteDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -531,6 +734,16 @@ public class NXB_View extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(0, 204, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/update.png"))); // NOI18N
+        jButton1.setText("Dữ liệu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BangChonLayout = new javax.swing.GroupLayout(BangChon);
         BangChon.setLayout(BangChonLayout);
         BangChonLayout.setHorizontalGroup(
@@ -543,17 +756,19 @@ public class NXB_View extends javax.swing.JFrame {
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(112, 112, 112)
                 .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BangChonLayout.setVerticalGroup(
             BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BangChonLayout.createSequentialGroup()
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                        .addComponent(jButtonEdit))
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jButtonEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -712,21 +927,20 @@ public class NXB_View extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.PREFERRED_SIZE, 1352, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
                     .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ThanhMenu4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackGroundLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(BackGroundLayout.createSequentialGroup()
                         .addComponent(TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane_NXB, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTabbedPane_NXB)))
                 .addContainerGap())
         );
 
@@ -735,8 +949,8 @@ public class NXB_View extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -776,30 +990,30 @@ public class NXB_View extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (this.dao.deleteNXB(this.id)) {
-            this.dao.loadDataList();
-            this.dao.loadDataListToTable(this);
-            JOptionPane.showMessageDialog(null, "Xóa thành công!");
+        if (id != null) {
+            this.jDialogDelete.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Xóa thất bại!");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn NXB muốn xóa!");
         }
-        id="";
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        this.dao.loadDataList();
-        for (DTONhaXuatBan nxb : this.dao.getDanhSach()) {
-            if (id.equals(nxb.getMa())) {
-                JtextfieldEditMa.setText(nxb.getMa());
-                JtextfieldEditTen.setText(nxb.getTen());
-                JtextfieldEditDiaChi.setText(nxb.getDiaChi());
-                JtextfieldEditSDT.setText(nxb.getSoDienThoai());
-                JtextfieldEditEmail.setText(nxb.getEmail());
+        if (id != null) {
+            this.dao.loadDataList();
+            for (DTONhaXuatBan nxb : this.dao.getDanhSach()) {
+                if (id.equals(nxb.getMa())) {
+                    JtextfieldEditMa.setText(nxb.getMa());
+                    JtextfieldEditTen.setText(nxb.getTen());
+                    JtextfieldEditDiaChi.setText(nxb.getDiaChi());
+                    JtextfieldEditSDT.setText(nxb.getSoDienThoai());
+                    JtextfieldEditEmail.setText(nxb.getEmail());
+                }
             }
+            jFrameEdit.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn NXB muốn sửa!");
         }
-        jFrameEdit.setVisible(true);
-        id="";
     }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jTable_NXBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_NXBMouseClicked
@@ -807,6 +1021,7 @@ public class NXB_View extends javax.swing.JFrame {
         if (seclectedRow >= 0) {
             id = (String) jTable_NXB.getValueAt(seclectedRow, 0);
         }
+        this.txtFind.setText(id);
     }//GEN-LAST:event_jTable_NXBMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
@@ -870,6 +1085,10 @@ public class NXB_View extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BookStore4MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jDialogUpdate.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -920,9 +1139,13 @@ public class NXB_View extends javax.swing.JFrame {
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEdit;
+    private javax.swing.JDialog jDialogDelete;
+    private javax.swing.JDialog jDialogUpdate;
     private javax.swing.JFrame jFrameAddNXB;
     private javax.swing.JFrame jFrameEdit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -932,6 +1155,8 @@ public class NXB_View extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAddData;
     private javax.swing.JPanel jPanelAddOK;
     private javax.swing.JPanel jPanelAddTitle;
+    private javax.swing.JPanel jPanelDeleteDown;
+    private javax.swing.JPanel jPanelDeleteTop;
     private javax.swing.JPanel jPanelEdit1;
     private javax.swing.JPanel jPanelEdit2;
     private javax.swing.JPanel jPanelEdit3;

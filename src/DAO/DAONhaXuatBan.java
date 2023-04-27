@@ -6,6 +6,10 @@ package DAO;
 
 import DTO.DTONhaXuatBan;
 import GUI.NXB_View;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +18,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -26,18 +37,20 @@ public class DAONhaXuatBan {
     DefaultTableModel model;
     private ArrayList<DTONhaXuatBan> danhSach = new ArrayList<DTONhaXuatBan>();
     private ArrayList<DTONhaXuatBan> danhSach1 = new ArrayList<DTONhaXuatBan>();
+    private ArrayList<DTONhaXuatBan> danhSach2 = new ArrayList<DTONhaXuatBan>();
 
     public ArrayList<DTONhaXuatBan> getDanhSach() {
         return danhSach;
     }
-     public ArrayList<DTONhaXuatBan> getListNXB(){
+
+    public ArrayList<DTONhaXuatBan> getListNXB() {
         ArrayList<DTONhaXuatBan> list = new ArrayList<>();
         String sql = "select * from NhaXuatBan";
-        try{
+        try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                DTONhaXuatBan a  = new DTONhaXuatBan();
+            while (rs.next()) {
+                DTONhaXuatBan a = new DTONhaXuatBan();
                 a.setMa(rs.getString(1));
                 a.setTen(rs.getString(2));
                 a.setDiaChi(rs.getString(3));
@@ -45,13 +58,13 @@ public class DAONhaXuatBan {
                 a.setEmail(rs.getString(5));
                 list.add(a);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return list;
     }
+
     public DAONhaXuatBan() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -185,26 +198,6 @@ public class DAONhaXuatBan {
         return false;
     }
 
-//    public void searchNXB(NXB_View nxb_view) {
-//        danhSach.clear();
-//        String sql = "SELECT * FROM NhaXuatBan WHERE MaNXB like '%" + nxb_view.getTxtFind().getText() + "%'" + " or Ten like '%" + nxb_view.getTxtFind().getText() + "%'"
-//                + " or SDT like '%" + nxb_view.getTxtFind().getText() + "%'" + " or DiaChi like '%" + nxb_view.getTxtFind().getText() + "%'" + " or Email like '%" + nxb_view.getTxtFind().getText() + "%'";
-//        try {
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//
-//            // Iterate through the data in the result set and display it.
-//            while (rs.next()) {
-//                NXB vl = new NXB(rs.getString("MaNXB"), rs.getString("Ten"), rs.getString("DiaChi"), rs.getString("SDT"), rs.getString("Email"));
-//                //danhSach.add(vl);
-//
-//                danhSach.add(vl);
-//
-//            }
-//            this.loadDataListToTable(nxb_view);
-//        } catch (Exception e) {
-//        }
-//    }
     public void searchNXB(NXB_View nxb_view) {
         this.loadDataList();
         this.danhSach1.clear();
@@ -232,6 +225,173 @@ public class DAONhaXuatBan {
                 model.addRow(new Object[]{vl.getMa(), vl.getTen(), vl.getDiaChi(), vl.getSoDienThoai(), vl.getEmail()});
             }
         }
+    }
+
+    public void readExcel() throws IOException {
+        danhSach2.clear();
+        int i = 1;
+        int d = 1;
+        String ma = "";
+        String ten = "";
+        String diachi = "";
+        String sdt = "";
+        String email = "";
+        String st = "";
+        FileInputStream file;
+        file = new FileInputStream("NXB.xlsx");
+        try (XSSFWorkbook wb = new XSSFWorkbook(file)) {
+            XSSFSheet sheet = wb.getSheetAt(0);
+            for (Row row : sheet) {
+                if (i != 1) {
+                    for (Cell cell : row) {
+                        st = cell.getStringCellValue();
+                        switch (d) {
+                            case 1 -> {
+                                ma = st;
+                                d += 1;
+                            }
+                            case 2 -> {
+                                ten = st;
+                                d += 1;
+                            }
+                            case 3 -> {
+                                diachi = st;
+                                d += 1;
+                            }
+                            case 4 -> {
+                                sdt = st;
+                                d += 1;
+                            }
+                            case 5 -> {
+                                email = st;
+                                d = 1;
+                            }
+                            default -> {
+                            }
+                        }
+                    }
+                    DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
+                    danhSach2.add(nxb);
+                } else {
+                    i += 1;
+                }
+
+            }
+            wb.close();
+            file.close();
+        }
+    }
+
+    public boolean Excel_Database() {
+        loadDataList();
+        int d = 0;
+
+        try {
+            this.readExcel();
+            for (DTONhaXuatBan nxb2 : danhSach2) {
+                int i = 0;
+
+                for (DTONhaXuatBan nxb : danhSach) {
+                    if (nxb2.getMa().equals(nxb.getMa())) {
+                        i = i + 1;
+                        if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
+                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
+                            continue;
+                        }
+                        if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
+                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, số diện thoại phải có 10 số!");
+                            continue;
+                        }
+                        if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
+
+                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
+                            continue;
+                        }
+                        if (EditNXB(nxb2)) {
+                            d = d + 1;
+                        }
+
+                    }
+                }
+                if (i == 0) {
+                    if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
+                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
+                        continue;
+                    }
+                    if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
+                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, số điện thoại phải có 10 số!");
+                        continue;
+                    }
+                    if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
+
+                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
+                        continue;
+                    }
+                    if (addNXBToSql(nxb2)) {
+                        d = d + 1;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại!");
+                    }
+                }
+            }
+            if (d != 0) {
+                return true;
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(DAONhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public void Database_Excel() throws FileNotFoundException {
+        loadDataList();
+        FileOutputStream file;
+
+        XSSFWorkbook wb = new XSSFWorkbook();
+        XSSFSheet Sheet = wb.createSheet("NXB");
+        XSSFRow row = null;
+        Cell cell = null;
+        row = Sheet.createRow(0);
+        int i = 0;
+        cell = row.createCell(0, CellType.STRING);
+        cell.setCellValue("Mã");
+        cell = row.createCell(1, CellType.STRING);
+        cell.setCellValue("Tên");
+        cell = row.createCell(2, CellType.STRING);
+        cell.setCellValue("Địa Chỉ");
+        cell = row.createCell(3, CellType.STRING);
+        cell.setCellValue("Số điện thoại");
+        cell = row.createCell(4, CellType.STRING);
+        cell.setCellValue("Email");
+        for (DTONhaXuatBan nxb : danhSach) {
+            if (nxb.getTen() != null) {
+                i = i + 1;
+                //System.out.println(nxb.getMa());
+                row = Sheet.createRow(i);
+                cell = row.createCell(0, CellType.STRING);
+                cell.setCellValue(nxb.getMa());
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(nxb.getTen());
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(nxb.getDiaChi());
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(nxb.getSoDienThoai());
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(nxb.getEmail());
+
+            }
+        }
+        try {
+            file = new FileOutputStream("NXB.xlsx");
+            wb.write(file);
+            wb.close();
+            file.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(DAONhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void close() {
