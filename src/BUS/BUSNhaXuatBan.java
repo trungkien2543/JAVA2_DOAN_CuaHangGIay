@@ -26,6 +26,10 @@ public class BUSNhaXuatBan {
         this.nxb_view = nxb_view;
         this.daoNxb = daoNxb;
     }
+    
+    public BUSNhaXuatBan(){
+        
+    }
     DAONhaXuatBan nxbDAO = new DAONhaXuatBan();
 
     public ArrayList<DTONhaXuatBan> getAllNXB() {

@@ -167,6 +167,7 @@ public class BanHang_View extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
+        BackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -189,7 +190,6 @@ public class BanHang_View extends javax.swing.JFrame {
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-to-basket.png"))); // NOI18N
         btnAdd.setText("Add");
-        btnAdd.setBorder(null);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -244,6 +244,8 @@ public class BanHang_View extends javax.swing.JFrame {
             .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        BackGround.add(BangChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 44, 1217, -1));
+
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/notification.png"))); // NOI18N
@@ -284,6 +286,8 @@ public class BanHang_View extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4))))
         );
+
+        BackGround.add(TieuDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 0, 1217, -1));
 
         jTabbedPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -350,7 +354,7 @@ public class BanHang_View extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -469,7 +473,7 @@ public class BanHang_View extends javax.swing.JFrame {
                     .addComponent(jLabel12))
                 .addGap(5, 5, 5)
                 .addComponent(btnTiepTuc)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -769,7 +773,7 @@ public class BanHang_View extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)
@@ -790,6 +794,8 @@ public class BanHang_View extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Chi TietHoa Don", jPanel2);
+
+        BackGround.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 104, -1, 637));
 
         ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -937,29 +943,7 @@ public class BanHang_View extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
-        BackGround.setLayout(BackGroundLayout);
-        BackGroundLayout.setHorizontalGroup(
-            BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(ThanhMenu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-        BackGroundLayout.setVerticalGroup(
-            BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
-            .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        BackGround.add(ThanhMenu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 741));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -967,7 +951,7 @@ public class BanHang_View extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1440,8 +1424,8 @@ public class BanHang_View extends javax.swing.JFrame {
         for (int i = 0; i < tblHoaDon.getRowCount(); i++){
             DTOChiTietHoaDon cthd =  new DTOChiTietHoaDon();
             cthd.setMaHoaDon(Integer.parseInt(lblMaPhieu.getText()));
-            cthd.setMaSach((java.lang.String) tblHoaDon.getValueAt(i, 0));
-            cthd.setTenSach((java.lang.String) tblHoaDon.getValueAt(i, 1));
+            cthd.setMaSach((String) tblHoaDon.getValueAt(i, 0));
+            cthd.setTenSach((String) tblHoaDon.getValueAt(i, 1));
             cthd.setGiaSach((int) tblHoaDon.getValueAt(i, 2));
             cthd.setSLMua((int) tblHoaDon.getValueAt(i, 3));
             if(new BUSChiTietHoaDon().addChiTietHoaDon(cthd).equals("Xảy ra lỗi")){

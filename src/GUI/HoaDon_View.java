@@ -713,6 +713,7 @@ public class HoaDon_View extends javax.swing.JFrame {
         }
         Date From = jDateFrom.getDate();
         Date To = jDateTo.getDate();
+        System.out.println(From);
         String From_str = ChuyenNgaySQL.format(From);
         String To_str = ChuyenNgaySQL.format(To);
         model.setRowCount(0);
