@@ -126,6 +126,22 @@ public class DAOKhoSach {
     }
     
     
+    public boolean CongSLBanHang(String masach, int SLTonKho, int SLNhap){
+        String sql = "update KhoSach set SoLuongTonKho = ? where MaSach = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, SLTonKho + SLNhap);
+            ps.setString(2, masach);
+            return ps.executeUpdate() > 0;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    
     public static void main(String[] args) {
         new DAOKhoSach();
     }
