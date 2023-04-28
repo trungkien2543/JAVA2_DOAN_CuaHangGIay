@@ -36,6 +36,9 @@ public class KhachHang_View extends javax.swing.JFrame {
         
         this.MaNV = MaNV;
         this.TenNV = TenNV;
+        
+        lblHello.setText("Hi " + this.TenNV);
+
     }
     
     private void initData(){
@@ -122,7 +125,6 @@ public class KhachHang_View extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         BackGround = new javax.swing.JPanel();
         BangChon = new javax.swing.JPanel();
@@ -135,7 +137,7 @@ public class KhachHang_View extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
         ThanhMenu5 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        lblHello = new javax.swing.JLabel();
         lbNhanVien5 = new javax.swing.JLabel();
         lbBanSach4 = new javax.swing.JLabel();
         lbNhaCungCap5 = new javax.swing.JLabel();
@@ -225,10 +227,12 @@ public class KhachHang_View extends javax.swing.JFrame {
 
         ThanhMenu5.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
-        jLabel13.setText("Hi You");
+        lblHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHello.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
+        lblHello.setText("Hi You");
+        lblHello.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblHello.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         lbNhanVien5.setBackground(new java.awt.Color(0, 204, 204));
         lbNhanVien5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -332,7 +336,7 @@ public class KhachHang_View extends javax.swing.JFrame {
         ThanhMenu5.setLayout(ThanhMenu5Layout);
         ThanhMenu5Layout.setHorizontalGroup(
             ThanhMenu5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblHello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbBanSach4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhanVien5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -349,7 +353,7 @@ public class KhachHang_View extends javax.swing.JFrame {
             ThanhMenu5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThanhMenu5Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(lbNhanVien5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -466,7 +470,7 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void lbNhanVien5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien5MouseClicked
         // TODO add your handling code here:
-        NhanVien_View a = new NhanVien_View();
+        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhanVien5MouseClicked
@@ -565,7 +569,6 @@ public class KhachHang_View extends javax.swing.JFrame {
     private javax.swing.JPanel ThanhMenu5;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -583,6 +586,7 @@ public class KhachHang_View extends javax.swing.JFrame {
     private javax.swing.JLabel lbPhieu10;
     private javax.swing.JLabel lbPhieu11;
     private javax.swing.JLabel lblBill4;
+    private javax.swing.JLabel lblHello;
     private javax.swing.JTable tblKhachHang;
     private javax.swing.JTextField txtFind;
     // End of variables declaration//GEN-END:variables

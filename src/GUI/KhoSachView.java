@@ -54,6 +54,8 @@ public class KhoSachView extends javax.swing.JFrame {
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         
+        lblHello.setText("Hi " + this.TenNV);
+
     }
 
     public void ShowTable(){
@@ -93,7 +95,7 @@ public class KhoSachView extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbKhoSach = new javax.swing.JTable();
         ThanhMenu4 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        lblHello = new javax.swing.JLabel();
         lbNhanVien4 = new javax.swing.JLabel();
         lbBanSach4 = new javax.swing.JLabel();
         lbNhaCungCap5 = new javax.swing.JLabel();
@@ -274,10 +276,12 @@ public class KhoSachView extends javax.swing.JFrame {
 
         ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
-        jLabel13.setText("Hi You");
+        lblHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHello.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
+        lblHello.setText("Hi You");
+        lblHello.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblHello.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         lbNhanVien4.setBackground(new java.awt.Color(0, 204, 204));
         lbNhanVien4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -381,7 +385,7 @@ public class KhoSachView extends javax.swing.JFrame {
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblHello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbBanSach4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -398,7 +402,7 @@ public class KhoSachView extends javax.swing.JFrame {
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(lbNhanVien4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -589,7 +593,7 @@ public class KhoSachView extends javax.swing.JFrame {
 
     private void lbNhanVien4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien4MouseClicked
         // TODO add your handling code here:
-        NhanVien_View a = new NhanVien_View();
+        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhanVien4MouseClicked
@@ -711,7 +715,6 @@ public class KhoSachView extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -725,6 +728,7 @@ public class KhoSachView extends javax.swing.JFrame {
     private javax.swing.JLabel lbPhieu10;
     private javax.swing.JLabel lbPhieu11;
     private javax.swing.JLabel lblBill4;
+    private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblThayDoiTK;
     private javax.swing.JTable tbKhoSach;
     private javax.swing.JTextField txtFind;

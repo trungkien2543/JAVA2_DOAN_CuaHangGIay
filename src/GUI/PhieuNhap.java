@@ -25,6 +25,10 @@ public class PhieuNhap extends javax.swing.JFrame {
         
         this.MaNV=MaNV;
         this.TenNV=TenNV;
+        
+        lblHello.setText("Hi " + this.TenNV);
+
+        
     }
 
     /**
@@ -37,16 +41,6 @@ public class PhieuNhap extends javax.swing.JFrame {
     private void initComponents() {
 
         BackGround = new javax.swing.JPanel();
-        ThanhMenu4 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        lbNhanVien4 = new javax.swing.JLabel();
-        lbBanSach4 = new javax.swing.JLabel();
-        lbNhaCungCap5 = new javax.swing.JLabel();
-        lbPhieu10 = new javax.swing.JLabel();
-        lbNhapSach4 = new javax.swing.JLabel();
-        lbPhieu11 = new javax.swing.JLabel();
-        lblBill4 = new javax.swing.JLabel();
-        BookStore4 = new javax.swing.JLabel();
         TieuDe = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -66,156 +60,20 @@ public class PhieuNhap extends javax.swing.JFrame {
         cbxNam = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
+        ThanhMenu4 = new javax.swing.JPanel();
+        lblHello = new javax.swing.JLabel();
+        lbNhanVien4 = new javax.swing.JLabel();
+        lbBanSach4 = new javax.swing.JLabel();
+        lbNhaCungCap5 = new javax.swing.JLabel();
+        lbPhieu10 = new javax.swing.JLabel();
+        lbNhapSach4 = new javax.swing.JLabel();
+        lbPhieu11 = new javax.swing.JLabel();
+        lblBill4 = new javax.swing.JLabel();
+        BookStore4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
-
-        ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
-        jLabel13.setText("Hi You");
-
-        lbNhanVien4.setBackground(new java.awt.Color(0, 204, 204));
-        lbNhanVien4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbNhanVien4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbNhanVien4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Employee.png"))); // NOI18N
-        lbNhanVien4.setText("  Nhân viên");
-        lbNhanVien4.setToolTipText("");
-        lbNhanVien4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbNhanVien4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbNhanVien4MouseClicked(evt);
-            }
-        });
-
-        lbBanSach4.setBackground(new java.awt.Color(0, 204, 204));
-        lbBanSach4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbBanSach4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbBanSach4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookSales.png"))); // NOI18N
-        lbBanSach4.setText("  Bán sách");
-        lbBanSach4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbBanSach4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbBanSach4MouseClicked(evt);
-            }
-        });
-
-        lbNhaCungCap5.setBackground(new java.awt.Color(0, 204, 204));
-        lbNhaCungCap5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbNhaCungCap5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbNhaCungCap5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Suppliers.png"))); // NOI18N
-        lbNhaCungCap5.setText("  Nhà xuất bản");
-        lbNhaCungCap5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbNhaCungCap5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbNhaCungCap5MouseClicked(evt);
-            }
-        });
-
-        lbPhieu10.setBackground(new java.awt.Color(0, 204, 204));
-        lbPhieu10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbPhieu10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbPhieu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Coupons.png"))); // NOI18N
-        lbPhieu10.setText("  Phiếu nhập");
-        lbPhieu10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbPhieu10.setOpaque(true);
-        lbPhieu10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbPhieu10MouseClicked(evt);
-            }
-        });
-
-        lbNhapSach4.setBackground(new java.awt.Color(0, 204, 204));
-        lbNhapSach4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbNhapSach4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbNhapSach4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ImportBook.png"))); // NOI18N
-        lbNhapSach4.setText("  Nhập sách");
-        lbNhapSach4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbNhapSach4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbNhapSach4MouseClicked(evt);
-            }
-        });
-
-        lbPhieu11.setBackground(new java.awt.Color(0, 204, 204));
-        lbPhieu11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbPhieu11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbPhieu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Customer.png"))); // NOI18N
-        lbPhieu11.setText("  Khách hàng");
-        lbPhieu11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbPhieu11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbPhieu11MouseClicked(evt);
-            }
-        });
-
-        lblBill4.setBackground(new java.awt.Color(0, 204, 204));
-        lblBill4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBill4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBill4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Bill.png"))); // NOI18N
-        lblBill4.setText("  Hóa đơn");
-        lblBill4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBill4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBill4MouseClicked(evt);
-            }
-        });
-
-        BookStore4.setBackground(new java.awt.Color(0, 204, 204));
-        BookStore4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        BookStore4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BookStore4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
-        BookStore4.setText(" Cửa hàng sách");
-        BookStore4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BookStore4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BookStore4MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
-        ThanhMenu4.setLayout(ThanhMenu4Layout);
-        ThanhMenu4Layout.setHorizontalGroup(
-            ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbBanSach4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbNhaCungCap5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPhieu11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        ThanhMenu4Layout.setVerticalGroup(
-            ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(lbNhanVien4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNhapSach4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbBanSach4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNhaCungCap5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPhieu11)
-                .addGap(18, 18, 18)
-                .addComponent(lbPhieu10)
-                .addGap(18, 18, 18)
-                .addComponent(lblBill4)
-                .addGap(18, 18, 18)
-                .addComponent(BookStore4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
 
@@ -375,7 +233,7 @@ public class PhieuNhap extends javax.swing.JFrame {
                     .addComponent(cbxDieuKienLoc, 0, 131, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -414,6 +272,154 @@ public class PhieuNhap extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblHoaDon);
 
+        ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
+
+        lblHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHello.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
+        lblHello.setText("Hi You");
+        lblHello.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblHello.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        lbNhanVien4.setBackground(new java.awt.Color(0, 204, 204));
+        lbNhanVien4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNhanVien4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNhanVien4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Employee.png"))); // NOI18N
+        lbNhanVien4.setText("  Nhân viên");
+        lbNhanVien4.setToolTipText("");
+        lbNhanVien4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbNhanVien4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNhanVien4MouseClicked(evt);
+            }
+        });
+
+        lbBanSach4.setBackground(new java.awt.Color(0, 204, 204));
+        lbBanSach4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbBanSach4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbBanSach4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookSales.png"))); // NOI18N
+        lbBanSach4.setText("  Bán sách");
+        lbBanSach4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbBanSach4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbBanSach4MouseClicked(evt);
+            }
+        });
+
+        lbNhaCungCap5.setBackground(new java.awt.Color(0, 204, 204));
+        lbNhaCungCap5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNhaCungCap5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNhaCungCap5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Suppliers.png"))); // NOI18N
+        lbNhaCungCap5.setText("  Nhà xuất bản");
+        lbNhaCungCap5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbNhaCungCap5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNhaCungCap5MouseClicked(evt);
+            }
+        });
+
+        lbPhieu10.setBackground(new java.awt.Color(0, 204, 204));
+        lbPhieu10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbPhieu10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbPhieu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Coupons.png"))); // NOI18N
+        lbPhieu10.setText("  Phiếu nhập");
+        lbPhieu10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbPhieu10.setOpaque(true);
+        lbPhieu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPhieu10MouseClicked(evt);
+            }
+        });
+
+        lbNhapSach4.setBackground(new java.awt.Color(0, 204, 204));
+        lbNhapSach4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNhapSach4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNhapSach4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ImportBook.png"))); // NOI18N
+        lbNhapSach4.setText("  Nhập sách");
+        lbNhapSach4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbNhapSach4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNhapSach4MouseClicked(evt);
+            }
+        });
+
+        lbPhieu11.setBackground(new java.awt.Color(0, 204, 204));
+        lbPhieu11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbPhieu11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbPhieu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Customer.png"))); // NOI18N
+        lbPhieu11.setText("  Khách hàng");
+        lbPhieu11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbPhieu11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPhieu11MouseClicked(evt);
+            }
+        });
+
+        lblBill4.setBackground(new java.awt.Color(0, 204, 204));
+        lblBill4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBill4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBill4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Bill.png"))); // NOI18N
+        lblBill4.setText("  Hóa đơn");
+        lblBill4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBill4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBill4MouseClicked(evt);
+            }
+        });
+
+        BookStore4.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
+        BookStore4.setText(" Cửa hàng sách");
+        BookStore4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
+        ThanhMenu4.setLayout(ThanhMenu4Layout);
+        ThanhMenu4Layout.setHorizontalGroup(
+            ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblHello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbBanSach4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbNhaCungCap5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPhieu11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(ThanhMenu4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        ThanhMenu4Layout.setVerticalGroup(
+            ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ThanhMenu4Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lbNhanVien4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbNhapSach4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbBanSach4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbNhaCungCap5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbPhieu11)
+                .addGap(18, 18, 18)
+                .addComponent(lbPhieu10)
+                .addGap(18, 18, 18)
+                .addComponent(lblBill4)
+                .addGap(18, 18, 18)
+                .addComponent(BookStore4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
         BackGround.setLayout(BackGroundLayout);
         BackGroundLayout.setHorizontalGroup(
@@ -428,14 +434,16 @@ public class PhieuNhap extends javax.swing.JFrame {
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
+                .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ThanhMenu4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(BackGroundLayout.createSequentialGroup()
+                        .addComponent(TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -451,63 +459,6 @@ public class PhieuNhap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lbNhanVien4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien4MouseClicked
-        // TODO add your handling code here:
-        NhanVien_View a = new NhanVien_View();
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lbNhanVien4MouseClicked
-
-    private void lbBanSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanSach4MouseClicked
-        // TODO add your handling code here:
-        BanHang_View a = new BanHang_View(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lbBanSach4MouseClicked
-
-    private void lbNhaCungCap5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhaCungCap5MouseClicked
-        // TODO add your handling code here:
-        NXB_View a = new NXB_View(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lbNhaCungCap5MouseClicked
-
-    private void lbPhieu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu10MouseClicked
-        // TODO add your handling code here:
-        PhieuNhap a = new PhieuNhap(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_lbPhieu10MouseClicked
-
-    private void lbNhapSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhapSach4MouseClicked
-        // TODO add your handling code here:
-        NhapHangView a = new NhapHangView(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lbNhapSach4MouseClicked
-
-    private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
-        // TODO add your handling code here:
-        KhachHang_View a = new KhachHang_View(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lbPhieu11MouseClicked
-
-    private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
-        // TODO add your handling code here:
-        HoaDon_View a = new HoaDon_View(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_lblBill4MouseClicked
-
-    private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
-        // TODO add your handling code here:
-        KhoSachView a = new KhoSachView(MaNV,TenNV);
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_BookStore4MouseClicked
 
     private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
 
@@ -695,6 +646,62 @@ public class PhieuNhap extends javax.swing.JFrame {
         txtFind.setText(Integer.toString((int) tblHoaDon.getValueAt(Selected_Row, 0)));
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
+    private void lbNhanVien4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien4MouseClicked
+        // TODO add your handling code here:
+        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbNhanVien4MouseClicked
+
+    private void lbBanSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanSach4MouseClicked
+        // TODO add your handling code here:
+        BanHang_View a = new BanHang_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbBanSach4MouseClicked
+
+    private void lbNhaCungCap5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhaCungCap5MouseClicked
+        // TODO add your handling code here:
+        NXB_View a = new NXB_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbNhaCungCap5MouseClicked
+
+    private void lbPhieu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu10MouseClicked
+        // TODO add your handling code here:
+        PhieuNhap a = new PhieuNhap(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbPhieu10MouseClicked
+
+    private void lbNhapSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhapSach4MouseClicked
+        // TODO add your handling code here:
+        NhapHangView a = new NhapHangView(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbNhapSach4MouseClicked
+
+    private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
+        // TODO add your handling code here:
+        KhachHang_View a = new KhachHang_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbPhieu11MouseClicked
+
+    private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
+        // TODO add your handling code here:
+        HoaDon_View a = new HoaDon_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblBill4MouseClicked
+
+    private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
+        // TODO add your handling code here:
+        KhoSachView a = new KhoSachView(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookStore4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -742,7 +749,6 @@ public class PhieuNhap extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxThang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -759,6 +765,7 @@ public class PhieuNhap extends javax.swing.JFrame {
     private javax.swing.JLabel lbPhieu10;
     private javax.swing.JLabel lbPhieu11;
     private javax.swing.JLabel lblBill4;
+    private javax.swing.JLabel lblHello;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtFind;
     // End of variables declaration//GEN-END:variables

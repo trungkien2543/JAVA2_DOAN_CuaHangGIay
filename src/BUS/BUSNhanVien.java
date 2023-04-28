@@ -25,6 +25,7 @@ public class BUSNhanVien extends NhanVien_View {
     private DAONhanVien daonhanvien;
     private DAOTaiKhoan daotaikhoan;
     
+    
     public BUSNhanVien (){
        daonhanvien = new DAONhanVien();
        daotaikhoan = new DAOTaiKhoan();

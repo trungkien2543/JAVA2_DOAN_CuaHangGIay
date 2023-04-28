@@ -74,6 +74,8 @@ public class BanHang_View extends javax.swing.JFrame {
         
         this.MaNV = MaNV;
         this.TenNV = TenNV;
+        
+        lblHello.setText("Hi " + this.TenNV);
     }
     
 
@@ -156,7 +158,7 @@ public class BanHang_View extends javax.swing.JFrame {
         lblSoTienTra = new javax.swing.JLabel();
         btnThanhToan = new javax.swing.JButton();
         ThanhMenu4 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
+        lblHello = new javax.swing.JLabel();
         lbNhanVien4 = new javax.swing.JLabel();
         lbBanSach4 = new javax.swing.JLabel();
         lbNhaCungCap5 = new javax.swing.JLabel();
@@ -803,10 +805,12 @@ public class BanHang_View extends javax.swing.JFrame {
 
         ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
-        jLabel28.setText("Hi You");
+        lblHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHello.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
+        lblHello.setText("Hi You");
+        lblHello.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblHello.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         lbNhanVien4.setBackground(new java.awt.Color(0, 204, 204));
         lbNhanVien4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -910,7 +914,7 @@ public class BanHang_View extends javax.swing.JFrame {
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblHello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbBanSach4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -927,7 +931,7 @@ public class BanHang_View extends javax.swing.JFrame {
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(lbNhanVien4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1567,7 +1571,7 @@ public class BanHang_View extends javax.swing.JFrame {
 
     private void lbNhanVien4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien4MouseClicked
         // TODO add your handling code here:
-        NhanVien_View a = new NhanVien_View();
+        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhanVien4MouseClicked
@@ -1693,7 +1697,6 @@ public class BanHang_View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1720,6 +1723,7 @@ public class BanHang_View extends javax.swing.JFrame {
     private javax.swing.JLabel lbPhieu11;
     private javax.swing.JLabel lblBill4;
     private javax.swing.JLabel lblDiaChiKH;
+    private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblMaGiamGia;
     private javax.swing.JLabel lblMaKH;
     private javax.swing.JLabel lblMaKH_HD;

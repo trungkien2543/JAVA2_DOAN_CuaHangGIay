@@ -79,6 +79,9 @@ public class NhapHangView extends javax.swing.JFrame {
         
         this.MaNV = MaNV;
         this.TenNV = TenNV;
+        
+        lblHello.setText("Hi " + this.TenNV);
+
     }
 
     public void ShowTableKho() {
@@ -155,16 +158,16 @@ public class NhapHangView extends javax.swing.JFrame {
         lblTongHoaDon = new javax.swing.JLabel();
         btnThanhToan = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
-        ThanhMenu = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        lbNhanVien = new javax.swing.JLabel();
-        lbBanSach = new javax.swing.JLabel();
-        lbNhaCungCap1 = new javax.swing.JLabel();
-        lbPhieu2 = new javax.swing.JLabel();
-        lbNhapSach = new javax.swing.JLabel();
-        lbPhieu3 = new javax.swing.JLabel();
-        lblBill = new javax.swing.JLabel();
-        BookStore = new javax.swing.JLabel();
+        ThanhMenu4 = new javax.swing.JPanel();
+        lblHello = new javax.swing.JLabel();
+        lbNhanVien4 = new javax.swing.JLabel();
+        lbBanSach4 = new javax.swing.JLabel();
+        lbNhaCungCap5 = new javax.swing.JLabel();
+        lbPhieu10 = new javax.swing.JLabel();
+        lbNhapSach4 = new javax.swing.JLabel();
+        lbPhieu11 = new javax.swing.JLabel();
+        lblBill4 = new javax.swing.JLabel();
+        BookStore4 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -250,7 +253,7 @@ public class NhapHangView extends javax.swing.JFrame {
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BangChonLayout.createSequentialGroup()
                         .addComponent(cbxNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(43, Short.MAX_VALUE))
+                        .addContainerGap(44, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BangChonLayout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(75, 75, 75))))
@@ -571,107 +574,151 @@ public class NhapHangView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Chi tiết phiếu nhập", jPanel5);
 
-        ThanhMenu.setBackground(new java.awt.Color(0, 153, 153));
+        ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
-        jLabel2.setText("Hi You");
+        lblHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHello.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Icon minion.png"))); // NOI18N
+        lblHello.setText("Hi You");
+        lblHello.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblHello.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        lbNhanVien.setBackground(new java.awt.Color(255, 255, 255));
-        lbNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Employee.png"))); // NOI18N
-        lbNhanVien.setText("Nhân viên");
-        lbNhanVien.setToolTipText("");
-
-        lbBanSach.setBackground(new java.awt.Color(255, 255, 255));
-        lbBanSach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbBanSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbBanSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookSales.png"))); // NOI18N
-        lbBanSach.setText("Bán sách");
-
-        lbNhaCungCap1.setBackground(new java.awt.Color(255, 255, 255));
-        lbNhaCungCap1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbNhaCungCap1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbNhaCungCap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Suppliers.png"))); // NOI18N
-        lbNhaCungCap1.setText("Nhà xuất bản");
-
-        lbPhieu2.setBackground(new java.awt.Color(255, 255, 255));
-        lbPhieu2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbPhieu2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbPhieu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Coupons.png"))); // NOI18N
-        lbPhieu2.setText("Phiếu nhập");
-
-        lbNhapSach.setBackground(new java.awt.Color(0, 204, 204));
-        lbNhapSach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbNhapSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbNhapSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ImportBook.png"))); // NOI18N
-        lbNhapSach.setText("Nhập sách");
-        lbNhapSach.setOpaque(true);
-
-        lbPhieu3.setBackground(new java.awt.Color(255, 255, 255));
-        lbPhieu3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbPhieu3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbPhieu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Customer.png"))); // NOI18N
-        lbPhieu3.setText("Khách hàng");
-
-        lblBill.setBackground(new java.awt.Color(255, 255, 255));
-        lblBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBill.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Bill.png"))); // NOI18N
-        lblBill.setText("Hóa đơn");
-
-        BookStore.setBackground(new java.awt.Color(255, 255, 255));
-        BookStore.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        BookStore.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BookStore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
-        BookStore.setText("Cửa hàng sách");
-        BookStore.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BookStore.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbNhanVien4.setBackground(new java.awt.Color(0, 204, 204));
+        lbNhanVien4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNhanVien4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNhanVien4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Employee.png"))); // NOI18N
+        lbNhanVien4.setText("  Nhân viên");
+        lbNhanVien4.setToolTipText("");
+        lbNhanVien4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbNhanVien4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BookStoreMouseClicked(evt);
+                lbNhanVien4MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout ThanhMenuLayout = new javax.swing.GroupLayout(ThanhMenu);
-        ThanhMenu.setLayout(ThanhMenuLayout);
-        ThanhMenuLayout.setHorizontalGroup(
-            ThanhMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbBanSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbNhapSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbNhaCungCap1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPhieu3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPhieu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ThanhMenuLayout.createSequentialGroup()
+        lbBanSach4.setBackground(new java.awt.Color(0, 204, 204));
+        lbBanSach4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbBanSach4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbBanSach4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookSales.png"))); // NOI18N
+        lbBanSach4.setText("  Bán sách");
+        lbBanSach4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbBanSach4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbBanSach4MouseClicked(evt);
+            }
+        });
+
+        lbNhaCungCap5.setBackground(new java.awt.Color(0, 204, 204));
+        lbNhaCungCap5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNhaCungCap5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNhaCungCap5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Suppliers.png"))); // NOI18N
+        lbNhaCungCap5.setText("  Nhà xuất bản");
+        lbNhaCungCap5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbNhaCungCap5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNhaCungCap5MouseClicked(evt);
+            }
+        });
+
+        lbPhieu10.setBackground(new java.awt.Color(0, 204, 204));
+        lbPhieu10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbPhieu10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbPhieu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Coupons.png"))); // NOI18N
+        lbPhieu10.setText("  Phiếu nhập");
+        lbPhieu10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbPhieu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPhieu10MouseClicked(evt);
+            }
+        });
+
+        lbNhapSach4.setBackground(new java.awt.Color(0, 204, 204));
+        lbNhapSach4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNhapSach4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNhapSach4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ImportBook.png"))); // NOI18N
+        lbNhapSach4.setText("  Nhập sách");
+        lbNhapSach4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbNhapSach4.setOpaque(true);
+        lbNhapSach4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbNhapSach4MouseClicked(evt);
+            }
+        });
+
+        lbPhieu11.setBackground(new java.awt.Color(0, 204, 204));
+        lbPhieu11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbPhieu11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbPhieu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Customer.png"))); // NOI18N
+        lbPhieu11.setText("  Khách hàng");
+        lbPhieu11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbPhieu11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPhieu11MouseClicked(evt);
+            }
+        });
+
+        lblBill4.setBackground(new java.awt.Color(0, 204, 204));
+        lblBill4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBill4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBill4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Bill.png"))); // NOI18N
+        lblBill4.setText("  Hóa đơn");
+        lblBill4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBill4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBill4MouseClicked(evt);
+            }
+        });
+
+        BookStore4.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
+        BookStore4.setText(" Cửa hàng sách");
+        BookStore4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
+        ThanhMenu4.setLayout(ThanhMenu4Layout);
+        ThanhMenu4Layout.setHorizontalGroup(
+            ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblHello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbBanSach4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbNhaCungCap5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPhieu11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BookStore, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        ThanhMenuLayout.setVerticalGroup(
-            ThanhMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ThanhMenuLayout.createSequentialGroup()
+        ThanhMenu4Layout.setVerticalGroup(
+            ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(lbNhanVien)
+                .addComponent(lbNhanVien4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNhapSach)
+                .addComponent(lbNhapSach4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbBanSach)
+                .addComponent(lbBanSach4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbNhaCungCap1)
+                .addComponent(lbNhaCungCap5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPhieu3)
+                .addComponent(lbPhieu11)
                 .addGap(18, 18, 18)
-                .addComponent(lbPhieu2)
+                .addComponent(lbPhieu10)
                 .addGap(18, 18, 18)
-                .addComponent(lblBill)
+                .addComponent(lblBill4)
                 .addGap(18, 18, 18)
-                .addComponent(BookStore)
+                .addComponent(BookStore4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -680,13 +727,13 @@ public class NhapHangView extends javax.swing.JFrame {
         BackGroundLayout.setHorizontalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(ThanhMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ThanhMenu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addContainerGap())
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,7 +746,7 @@ public class NhapHangView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(ThanhMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -707,7 +754,7 @@ public class NhapHangView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackGround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -829,13 +876,6 @@ public class NhapHangView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAddActionPerformed
   
-    private void BookStoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStoreMouseClicked
-        // TODO add your handling code here:
-        KhoSachView a = new KhoSachView(MaNV,TenNV);
-        a.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_BookStoreMouseClicked
-
     private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
         // TODO add your handling code here:
         if(txtFind.getText().trim().equals("Nhập thông tin để tìm kiếm")){
@@ -1029,12 +1069,67 @@ public class NhapHangView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void lbNhanVien4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien4MouseClicked
+        // TODO add your handling code here:
+        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbNhanVien4MouseClicked
+
+    private void lbBanSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanSach4MouseClicked
+        // TODO add your handling code here:
+        BanHang_View a = new BanHang_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbBanSach4MouseClicked
+
+    private void lbNhaCungCap5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhaCungCap5MouseClicked
+        // TODO add your handling code here:
+        NXB_View a = new NXB_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbNhaCungCap5MouseClicked
+
+    private void lbPhieu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu10MouseClicked
+        // TODO add your handling code here:
+        PhieuNhap a = new PhieuNhap(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbPhieu10MouseClicked
+
+    private void lbNhapSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhapSach4MouseClicked
+        // TODO add your handling code here:
+        NhapHangView a = new NhapHangView(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbNhapSach4MouseClicked
+
+    private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
+        // TODO add your handling code here:
+        KhachHang_View a = new KhachHang_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbPhieu11MouseClicked
+
+    private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
+        // TODO add your handling code here:
+        HoaDon_View a = new HoaDon_View(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblBill4MouseClicked
+
+    private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
+        // TODO add your handling code here:
+        KhoSachView a = new KhoSachView(MaNV,TenNV);
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookStore4MouseClicked
+
     private void Reset(){
         cbxNXB.setEnabled(true);
         cbxNXB.setSelectedIndex(0);
         model_kho.setRowCount(0);
         model_nhap.setRowCount(0);
-        lblBill.setText("");
         lblMaNV.setText("");
         lblMaPhieu.setText("");
         lblNgayNhap.setText("");
@@ -1098,8 +1193,8 @@ public class NhapHangView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
-    private javax.swing.JLabel BookStore;
-    private javax.swing.JPanel ThanhMenu;
+    private javax.swing.JLabel BookStore4;
+    private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnConfirm;
@@ -1114,7 +1209,6 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1132,13 +1226,14 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel jpChiTietHoaDon;
     private javax.swing.JPanel jpThongTinSanPham;
-    private javax.swing.JLabel lbBanSach;
-    private javax.swing.JLabel lbNhaCungCap1;
-    private javax.swing.JLabel lbNhanVien;
-    private javax.swing.JLabel lbNhapSach;
-    private javax.swing.JLabel lbPhieu2;
-    private javax.swing.JLabel lbPhieu3;
-    private javax.swing.JLabel lblBill;
+    private javax.swing.JLabel lbBanSach4;
+    private javax.swing.JLabel lbNhaCungCap5;
+    private javax.swing.JLabel lbNhanVien4;
+    private javax.swing.JLabel lbNhapSach4;
+    private javax.swing.JLabel lbPhieu10;
+    private javax.swing.JLabel lbPhieu11;
+    private javax.swing.JLabel lblBill4;
+    private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblMaPhieu;
     private javax.swing.JLabel lblNgayNhap;
