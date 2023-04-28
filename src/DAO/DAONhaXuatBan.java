@@ -38,7 +38,9 @@ public class DAONhaXuatBan {
     private ArrayList<DTONhaXuatBan> danhSach = new ArrayList<DTONhaXuatBan>();
     private ArrayList<DTONhaXuatBan> danhSach1 = new ArrayList<DTONhaXuatBan>();
     private ArrayList<DTONhaXuatBan> danhSach2 = new ArrayList<DTONhaXuatBan>();
-
+    
+    static String MaNV,TenNV;
+    
     public ArrayList<DTONhaXuatBan> getDanhSach() {
         return danhSach;
     }
@@ -403,7 +405,7 @@ public class DAONhaXuatBan {
     }
 
     public static void main(String args[]) {
-        NXB_View test = new NXB_View();
+        NXB_View test = new NXB_View(MaNV,TenNV);
 
     }
 }

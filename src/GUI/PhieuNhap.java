@@ -15,10 +15,16 @@ public class PhieuNhap extends javax.swing.JFrame {
     /**
      * Creates new form PhieuNhap
      */
-    public PhieuNhap() {
+    
+    static String MaNV,TenNV;
+    
+    public PhieuNhap(String MaNV,String TenNV) {
         initComponents();
         this.setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
+        
+        this.MaNV=MaNV;
+        this.TenNV=TenNV;
     }
 
     /**
@@ -455,21 +461,21 @@ public class PhieuNhap extends javax.swing.JFrame {
 
     private void lbBanSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanSach4MouseClicked
         // TODO add your handling code here:
-        BanHang_View a = new BanHang_View();
+        BanHang_View a = new BanHang_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbBanSach4MouseClicked
 
     private void lbNhaCungCap5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhaCungCap5MouseClicked
         // TODO add your handling code here:
-        NXB_View a = new NXB_View();
+        NXB_View a = new NXB_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhaCungCap5MouseClicked
 
     private void lbPhieu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu10MouseClicked
         // TODO add your handling code here:
-        PhieuNhap a = new PhieuNhap();
+        PhieuNhap a = new PhieuNhap(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
 
@@ -477,28 +483,28 @@ public class PhieuNhap extends javax.swing.JFrame {
 
     private void lbNhapSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhapSach4MouseClicked
         // TODO add your handling code here:
-        NhapHangView a = new NhapHangView();
+        NhapHangView a = new NhapHangView(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhapSach4MouseClicked
 
     private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
         // TODO add your handling code here:
-        KhachHang_View a = new KhachHang_View();
+        KhachHang_View a = new KhachHang_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbPhieu11MouseClicked
 
     private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
         // TODO add your handling code here:
-        HoaDon_View a = new HoaDon_View();
+        HoaDon_View a = new HoaDon_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblBill4MouseClicked
 
     private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
         // TODO add your handling code here:
-        KhoSachView a = new KhoSachView();
+        KhoSachView a = new KhoSachView(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BookStore4MouseClicked
@@ -719,7 +725,7 @@ public class PhieuNhap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PhieuNhap().setVisible(true);
+                new PhieuNhap(MaNV,TenNV).setVisible(true);
             }
         });
     }

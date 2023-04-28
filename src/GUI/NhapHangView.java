@@ -46,10 +46,12 @@ public class NhapHangView extends javax.swing.JFrame {
     int tongtien=0;
     Locale localVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localVN);
+    
+    static String MaNV,TenNV;
     /**
      * Creates new form NhapHang
      */
-    public NhapHangView() {
+    public NhapHangView(String MaNV, String TenNV) {
         initComponents();
         String[] header_kho = {"Ma sach", "Ten sach", "Nam xuat ban", "Ten tac gia", "Nha xuat ban", "So luong", "Gia", "The loai"};
         model_kho = new DefaultTableModel(header_kho, 0);
@@ -74,6 +76,9 @@ public class NhapHangView extends javax.swing.JFrame {
         tblPhieuNhap.setEnabled(false);
         //Reset();
         jTabbedPane1.setEnabledAt(1, false);
+        
+        this.MaNV = MaNV;
+        this.TenNV = TenNV;
     }
 
     public void ShowTableKho() {
@@ -826,7 +831,7 @@ public class NhapHangView extends javax.swing.JFrame {
   
     private void BookStoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStoreMouseClicked
         // TODO add your handling code here:
-        KhoSachView a = new KhoSachView();
+        KhoSachView a = new KhoSachView(MaNV,TenNV);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BookStoreMouseClicked
@@ -1085,7 +1090,7 @@ public class NhapHangView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhapHangView().setVisible(true);
+                new NhapHangView(MaNV,TenNV).setVisible(true);
             }
         });
     }

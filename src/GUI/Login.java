@@ -4,8 +4,11 @@
  */
 package GUI;
 
+import BUS.BUSNhanVien;
 import DTO.DTOTaiKhoan;
 import BUS.BUSTaiKhoan;
+import DTO.DTONhaXuatBan;
+import DTO.DTONhanVien;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +28,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private ArrayList<DTOTaiKhoan> list;
+    private ArrayList<DTONhanVien> list_NV;
     public Login() {
         initComponents();
         jPanel1.setFocusable(true);
@@ -34,6 +38,7 @@ public class Login extends javax.swing.JFrame {
 
     public void initData() {
         list = new ArrayList<>(new BUSTaiKhoan().getAllTaiKhoan());
+        list_NV = new ArrayList<>(new BUSNhanVien().getList());
     }
 
     /**
@@ -257,6 +262,8 @@ public class Login extends javax.swing.JFrame {
         boolean isExist = false;
         boolean isLock = false;
         DTOTaiKhoan a =null;
+        //Goi doi tuong nhan vien de thuc hien gui thong tin nhan vien dang nhap qua frame khac
+        DTONhanVien NV = new DTONhanVien();
         for (DTOTaiKhoan i : list) {
             if (i.getMaNhanVien().equals(txtTK) && i.getMatKhau().equals(txtMK) && !isExist||
                 i.getEmail().equals(txtTK) && i.getMatKhau().equals(txtMK) && !isExist) {
@@ -269,11 +276,27 @@ public class Login extends javax.swing.JFrame {
         }
         if (!isExist) {
             JOptionPane.showMessageDialog(rootPane, "Thông tin tài khoản hoặc mật khẩu không chính xác");
+            return;
         } else if (isLock) {
             JOptionPane.showMessageDialog(rootPane, "Tài khoản bạn đang bị khóa!!");
+            return;
         } else {
             JOptionPane.showMessageDialog(rootPane, "Thành công!! Đăng nhập với chức vụ "+ a.getChucVu());
         }
+        
+        //Tim thong tin nhan vien su dung tai khoan de dang nhap
+        for(DTONhanVien s : list_NV){
+            if(s.getMaNV().equals(a.getMaNhanVien())){
+                NV = s;
+            }
+        }
+        
+        if(a.getChucVu().equals("Admin")){
+            KhoSachView s = new KhoSachView(a.getMaNhanVien(),NV.getTenNV());
+            s.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnForgetPasswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgetPasswdActionPerformed

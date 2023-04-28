@@ -29,7 +29,10 @@ public class BUSNhanVien extends NhanVien_View {
        daonhanvien = new DAONhanVien();
        daotaikhoan = new DAOTaiKhoan();
     }
-
+    
+    public ArrayList<DTONhanVien> getList(){
+        return daonhanvien.getNhanVien();
+    }
     public DefaultTableModel timKiem(DefaultTableModel model, List<DTONhanVien> listnv, String selectedItem, String txtTimKiem) {
         switch (selectedItem) {
             case "tìm kiếm theo tên":
