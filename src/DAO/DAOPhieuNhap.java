@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DTO.DTOHoaDon;
 import DTO.DTOPhieuNhap;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -97,6 +98,25 @@ public class DAOPhieuNhap {
             e.printStackTrace();
         }
         return 0;
+    }
+    
+    public ArrayList<DTOPhieuNhap> TimKiem(String Loai,String From,String To){
+        ArrayList<DTOPhieuNhap> list_find = new ArrayList<>();
+        try{
+            String sql = "select * from PhieuNhap where "+Loai+" between ? and ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, From);
+            ps.setString(2, To);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                DTOPhieuNhap s = new DTOPhieuNhap(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getDate(4), rs.getInt(5));
+                list_find.add(s);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return list_find;
     }
     
 }

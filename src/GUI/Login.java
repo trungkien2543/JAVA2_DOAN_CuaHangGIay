@@ -269,7 +269,7 @@ public class Login extends javax.swing.JFrame {
                 i.getEmail().equals(txtTK) && i.getMatKhau().equals(txtMK) && !isExist) {
                 isExist = !isExist;
                 a = i;
-                if (i.getTrangThai().equalsIgnoreCase("Khoa")) {
+                if (i.getTrangThai().equalsIgnoreCase("Khóa")) {
                     isLock = !isLock;
                 }
             }

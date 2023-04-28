@@ -5,6 +5,7 @@
 package BUS;
 
 import DAO.DAOPhieuNhap;
+import DTO.DTOHoaDon;
 import DTO.DTOPhieuNhap;
 import java.util.ArrayList;
 
@@ -36,5 +37,8 @@ public class BUSPhieuNhap {
         }
     }
     
+    public ArrayList<DTOPhieuNhap> getListTimKiem(String Loai, String From, String To){
+        return pnDAO.TimKiem(Loai, From, To);
+    }
     
 }
