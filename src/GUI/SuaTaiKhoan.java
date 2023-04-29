@@ -38,6 +38,11 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         btnDoiThongTin.setText("Thay đổi thông tin");
+        btnDoiThongTin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiThongTinActionPerformed(evt);
+            }
+        });
 
         btnDoiMatKhau.setText("Thay đổi mật khẩu");
         btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +89,10 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
+
+    private void btnDoiThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiThongTinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDoiThongTinActionPerformed
 
     /**
      * @param args the command line arguments
