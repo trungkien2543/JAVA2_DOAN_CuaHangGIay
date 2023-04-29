@@ -6,10 +6,20 @@ package GUI;
 
 import BUS.BUSKhachHang;
 import DTO.DTOKhachHang;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -21,37 +31,37 @@ public class KhachHang_View extends javax.swing.JFrame {
      * Creates new form DTOKhachHang
      */
     DefaultTableModel tblModel;
-    private ArrayList<DTOKhachHang> list  ;
-    
+    private ArrayList<DTOKhachHang> list;
+
     static String MaNV, TenNV;
-    
+
     public KhachHang_View(String MaNV, String TenNV) {
         initComponents();
         initData();
-        String[] header = {"Mã khách hàng","Tên khách hàng","Địa chỉ","SDT","Tích điểm"};
+        String[] header = {"Mã khách hàng", "Tên khách hàng", "Địa chỉ", "SDT", "Tích điểm"};
         tblModel = new DefaultTableModel(header, 0);
         loadData(list);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
         this.setLocationRelativeTo(null);
-        
+
         this.MaNV = MaNV;
         this.TenNV = TenNV;
-        
+
         lblHello.setText("Hi " + this.TenNV);
 
     }
-    
-    private void initData(){
+
+    private void initData() {
         list = new ArrayList<>(new BUSKhachHang().getAllKhachHang());
     }
-    
-    private void loadData(ArrayList<DTOKhachHang> list){
-           for (DTO.DTOKhachHang i : list) {
+
+    private void loadData(ArrayList<DTOKhachHang> list) {
+        for (DTO.DTOKhachHang i : list) {
             tblModel.addRow(new Object[]{i.getMaKH(), i.getTenKH(), i.getDiaChi(), i.getSDT(), i.getTichDiem()});
-            }
-            tblKhachHang.setModel(tblModel);
+        }
+        tblKhachHang.setModel(tblModel);
     }
-    
+
     private ArrayList<DTOKhachHang> timKiem(String value, int selected) {
         tblModel.setRowCount(0);
         if (value.isEmpty()) {
@@ -62,12 +72,12 @@ public class KhachHang_View extends javax.swing.JFrame {
         for (DTOKhachHang i : list) {
             switch (selected) {
                 case 0:
-                    if (Integer.toString(i.getTichDiem()).contains(value)|| 
-                         i.getTenKH().contains(value) || i.getMaKH().contains(value)
+                    if (Integer.toString(i.getTichDiem()).contains(value)
+                            || i.getTenKH().contains(value) || i.getMaKH().contains(value)
                             | i.getDiaChi().contains(value)) {
                         rs.add(i);
                     }
-                break;
+                    break;
                 case 1:
                     if (i.getMaKH().contains(value)) {
                         rs.add(i);
@@ -98,25 +108,25 @@ public class KhachHang_View extends javax.swing.JFrame {
         loadData(rs);
         return rs;
     }
-    
-     private void sapXep(ArrayList<DTOKhachHang> rs, int selected) {
+
+    private void sapXep(ArrayList<DTOKhachHang> rs, int selected) {
         ArrayList<DTOKhachHang> tmp = new ArrayList<>(rs);
         switch (selected) {
             case 0:
                 break;
             case 1:
 //                  tang dan
-                Collections.sort(tmp,(o1, o2) -> o1.getTichDiem() - o2.getTichDiem());
+                Collections.sort(tmp, (o1, o2) -> o1.getTichDiem() - o2.getTichDiem());
                 break;
             case 2:
 //                 giam dan      
-                Collections.sort(tmp,(o1, o2) -> o2.getTichDiem()-o1.getTichDiem());
-                  break;
+                Collections.sort(tmp, (o1, o2) -> o2.getTichDiem() - o1.getTichDiem());
+                break;
         }
         tblModel.setRowCount(0);
         loadData(tmp);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,6 +144,8 @@ public class KhachHang_View extends javax.swing.JFrame {
         jcbDK = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jcbSX = new javax.swing.JComboBox<>();
+        btnImport = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
         ThanhMenu5 = new javax.swing.JPanel();
@@ -149,9 +161,9 @@ public class KhachHang_View extends javax.swing.JFrame {
         TieuDe = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -206,6 +218,22 @@ public class KhachHang_View extends javax.swing.JFrame {
             }
         });
         BangChon.add(jcbSX);
+
+        btnImport.setText("Import");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportActionPerformed(evt);
+            }
+        });
+        BangChon.add(btnImport);
+
+        btnExport.setText("Export");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
+        BangChon.add(btnExport);
 
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -383,15 +411,15 @@ public class KhachHang_View extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 102, 0));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
-        jPanel1.add(jLabel4);
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
+        jPanel1.add(jLabel29);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/notification.png"))); // NOI18N
         jPanel1.add(jLabel3);
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
-        jPanel1.add(jLabel29);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
+        jPanel1.add(jLabel4);
 
         TieuDe.add(jPanel1);
 
@@ -443,7 +471,7 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
         // TODO add your handling code here:
-         String value = txtFind.getText();
+        String value = txtFind.getText();
         int selectDK = jcbDK.getSelectedIndex();
         int selectSX = jcbSX.getSelectedIndex();
         ArrayList<DTOKhachHang> rs = timKiem(value, selectDK);
@@ -461,7 +489,7 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void jcbSXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSXActionPerformed
         // TODO add your handling code here:
-         String value = txtFind.getText();
+        String value = txtFind.getText();
         int selectDK = jcbDK.getSelectedIndex();
         int selectSX = jcbSX.getSelectedIndex();
         ArrayList<DTOKhachHang> rs = timKiem(value, selectDK);
@@ -470,28 +498,28 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void lbNhanVien5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien5MouseClicked
         // TODO add your handling code here:
-        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
+        NhanVien_View a = new NhanVien_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhanVien5MouseClicked
 
     private void lbBanSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanSach4MouseClicked
         // TODO add your handling code here:
-        BanHang_View a = new BanHang_View(MaNV,TenNV);
+        BanHang_View a = new BanHang_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbBanSach4MouseClicked
 
     private void lbNhaCungCap5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhaCungCap5MouseClicked
         // TODO add your handling code here:
-        NXB_View a = new NXB_View(MaNV,TenNV);
+        NXB_View a = new NXB_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhaCungCap5MouseClicked
 
     private void lbPhieu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu10MouseClicked
         // TODO add your handling code here:
-        PhieuNhap a = new PhieuNhap(MaNV,TenNV);
+        PhieuNhap a = new PhieuNhap(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
 
@@ -499,33 +527,102 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void lbNhapSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhapSach4MouseClicked
         // TODO add your handling code here:
-        NhapHangView a = new NhapHangView(MaNV,TenNV);
+        NhapHangView a = new NhapHangView(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhapSach4MouseClicked
 
     private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
         // TODO add your handling code here:
-        KhachHang_View a = new KhachHang_View(MaNV,TenNV);
+        KhachHang_View a = new KhachHang_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbPhieu11MouseClicked
 
     private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
         // TODO add your handling code here:
-        HoaDon_View a = new HoaDon_View(MaNV,TenNV);
+        HoaDon_View a = new HoaDon_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblBill4MouseClicked
 
     private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
         // TODO add your handling code here:
-        KhoSachView a = new KhoSachView(MaNV,TenNV);
+        KhoSachView a = new KhoSachView(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BookStore4MouseClicked
-    
-    
+
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        // TODO add your handling code here:
+        int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có muốn xuất bảng này ra file excel", "Xuất file EXCEL", JOptionPane.YES_NO_OPTION);
+        if(luaChon == JOptionPane.NO_OPTION) return;
+        XSSFWorkbook wordbook = new XSSFWorkbook();
+        XSSFSheet sheet = wordbook.createSheet("KhachHang");
+        try {
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            //Thanh tieu de
+            row = sheet.createRow(0);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Mã khách hàng");
+
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Tên khách hàng");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Địa chỉ");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("SĐT");
+
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Tích điểm");
+            
+            for(int i=0;i<tblKhachHang.getRowCount();i++){
+                row = sheet.createRow(1+i);
+                
+                cell = row.createCell(0,CellType.STRING);
+                cell.setCellValue(tblKhachHang.getValueAt(i, 0).toString());
+                
+                cell = row.createCell(1,CellType.STRING);
+                cell.setCellValue(tblKhachHang.getValueAt(i, 1).toString());
+                
+                cell = row.createCell(2,CellType.STRING);
+                cell.setCellValue(tblKhachHang.getValueAt(i, 2).toString());
+                
+                cell = row.createCell(3,CellType.STRING);
+                cell.setCellValue(tblKhachHang.getValueAt(i, 3).toString());
+                
+                cell = row.createCell(4,CellType.STRING);
+                cell.setCellValue(tblKhachHang.getValueAt(i, 4).toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("hh_mm_ss_dd_MM_YYYY");
+        String tenfile = formatter.format(new Date().getTime()) + "_KH";
+        File f = new File("ExcelFile//KhachHang//Export//"+tenfile+".xlsx");
+         try{
+            FileOutputStream fis = new FileOutputStream(f);
+            wordbook.write(fis);
+            fis.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return;
+        }
+         JOptionPane.showMessageDialog(rootPane, "Xuất file "+tenfile+ " thành công!\nĐược lưu tại "+ f.getPath());
+        
+    }//GEN-LAST:event_btnExportActionPerformed
+
+    private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnImportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -553,11 +650,11 @@ public class KhachHang_View extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhachHang_View(MaNV,TenNV).setVisible(true);
+                new KhachHang_View(MaNV, TenNV).setVisible(true);
             }
         });
     }
@@ -568,6 +665,8 @@ public class KhachHang_View extends javax.swing.JFrame {
     private javax.swing.JLabel BookStore4;
     private javax.swing.JPanel ThanhMenu5;
     private javax.swing.JPanel TieuDe;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnImport;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
