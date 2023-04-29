@@ -28,4 +28,32 @@ public class BUSTaiKhoan {
             }
             return "Thay đổi thất bại!";
         }
+        
+        public ArrayList<DTOTaiKhoan> getallTaiKhoan(){
+             return tkDAO.getListTK();
+            }
+        public String themTaiKhoan(DTOTaiKhoan taikhoan){
+       
+        if(tkDAO.addTaiKhoan(taikhoan))
+            return "add tài khoản thành công";
+        return "add tài khoản thất bại";
+    }
+        
+        public String xoatTaiKhoan(DTOTaiKhoan taiKhoan){
+       if(tkDAO.deletedTaiKhoan(taiKhoan))
+           return "xóa thành công";
+       return "xóa thất bại";
+    }
+         public String khoaTaiKhoan(DTOTaiKhoan taiKhoan){
+        if(tkDAO.khoaTaiKhoan(taiKhoan))
+            return "khóa thành công";
+        return "khóa thất bại";
+    }
+    
+    public String moTaiKhoan(DTOTaiKhoan taiKhoan){
+        if(tkDAO.moTaiKhoan(taiKhoan))
+            return "mở khóa thành công";
+        return "mở khóa thất bại";
+    }
+   
 }

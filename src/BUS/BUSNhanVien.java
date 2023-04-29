@@ -24,20 +24,18 @@ import javax.swing.plaf.RootPaneUI;
  */
 public class BUSNhanVien {
     private DAONhanVien daonhanvien;
-    private DAOTaiKhoan daotaikhoan;
+    
     
     public BUSNhanVien (){
        daonhanvien = new DAONhanVien();
-       daotaikhoan = new DAOTaiKhoan();
+       
     }
   public BUSNhanVien (DAONhanVien daonhanvien,DAOTaiKhoan daotaikhoan){
       this.daonhanvien=daonhanvien;
-      this.daotaikhoan=daotaikhoan;
+     
   }
 
-    public ArrayList<DTOTaiKhoan> getAllTaiKhoan(){
-        return daotaikhoan.getListTK();
-    }
+   
     public ArrayList<DTONhanVien> getAllNhanVien(){
         return daonhanvien.getNhanVien();
     }
@@ -46,17 +44,8 @@ public class BUSNhanVien {
             return "add thành công";
         return"add thất bại";
     }
-    public String themTaiKhoan(DTOTaiKhoan taikhoan){
-       
-        if(daotaikhoan.addTaiKhoan(taikhoan))
-            return "add tài khoản thành công";
-        return "add tài khoản thất bại";
-    }
-    public String xoatTaiKhoan(DTOTaiKhoan taiKhoan){
-       if(daotaikhoan.deletedTaiKhoan(taiKhoan))
-           return "xóa thành công";
-       return "xóa thất bại";
-    }
+   
+    
     
     public String xoaNhanVien(DTONhanVien Nhanvien){
         if(daonhanvien.deletedNhanvien(Nhanvien))
@@ -64,17 +53,6 @@ public class BUSNhanVien {
        return "xóa thất bại";
     }
     
-    public String khoaTaiKhoan(DTOTaiKhoan taiKhoan){
-        if(daotaikhoan.khoaTaiKhoan(taiKhoan))
-            return "khóa thành công";
-        return "khóa thất bại";
-    }
-    
-    public String moTaiKhoan(DTOTaiKhoan taiKhoan){
-        if(daotaikhoan.moTaiKhoan(taiKhoan))
-            return "mở khóa thành công";
-        return "mở khóa thất bại";
-    }
    
     
 }

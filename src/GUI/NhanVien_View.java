@@ -6,6 +6,7 @@ package GUI;
 
 
 import BUS.BUSNhanVien;
+import BUS.BUSTaiKhoan;
 import DAO.DAOTaiKhoan;
 import DTO.DTOTaiKhoan;
 import DAO.DAONhanVien;
@@ -43,7 +44,7 @@ public class NhanVien_View extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
          listnv = new BUSNhanVien().getAllNhanVien();
         
-        listtk = new BUSNhanVien().getAllTaiKhoan();
+        listtk = new BUSTaiKhoan().getAllTaiKhoan();
 
         model = (DefaultTableModel) thongtinnv.getModel();
         model.setColumnIdentifiers(new Object[]{
@@ -288,7 +289,7 @@ public class NhanVien_View extends javax.swing.JFrame {
 
         unblock.setBackground(new java.awt.Color(0, 204, 153));
         unblock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        unblock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/padlock.png"))); // NOI18N
+        unblock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/unblock.png"))); // NOI18N
         unblock.setText("unblock");
         unblock.setBorder(null);
         unblock.addItemListener(new java.awt.event.ItemListener() {
@@ -722,7 +723,7 @@ if (maNV != null && !maNV.trim().equals("")) {
            // Update dữ liệu trong CSDL SQL
                new BUSNhanVien().xoaNhanVien(nv);
                
-               new BUSNhanVien().xoatTaiKhoan(tk);
+               new BUSTaiKhoan().xoatTaiKhoan(tk);
                
                 int index = listnv.indexOf(nv); // Tìm vị trí của đối tượng DTONhanVien trong ArrayList
                 listnv.remove(index); // Xóa đối tượng DTONhanVien khỏi ArrayList
@@ -770,7 +771,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                }
            }
            if (tk != null) { // Nếu tìm thấy đối tượng DTONhanVien
-               new BUSNhanVien().khoaTaiKhoan(tk);
+               new BUSTaiKhoan().khoaTaiKhoan(tk);
              
                     txthienthi.setText("");
               
@@ -832,7 +833,7 @@ if (maNV != null && !maNV.trim().equals("")) {
         tk.setTrangThai("mo");
         
         new BUSNhanVien().themNhanVien(nv);
-        new BUSNhanVien().themTaiKhoan(tk);
+        new BUSTaiKhoan().themTaiKhoan(tk);
            
             listtk.add(tk);
             listnv.add(nv);
@@ -970,7 +971,7 @@ if (maNV != null && !maNV.trim().equals("")) {
            }
            if (tk != null) { // Nếu tìm thấy đối tượng DTONhanVien
 
-              new BUSNhanVien().moTaiKhoan(tk);
+              new BUSTaiKhoan().moTaiKhoan(tk);
                  txthienthi.setText("");
 
               
@@ -1049,7 +1050,7 @@ if (maNV != null && !maNV.trim().equals("")) {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
