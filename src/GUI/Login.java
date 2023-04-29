@@ -38,7 +38,7 @@ public class Login extends javax.swing.JFrame {
 
     public void initData() {
         list = new ArrayList<>(new BUSTaiKhoan().getAllTaiKhoan());
-        list_NV = new ArrayList<>(new BUSNhanVien().getList());
+        list_NV = new ArrayList<>(new BUSNhanVien().getAllNhanVien());
     }
 
     /**

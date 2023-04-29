@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import DTO.DTONhanVien;
+import static groovy.sql.Sql.NULL;
 
 /**
  *
@@ -65,15 +66,15 @@ public class DAONhanVien {
         }
         return list;
     }
-     public boolean updateNhanvien(DTONhanVien nv) {
+     public boolean deletedNhanvien(DTONhanVien nv) {
     PreparedStatement ps1 = null;
                     boolean result = false;
                     try {
                         ps1 = con.prepareStatement("UPDATE nhanvien SET tenNV = ?, queQuan = ?, soNgayLam = ?, congViec = ? WHERE maNV = ?");
-                        ps1.setString(1, nv.getTenNV());
-                        ps1.setString(2, nv.getQueQuan());
-                        ps1.setInt(3, nv.getSoNgayLam());
-                        ps1.setString(4, nv.getCongViec());
+                        ps1.setString(1,null );
+                        ps1.setString(2, null);
+                        ps1.setInt(3, 0);
+                        ps1.setString(4, null);
                         ps1.setString(5, nv.getMaNV());
                         int rowCount = ps1.executeUpdate();
                         if (rowCount > 0) {

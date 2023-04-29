@@ -41,8 +41,9 @@ public class NhanVien_View extends javax.swing.JFrame {
         initComponents();
        
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        listnv = new DAONhanVien().getNhanVien();
-        listtk = new DAOTaiKhoan().getListTK();
+         listnv = new BUSNhanVien().getAllNhanVien();
+        
+        listtk = new BUSNhanVien().getAllTaiKhoan();
 
         model = (DefaultTableModel) thongtinnv.getModel();
         model.setColumnIdentifiers(new Object[]{
@@ -668,9 +669,7 @@ public class NhanVien_View extends javax.swing.JFrame {
                         .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(BackGroundLayout.createSequentialGroup()
-                                .addComponent(themnv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(0, 0, 0))
+                            .addComponent(themnv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tabledanhsach, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(ThanhMenu5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -705,8 +704,35 @@ public class NhanVien_View extends javax.swing.JFrame {
         }
         String maNV = txthienthi.getText();
 if (maNV != null && !maNV.trim().equals("")) {
-    BUSNhanVien bus = new BUSNhanVien();
-    bus.xoaNhanVien(maNV, model, model1, listnv, listtk);
+   DTONhanVien nv = null;
+        DTOTaiKhoan tk = null;
+        for (DTONhanVien nhanVien : listnv) {
+            if (nhanVien.getMaNV().equals(maNV)) { // Tìm đối tượng DTONhanVien có mã nhân viên tương ứng trong ArrayList
+                nv = nhanVien;
+                break;
+            }
+        }
+        for (DTOTaiKhoan taikhoan : listtk) {
+            if (taikhoan.getMaNhanVien().equals(maNV)) { // Tìm đối tượng DTONhanVien có mã nhân viên tương ứng trong ArrayList
+                tk = taikhoan;
+                break;
+            }
+        }
+        if (nv != null) { // Nếu tìm thấy đối tượng DTONhanVien
+           // Update dữ liệu trong CSDL SQL
+               new BUSNhanVien().xoaNhanVien(nv);
+               
+               new BUSNhanVien().xoatTaiKhoan(tk);
+               
+                int index = listnv.indexOf(nv); // Tìm vị trí của đối tượng DTONhanVien trong ArrayList
+                listnv.remove(index); // Xóa đối tượng DTONhanVien khỏi ArrayList
+                model.removeRow(index); // Xóa dòng tương ứng trong table 
+                int index1 = listtk.indexOf(tk); // Tìm vị trí của đối tượng taikhoan trong ArrayList
+                listtk.remove(index1); // Xóa đối tượng taikhoan khỏi ArrayList
+                model1.removeRow(index1); // Xóa dòng tương ứng trong table 
+               JOptionPane.showMessageDialog(rootPane, "xóa thành công");
+           
+        }
     txthienthi.setText("");
 }
 
@@ -730,11 +756,25 @@ if (maNV != null && !maNV.trim().equals("")) {
            JOptionPane.showMessageDialog(rootPane, "mời bạn chọn nhân viên cần khóa tài khoản !");
            return;
        }
-
+         
        String maNV = txthienthi.getText(); // Lấy mã nhân viên từ textfield
        if (maNV != null && !maNV.trim().equals("")) { // Kiểm tra mã nhân viên có hợp lệ hay không
-           BUSNhanVien bus =new BUSNhanVien();
-           bus.blocknhanvien(listtk, maNV);
+         DTOTaiKhoan tk = null;
+           for (DTOTaiKhoan taikhoan : listtk) {
+               if (taikhoan.getTrangThai().equalsIgnoreCase("mo") && taikhoan.getMaNhanVien().equals(maNV)) {
+                   tk = taikhoan;
+                   break;
+               } else if (taikhoan.getTrangThai().equalsIgnoreCase("khóa")&& taikhoan.getMaNhanVien().equals(maNV)) {
+                   JOptionPane.showMessageDialog(rootPane, "tài khoản này đã khóa!");
+                    break;
+               }
+           }
+           if (tk != null) { // Nếu tìm thấy đối tượng DTONhanVien
+               new BUSNhanVien().khoaTaiKhoan(tk);
+             
+                    txthienthi.setText("");
+              
+           }
        }
 
        showResult1();
@@ -761,7 +801,7 @@ if (maNV != null && !maNV.trim().equals("")) {
 
         themnv.setVisible(false);
        
-       DTONhanVien nv= new DTONhanVien();
+        DTONhanVien nv= new DTONhanVien();
        DTOTaiKhoan tk=new DTOTaiKhoan();
         if(addbt.getText().equals("")||addhometown.getText().equals("")||addma.getText().equals("")||addten.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane,"mời bạn nhập đầy đủ thông tin!");
@@ -790,15 +830,13 @@ if (maNV != null && !maNV.trim().equals("")) {
         tk.setEmail(txtemail.getText());
         tk.setMatKhau("1");
         tk.setTrangThai("mo");
-        if (new DAONhanVien().addNhanvien(nv)&&new DAOTaiKhoan().addTaiKhoan(tk)) {
-
-            JOptionPane.showMessageDialog(rootPane, "add success");
-
+        
+        new BUSNhanVien().themNhanVien(nv);
+        new BUSNhanVien().themTaiKhoan(tk);
+           
             listtk.add(tk);
             listnv.add(nv);
-        } else if (null == nv) {
-            JOptionPane.showMessageDialog(rootPane, "Student's ID cannot be duplicated");
-        }
+         JOptionPane.showMessageDialog(rootPane, "add success");
         addma.setText("");
         addten.setText("");
         addhometown.setText("");
@@ -849,12 +887,45 @@ if (maNV != null && !maNV.trim().equals("")) {
 
         // TODO add your handling code here:
         String selectedItem = boxsearch.getSelectedItem().toString();
-       BUSNhanVien bus= new BUSNhanVien();
-       
-                thongtinnv.setModel(bus.timKiem(model, listnv, selectedItem, txthienthi.getText()));
-              
+     switch (selectedItem) {
+            case "tìm kiếm theo tên":
+                model.setRowCount(0);
+                for (DTONhanVien nv : listnv) {
+                    if (nv.getTenNV().contains(txthienthi.getText())) {
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        model.addRow(rowData);
+                    }
+                }
+                break;
 
-
+            case "tìm kiếm theo quê quán":
+                model.setRowCount(0);
+                for (DTONhanVien nv : listnv) {
+                    if (nv.getQueQuan().contains(txthienthi.getText())) {
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        model.addRow(rowData);
+                    }
+                }
+                break;
+            case "tìm kiếm theo công việc":
+                model.setRowCount(0);
+                for (DTONhanVien nv : listnv) {
+                    if (nv.getCongViec().contains(txthienthi.getText())) {
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        model.addRow(rowData);
+                    }
+                }
+                break;
+            case "tìm kiếm theo mã nhân viên":
+                model.setRowCount(0);
+                for (DTONhanVien nv : listnv) {
+                    if (nv.getMaNV().contains(txthienthi.getText())) {
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        model.addRow(rowData);
+                    }
+                }
+                break;
+        }
     }//GEN-LAST:event_txthienthiKeyReleased
 
     private void dstaikhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dstaikhoanMouseClicked
@@ -878,7 +949,7 @@ if (maNV != null && !maNV.trim().equals("")) {
 
     private void unblockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unblockActionPerformed
         // TODO add your handling code here:
-         int selected = dstaikhoan.getSelectedRow();
+           int selected = dstaikhoan.getSelectedRow();
        if (selected == -1) {
            JOptionPane.showMessageDialog(rootPane, "mời bạn chọn nhân viên cần mở tài khoản !");
            return;
@@ -886,9 +957,26 @@ if (maNV != null && !maNV.trim().equals("")) {
 
        String maNV = txthienthi.getText(); // Lấy mã nhân viên từ textfield
        if (maNV != null && !maNV.trim().equals("")) { // Kiểm tra mã nhân viên có hợp lệ hay không
-           BUSNhanVien bus =new BUSNhanVien();
-           bus.unblocknhanvien(listtk, maNV);
+            DTOTaiKhoan tk = null;
+           for (DTOTaiKhoan taikhoan : listtk) {
+               if (taikhoan.getTrangThai().equalsIgnoreCase("khóa") && taikhoan.getMaNhanVien().equals(maNV)) {
+                   tk = taikhoan;
+                   break;
+               } else if (taikhoan.getTrangThai().equalsIgnoreCase("mo") && taikhoan.getMaNhanVien().equals(maNV)) {
+                   JOptionPane.showMessageDialog(rootPane, "tài khoản này đang mở!");
+                    txthienthi.setText("");
+                  break;
+               }
+           }
+           if (tk != null) { // Nếu tìm thấy đối tượng DTONhanVien
+
+              new BUSNhanVien().moTaiKhoan(tk);
+                 txthienthi.setText("");
+
+              
+           }
        }
+
 
        showResult1();
         
