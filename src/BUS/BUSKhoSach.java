@@ -5,7 +5,11 @@
 package BUS;
 import DAO.DAOKhoSach;
 import DTO.DTOKhoSach;
+import GUI.KhoSachView;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -46,5 +50,14 @@ public class BUSKhoSach {
             return "Sửa thành công";
         }
         return "Sửa thất bại";
+    }
+    public void Database_Excel() {
+        try {
+            this.ksDAO.Database_Excel();
+            JOptionPane.showMessageDialog(null, "Hoàn thành cập nhật!");
+            return;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BUSNhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

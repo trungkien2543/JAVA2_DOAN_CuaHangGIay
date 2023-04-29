@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 public class KhoSachView extends javax.swing.JFrame {
     DefaultTableModel model;
     ArrayList<DTOKhoSach> list;
+    String path;
     Locale localVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localVN);
     static String MaNV, TenNV;
@@ -86,6 +88,7 @@ public class KhoSachView extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
+        btnExcel = new javax.swing.JButton();
         TieuDe = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblThayDoiTK = new javax.swing.JLabel();
@@ -171,6 +174,16 @@ public class KhoSachView extends javax.swing.JFrame {
             }
         });
 
+        btnExcel.setBackground(new java.awt.Color(0, 204, 153));
+        btnExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/update.png"))); // NOI18N
+        btnExcel.setText("Excel");
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BangChonLayout = new javax.swing.GroupLayout(BangChon);
         BangChon.setLayout(BangChonLayout);
         BangChonLayout.setHorizontalGroup(
@@ -183,6 +196,8 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BangChonLayout.setVerticalGroup(
@@ -193,7 +208,8 @@ public class KhoSachView extends javax.swing.JFrame {
                     .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -650,6 +666,31 @@ public class KhoSachView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFindFocusLost
 
+    public String layPath(){
+        path = "";
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x = j.showSaveDialog(this);
+        if(x == JFileChooser.APPROVE_OPTION){
+            path=j.getSelectedFile().getPath();
+        }
+        return path;
+    }
+    
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        // TODO add your handling code here:
+        path = "";
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x = j.showSaveDialog(this);
+        if(x == JFileChooser.APPROVE_OPTION){
+            path=j.getSelectedFile().getPath();
+        }
+        System.out.println(path);
+        BUSKhoSach ks = new BUSKhoSach();
+        ks.Database_Excel();
+    }//GEN-LAST:event_btnExcelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -709,6 +750,7 @@ public class KhoSachView extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnExcel;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
