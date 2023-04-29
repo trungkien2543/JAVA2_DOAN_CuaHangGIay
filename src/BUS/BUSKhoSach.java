@@ -51,9 +51,9 @@ public class BUSKhoSach {
         }
         return "Sửa thất bại";
     }
-    public void Database_Excel() {
+    public void Database_Excel(String path) {
         try {
-            this.ksDAO.Database_Excel();
+            this.ksDAO.Database_Excel(path);
             JOptionPane.showMessageDialog(null, "Hoàn thành cập nhật!");
             return;
         } catch (FileNotFoundException ex) {

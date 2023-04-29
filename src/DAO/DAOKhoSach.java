@@ -35,6 +35,7 @@ public class DAOKhoSach {
    
     public Connection conn;
     
+    
     public DAOKhoSach(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -156,7 +157,8 @@ public class DAOKhoSach {
         return false;
     }
     
-    public void Database_Excel() throws FileNotFoundException {
+    
+    public void Database_Excel(String path) throws FileNotFoundException {
         ArrayList<DTOKhoSach> list = new ArrayList<>();
         list = getListSach();
         FileOutputStream file;
@@ -208,8 +210,7 @@ public class DAOKhoSach {
             }
         }
         try {
-            
-            file = new FileOutputStream("KhoSach.xlsx");
+            file = new FileOutputStream(path+"KhoSach.xlsx");
             wb.write(file);
             wb.close();
             file.close();

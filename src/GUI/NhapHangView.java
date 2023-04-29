@@ -81,6 +81,8 @@ public class NhapHangView extends javax.swing.JFrame {
         this.TenNV = TenNV;
         
         lblHello.setText("Hi " + this.TenNV);
+        
+        Reset();
 
     }
 
@@ -1141,7 +1143,9 @@ public class NhapHangView extends javax.swing.JFrame {
         lblNgayNhap.setText("");
         lblTenNV.setText("");
         lblTongHoaDon.setText("");
-        lblTongTien.setText("");    
+        lblTongTien.setText("");
+        lblMaNV.setText(MaNV);
+        lblTenNV.setText(TenNV);
         tongtien = 0;
          jTabbedPane1.setEnabledAt(1, false);
     }

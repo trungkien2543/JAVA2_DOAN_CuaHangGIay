@@ -4,74 +4,23 @@
  */
 package GUI;
 
-import DAO.DAOKhoSach;
-import DAO.DAONhaXuatBan;
-import DTO.DTONhaXuatBan;
-import DTO.DTOKhoSach;
-import BUS.BUSNhaXuatBan;
-import BUS.BUSKhoSach;
-import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Locale;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author ASUS
  */
-public class KhoSachView extends javax.swing.JFrame {
-    DefaultTableModel model;
-    ArrayList<DTOKhoSach> list;
-    String path;
-    Locale localVN = new Locale("vi", "VN");
-    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localVN);
+public class ThongKeView extends javax.swing.JFrame {
+ 
     static String MaNV, TenNV;
     
     
-    public KhoSachView(String MaNV, String TenNV) {
+    public ThongKeView(String MaNV, String TenNV) {
         initComponents();
-        String[] header = {"MaSach", "TenSach", "NamXuatBan", "TenTacGia", "NhaXuatBan", "SoLuongTonKho","Gia","TheLoai"};
-        model = new DefaultTableModel(header, 0);
-        tbKhoSach.setModel(model);
         
-        setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        
-        //Truy van ra arraylist
-        list = new BUSKhoSach().getAllsach();
-        ShowTable();
-        
-        //Thuc hien lay ten va ma nhan vien
-        this.MaNV = MaNV;
-        this.TenNV = TenNV;
         
         lblHello.setText("Hi " + this.TenNV);
 
     }
 
-    public void ShowTable(){
-        model.setRowCount(0);
-        list = new BUSKhoSach().getAllsach();
-        for (DTOKhoSach s : list) {
-            if(s.getTenSach()==null){
-                continue;
-            }
-            model.addRow(new Object[]{
-                s.getMaSach(), s.getTenSach(), s.getNam(), s.getTenTacGia(), s.getNhaXuatBan(), s.getSl(), currencyVN.format(s.getGia()),s.getTheLoai()
-            });
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,20 +32,11 @@ public class KhoSachView extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         BackGround = new javax.swing.JPanel();
-        BangChon = new javax.swing.JPanel();
-        txtFind = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        btnExcel = new javax.swing.JButton();
         TieuDe = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblThayDoiTK = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbKhoSach = new javax.swing.JTable();
         ThanhMenu4 = new javax.swing.JPanel();
         lblHello = new javax.swing.JLabel();
         lbNhanVien4 = new javax.swing.JLabel();
@@ -107,111 +47,15 @@ public class KhoSachView extends javax.swing.JFrame {
         lbPhieu11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
+        BookStore5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
-
-        BangChon.setBackground(new java.awt.Color(0, 153, 153));
-
-        txtFind.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFindFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFindFocusLost(evt);
-            }
-        });
-        txtFind.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                txtFindMouseReleased(evt);
-            }
-        });
-        txtFind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFindActionPerformed(evt);
-            }
-        });
-        txtFind.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFindKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFindKeyReleased(evt);
-            }
-        });
-
-        btnAdd.setBackground(new java.awt.Color(0, 204, 153));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-to-basket.png"))); // NOI18N
-        btnAdd.setText("Thêm");
-        btnAdd.setBorder(null);
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setBackground(new java.awt.Color(0, 204, 153));
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
-        btnDelete.setText("Xóa");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnEdit.setBackground(new java.awt.Color(0, 204, 153));
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sua.png"))); // NOI18N
-        btnEdit.setText("Sửa");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
-        btnExcel.setBackground(new java.awt.Color(0, 204, 153));
-        btnExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/update.png"))); // NOI18N
-        btnExcel.setText("Excel");
-        btnExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcelActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout BangChonLayout = new javax.swing.GroupLayout(BangChon);
-        BangChon.setLayout(BangChonLayout);
-        BangChonLayout.setHorizontalGroup(
-            BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BangChonLayout.createSequentialGroup()
-                .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        BangChonLayout.setVerticalGroup(
-            BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BangChonLayout.createSequentialGroup()
-                .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
 
@@ -236,7 +80,7 @@ public class KhoSachView extends javax.swing.JFrame {
             TieuDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TieuDeLayout.createSequentialGroup()
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 974, Short.MAX_VALUE)
                 .addComponent(lblThayDoiTK)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,37 +96,6 @@ public class KhoSachView extends javax.swing.JFrame {
             .addComponent(lblThayDoiTK, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        tbKhoSach.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "MaSach", "TenSach", "NamXuatBan", "TenTacGia", "NhaXuatBan", "SoLuongTonKho", " Gia", "TheLoai"
-            }
-        ));
-        tbKhoSach.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbKhoSachMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tbKhoSach);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1367, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
         );
 
         ThanhMenu4.setBackground(new java.awt.Color(0, 153, 153));
@@ -392,6 +205,19 @@ public class KhoSachView extends javax.swing.JFrame {
             }
         });
 
+        BookStore5.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
+        BookStore5.setText("Thống kê");
+        BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.setOpaque(true);
+        BookStore5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore5MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -406,7 +232,9 @@ public class KhoSachView extends javax.swing.JFrame {
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addGroup(ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ThanhMenu4Layout.setVerticalGroup(
@@ -430,7 +258,31 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(BookStore4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(BookStore5)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 336, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
@@ -441,9 +293,9 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         BackGroundLayout.setVerticalGroup(
@@ -451,9 +303,10 @@ public class KhoSachView extends javax.swing.JFrame {
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addComponent(TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -472,126 +325,6 @@ public class KhoSachView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tbKhoSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhoSachMouseClicked
-        // TODO add your handling code here:
-        int selectedrow = tbKhoSach.getSelectedRow();
-
-        txtFind.setText((String) tbKhoSach.getValueAt(selectedrow, 0));
-    }//GEN-LAST:event_tbKhoSachMouseClicked
-
-    private void txtFindMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFindMouseReleased
-        
-    }//GEN-LAST:event_txtFindMouseReleased
-
-    private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindActionPerformed
-
-    private void txtFindKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindKeyPressed
-
-    private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
-        // TODO add your handling code here:
-        model.setRowCount(0);
-        String find = txtFind.getText();
-        
-   
-        
-        for(DTOKhoSach s : list){
-            if(s.getTenSach()==null){
-                continue;
-            }
-            if(s.getMaSach().contains(find) || s.getTenSach().contains(find) || String.valueOf(s.getNam()).contains(find) || s.getTenTacGia().contains(find) 
-            || s.getNhaXuatBan().contains(find) || String.valueOf(s.getSl()).contains(find) || String.valueOf(s.getGia()).contains(find) || s.getTheLoai().contains(find)){
-                model.addRow(new Object[]{
-                    s.getMaSach(), s.getTenSach(), s.getNam(), s.getTenTacGia(), s.getNhaXuatBan(), s.getSl(), currencyVN.format(s.getGia()),s.getTheLoai()
-            });
-            }
-        }
-                
-    }//GEN-LAST:event_txtFindKeyReleased
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        String str;
-        boolean flag = false;
-        do{
-            flag = false;
-            str = JOptionPane.showInputDialog("Nhap ma sach");
-            if(str == null){
-                txtFind.requestFocus();
-                return;
-            }
-            if (str.isEmpty()){
-                JOptionPane.showMessageDialog(rootPane, "Chua nhap ma sach");
-                flag = true;
-            }
-            
-            for(DTOKhoSach s : list){
-                if(s.getMaSach().equals(str) &&s.getTenSach()!=null){
-                    JOptionPane.showMessageDialog(this, "Ma sach da ton tai");
-                    flag = true;
-                }
-            }
-        }
-        while (flag);
-        NhapThongTinSach a = new NhapThongTinSach(str);
-        a.setVisible(true);
-        a.setLocationRelativeTo(null);
-        a.addWindowListener(new WindowAdapter() {
-            public void windowClosed(WindowEvent e) {
-                 ShowTable();
-            }   
-        });
-        
-        
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        String str=txtFind.getText();
-        int row = tbKhoSach.getSelectedRow();
-        if (row == -1 ){
-            JOptionPane.showMessageDialog(rootPane, "Hay chon 1 dong roi an nut sua");
-            return;
-        }
-        else{
-            SuaThongTinSach a = new SuaThongTinSach(str);
-            a.setVisible(true);
-            a.setLocationRelativeTo(null);
-            a.addWindowListener(new WindowAdapter() {
-                public void windowClosed(WindowEvent e) {
-                     ShowTable();
-                }   
-            });
-        }
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int row = tbKhoSach.getSelectedRow();
-        if (row == -1 ){
-            JOptionPane.showMessageDialog(rootPane, "Hay chon 1 dong roi an nut xoa");
-            return ;
-        }
-        else{
-            int dk=JOptionPane.showConfirmDialog(this,"Ban co muon xoa" , "Confirm", JOptionPane.YES_NO_OPTION);
-            if(dk!=JOptionPane.YES_OPTION){
-            return;
-            }
-            if(new DAOKhoSach().deleteSach((String) tbKhoSach.getValueAt(row, 0))){
-                JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong!");
-                list = new DAOKhoSach().getListSach();
-                txtFind.setText("");
-                ShowTable();
-                return ;   
-            }
-     
-        }
-        
-    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void lblThayDoiTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThayDoiTKMouseClicked
         // TODO add your handling code here:
@@ -652,34 +385,17 @@ public class KhoSachView extends javax.swing.JFrame {
 
     private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
         // TODO add your handling code here:
-        KhoSachView a = new KhoSachView(MaNV,TenNV);
+        ThongKeView a = new ThongKeView(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BookStore4MouseClicked
 
-    private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
+    private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_txtFindFocusGained
+    }//GEN-LAST:event_BookStore5MouseClicked
 
-    private void txtFindFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindFocusLost
-
-    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
-        // TODO add your handling code here:
-        path = "";
-        JFileChooser j = new JFileChooser();
-        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int x = j.showSaveDialog(this);
-        if(x == JFileChooser.APPROVE_OPTION){
-            path=j.getSelectedFile().getPath();
-        }
-        System.out.println(path);
-        BUSKhoSach ks = new BUSKhoSach();
-        ks.Database_Excel(path);
-    }//GEN-LAST:event_btnExcelActionPerformed
-
+   
+    
     /**
      * @param args the command line arguments
      */
@@ -725,7 +441,7 @@ public class KhoSachView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhoSachView(MaNV,TenNV).setVisible(true);
+                new ThongKeView(MaNV,TenNV).setVisible(true);
                 
             }
         });
@@ -733,20 +449,16 @@ public class KhoSachView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
-    private javax.swing.JPanel BangChon;
     private javax.swing.JLabel BookStore4;
+    private javax.swing.JLabel BookStore5;
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnExcel;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbBanSach4;
     private javax.swing.JLabel lbNhaCungCap5;
     private javax.swing.JLabel lbNhanVien4;
@@ -756,7 +468,5 @@ public class KhoSachView extends javax.swing.JFrame {
     private javax.swing.JLabel lblBill4;
     private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblThayDoiTK;
-    private javax.swing.JTable tbKhoSach;
-    private javax.swing.JTextField txtFind;
     // End of variables declaration//GEN-END:variables
 }
