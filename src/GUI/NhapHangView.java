@@ -87,7 +87,7 @@ public class NhapHangView extends javax.swing.JFrame {
         
         for(DTOTaiKhoan s : list_tk){
             if(s.getMaNhanVien().equals(MaNV)){
-                if(s.getChucVu().equals("Sale")){
+                if(s.getChucVu().equals("Kho")){
                     System.out.println(s.getChucVu());
                     lbNhaCungCap5.setVisible(false);
                     lbNhanVien4.setVisible(false);
@@ -138,10 +138,6 @@ public class NhapHangView extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jLabel3 = new javax.swing.JLabel();
         BackGround = new javax.swing.JPanel();
-        TieuDe1 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
         BangChon = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         txtFind = new javax.swing.JTextField();
@@ -188,6 +184,10 @@ public class NhapHangView extends javax.swing.JFrame {
         lbKH11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         lbBookStore4 = new javax.swing.JLabel();
+        TieuDe2 = new javax.swing.JPanel();
+        lblThayDoiTK3 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -197,36 +197,6 @@ public class NhapHangView extends javax.swing.JFrame {
 
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
         BackGround.setPreferredSize(new java.awt.Dimension(1536, 864));
-
-        TieuDe1.setBackground(new java.awt.Color(153, 102, 0));
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
-        jLabel16.setText("jLabel3");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Hệ thống quản lý cửa hàng sách");
-
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
-
-        javax.swing.GroupLayout TieuDe1Layout = new javax.swing.GroupLayout(TieuDe1);
-        TieuDe1.setLayout(TieuDe1Layout);
-        TieuDe1Layout.setHorizontalGroup(
-            TieuDe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TieuDe1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel29)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        TieuDe1Layout.setVerticalGroup(
-            TieuDe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -428,7 +398,7 @@ public class NhapHangView extends javax.swing.JFrame {
                             .addComponent(jScrollPane1))
                         .addGap(111, 111, 111))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpThongTinSanPhamLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 622, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 616, Short.MAX_VALUE)
                         .addGroup(jpThongTinSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(lblTongTien)
@@ -746,26 +716,68 @@ public class NhapHangView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        TieuDe2.setBackground(new java.awt.Color(153, 102, 0));
+
+        lblThayDoiTK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
+        lblThayDoiTK3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThayDoiTK3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThayDoiTK3MouseClicked(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setText("Hệ thống quản lý cửa hàng sách");
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
+        jLabel18.setText("jLabel3");
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TieuDe2Layout = new javax.swing.GroupLayout(TieuDe2);
+        TieuDe2.setLayout(TieuDe2Layout);
+        TieuDe2Layout.setHorizontalGroup(
+            TieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TieuDe2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblThayDoiTK3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
+        );
+        TieuDe2Layout.setVerticalGroup(
+            TieuDe2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblThayDoiTK3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout BackGroundLayout = new javax.swing.GroupLayout(BackGround);
         BackGround.setLayout(BackGroundLayout);
         BackGroundLayout.setHorizontalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ThanhMenu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackGroundLayout.createSequentialGroup()
                         .addComponent(jTabbedPane1)
                         .addContainerGap())
-                    .addComponent(TieuDe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(BangChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TieuDe2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         BackGroundLayout.setVerticalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackGroundLayout.createSequentialGroup()
-                        .addComponent(TieuDe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TieuDe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BangChon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1148,6 +1160,21 @@ public class NhapHangView extends javax.swing.JFrame {
         //        txtFind.setText((String) tbKho.getValueAt(selectedrow, 0));
     }//GEN-LAST:event_tbKhoMouseClicked
 
+    private void lblThayDoiTK3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThayDoiTK3MouseClicked
+        // TODO add your handling code here:
+        SuaTaiKhoan a = new SuaTaiKhoan(MaNV,TenNV);
+        a.setVisible(true);
+        a.setLocationRelativeTo(null);
+        //this.setVisible(true);
+    }//GEN-LAST:event_lblThayDoiTK3MouseClicked
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        // TODO add your handling code here:
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel18MouseClicked
+
     private void Reset(){
         cbxNXB.setEnabled(true);
         cbxNXB.setSelectedIndex(0);
@@ -1220,7 +1247,7 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JPanel BangChon;
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
-    private javax.swing.JPanel TieuDe1;
+    private javax.swing.JPanel TieuDe2;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnDelete;
@@ -1235,11 +1262,10 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1267,6 +1293,7 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JLabel lblNgayNhap;
     private javax.swing.JLabel lblTenNV;
     private javax.swing.JLabel lblThayDoiTK2;
+    private javax.swing.JLabel lblThayDoiTK3;
     private javax.swing.JLabel lblTongHoaDon;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tbKho;

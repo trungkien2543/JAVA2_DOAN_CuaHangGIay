@@ -264,7 +264,7 @@ public class PhieuNhap extends javax.swing.JFrame {
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
         );
         ThanhMenu4Layout.setVerticalGroup(
@@ -465,10 +465,10 @@ public class PhieuNhap extends javax.swing.JFrame {
                 .addComponent(jpTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnIm, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(btnIm, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                     .addComponent(btnEx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                 .addContainerGap())
         );
         BangChonLayout.setVerticalGroup(

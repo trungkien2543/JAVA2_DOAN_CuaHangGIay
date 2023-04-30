@@ -386,7 +386,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="ThanhMenu4" max="32767" attributes="0"/>
+                  <Component id="ThanhMenu4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BangChon" max="32767" attributes="0"/>
@@ -442,7 +442,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane1" pref="1351" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="1363" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -656,7 +656,7 @@
                   <Component id="lblBill4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BookStore4" pref="158" max="32767" attributes="0"/>
+                      <Component id="BookStore4" pref="146" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

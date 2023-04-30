@@ -301,6 +301,11 @@ public class Login extends javax.swing.JFrame {
             s.setVisible(true);
             this.dispose();
         }
+        else{
+            NhapHangView s = new NhapHangView(a.getMaNhanVien(), NV.getTenNV());
+            s.setVisible(true);
+            this.dispose();
+        }
         
     }//GEN-LAST:event_btnLoginActionPerformed
 

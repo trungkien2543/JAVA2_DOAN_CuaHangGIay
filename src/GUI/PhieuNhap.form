@@ -121,7 +121,7 @@
                   <Component id="lblBill4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BookStore4" pref="161" max="32767" attributes="0"/>
+                      <Component id="BookStore4" pref="149" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -365,11 +365,11 @@
                       <Component id="jpTongTien" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnIm" alignment="0" pref="185" max="32767" attributes="0"/>
+                          <Component id="btnIm" alignment="0" pref="191" max="32767" attributes="0"/>
                           <Component id="btnEx" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" pref="113" max="32767" attributes="0"/>
+                      <Component id="jButton1" pref="119" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>

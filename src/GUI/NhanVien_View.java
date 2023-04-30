@@ -163,10 +163,10 @@ public class NhanVien_View extends javax.swing.JFrame {
         bangds.setLayout(bangdsLayout);
         bangdsLayout.setHorizontalGroup(
             bangdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1352, Short.MAX_VALUE)
+            .addGap(0, 1358, Short.MAX_VALUE)
             .addGroup(bangdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(bangdsLayout.createSequentialGroup()
-                    .addComponent(scrollthongtin, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+                    .addComponent(scrollthongtin, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         bangdsLayout.setVerticalGroup(
@@ -199,9 +199,9 @@ public class NhanVien_View extends javax.swing.JFrame {
         paneltaikhoan.setLayout(paneltaikhoanLayout);
         paneltaikhoanLayout.setHorizontalGroup(
             paneltaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1352, Short.MAX_VALUE)
+            .addGap(0, 1358, Short.MAX_VALUE)
             .addGroup(paneltaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(scrollacount, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE))
+                .addComponent(scrollacount, javax.swing.GroupLayout.DEFAULT_SIZE, 1358, Short.MAX_VALUE))
         );
         paneltaikhoanLayout.setVerticalGroup(
             paneltaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,7 +460,7 @@ public class NhanVien_View extends javax.swing.JFrame {
             .addGroup(themnvLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(addbt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addComponent(cancelbt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
             .addComponent(setcongviec, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -617,13 +617,13 @@ public class NhanVien_View extends javax.swing.JFrame {
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addContainerGap())
         );
         ThanhMenu5Layout.setVerticalGroup(
             ThanhMenu5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThanhMenu5Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(20, 20, 20)
                 .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(lbNhanVien5)
@@ -649,7 +649,7 @@ public class NhanVien_View extends javax.swing.JFrame {
         BackGroundLayout.setHorizontalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(ThanhMenu5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ThanhMenu5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TieuDe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
