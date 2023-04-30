@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -270,6 +271,11 @@ public class HoaDon_View extends javax.swing.JFrame {
         btnIm.setBackground(new java.awt.Color(0, 204, 153));
         btnIm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnIm.setText("Nhập từ file Excel");
+        btnIm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImActionPerformed(evt);
+            }
+        });
 
         btnEx.setBackground(new java.awt.Color(0, 204, 153));
         btnEx.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -880,7 +886,10 @@ public class HoaDon_View extends javax.swing.JFrame {
         }
         
         //Thực hiện ghi file
-        File f = new File("ExcelFile//HoaDon//Export//"+tenfile+".xlsx");
+        JFileChooser  j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        j.showSaveDialog(btnEx);
+        File f = new File(j.getSelectedFile()+"\\"+tenfile+".xlsx");
         if(f.exists()){
             if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn ghi đè lên file này không ?") != JOptionPane.YES_OPTION){
                 return;
@@ -898,6 +907,20 @@ public class HoaDon_View extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(rootPane, "Xuất file thành công");
     }//GEN-LAST:event_btnExActionPerformed
+
+    private void btnImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImActionPerformed
+        // TODO add your handling code here:
+//        JFileChooser j = new JFileChooser();
+//        j.showOpenDialog(btnIm);
+//        String path = "" + j.getSelectedFile();
+//        File f = new File(path);
+//        try{
+//            
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
+    }//GEN-LAST:event_btnImActionPerformed
 
     /**
      * @param args the command line arguments
