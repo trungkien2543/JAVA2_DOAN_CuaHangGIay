@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,9 +39,9 @@ public class DAONhaXuatBan {
     private ArrayList<DTONhaXuatBan> danhSach = new ArrayList<DTONhaXuatBan>();
     private ArrayList<DTONhaXuatBan> danhSach1 = new ArrayList<DTONhaXuatBan>();
     private ArrayList<DTONhaXuatBan> danhSach2 = new ArrayList<DTONhaXuatBan>();
-    
-    static String MaNV,TenNV;
-    
+
+    static String MaNV, TenNV;
+
     public ArrayList<DTONhaXuatBan> getDanhSach() {
         return danhSach;
     }
@@ -101,13 +102,15 @@ public class DAONhaXuatBan {
     }
 
     public void loadDataListToTable(NXB_View nxb_view) {
+        danhSach1.clear();
         String[] header = {"MaNXB", "Ten", "DiaChi", "SDT", "Email"};
 
         model = new DefaultTableModel(header, 0);
         nxb_view.getjTable_NXB().setModel(model);
-        for (DTONhaXuatBan vl : danhSach) {
-            if (vl.getTen() != null) {
-                model.addRow(new Object[]{vl.getMa(), vl.getTen(), vl.getDiaChi(), vl.getSoDienThoai(), vl.getEmail()});
+        for (DTONhaXuatBan nxb : danhSach) {
+            if (nxb.getTen() != null) {
+                model.addRow(new Object[]{nxb.getMa(), nxb.getTen(), nxb.getDiaChi(), nxb.getSoDienThoai(), nxb.getEmail()});
+                danhSach1.add(nxb);
             }
         }
     }
@@ -240,7 +243,7 @@ public class DAONhaXuatBan {
         String email = "";
         String st = "";
         FileInputStream file;
-        file = new FileInputStream("NXB.xlsx");
+        file = new FileInputStream("ExcelFile\\NhaXuatBan\\Export\\NXB.xlsx");
         try (XSSFWorkbook wb = new XSSFWorkbook(file)) {
             XSSFSheet sheet = wb.getSheetAt(0);
             for (Row row : sheet) {
@@ -297,7 +300,7 @@ public class DAONhaXuatBan {
                     if (nxb2.getMa().equals(nxb.getMa())) {
                         i = i + 1;
                         if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
-                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
+                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-001");
                             continue;
                         }
                         if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
@@ -317,7 +320,7 @@ public class DAONhaXuatBan {
                 }
                 if (i == 0) {
                     if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
-                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
+                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-001");
                         continue;
                     }
                     if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
@@ -346,16 +349,14 @@ public class DAONhaXuatBan {
         return false;
     }
 
-    public void Database_Excel() throws FileNotFoundException {
-        loadDataList();
+    public int Table_Excel() throws FileNotFoundException {
+        int i = 0;
         FileOutputStream file;
-
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet Sheet = wb.createSheet("NXB");
         XSSFRow row = null;
         Cell cell = null;
         row = Sheet.createRow(0);
-        int i = 0;
         cell = row.createCell(0, CellType.STRING);
         cell.setCellValue("Mã");
         cell = row.createCell(1, CellType.STRING);
@@ -366,10 +367,8 @@ public class DAONhaXuatBan {
         cell.setCellValue("Số điện thoại");
         cell = row.createCell(4, CellType.STRING);
         cell.setCellValue("Email");
-        for (DTONhaXuatBan nxb : danhSach) {
+        for (DTONhaXuatBan nxb : danhSach1) {
             if (nxb.getTen() != null) {
-                i = i + 1;
-                //System.out.println(nxb.getMa());
                 row = Sheet.createRow(i);
                 cell = row.createCell(0, CellType.STRING);
                 cell.setCellValue(nxb.getMa());
@@ -381,19 +380,21 @@ public class DAONhaXuatBan {
                 cell.setCellValue(nxb.getSoDienThoai());
                 cell = row.createCell(4, CellType.STRING);
                 cell.setCellValue(nxb.getEmail());
+                i = i + 1;               
 
             }
         }
         try {
-            file = new FileOutputStream("NXB.xlsx");
+            file = new FileOutputStream("ExcelFile\\NhaXuatBan\\Export\\NXB.xlsx");
             wb.write(file);
             wb.close();
             file.close();
 
-        } catch (IOException ex) {
-            Logger.getLogger(DAONhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) { 
+            JOptionPane.showMessageDialog(null, "Cập nhật thất bại, có thể bạn chưa đóng file khi cập nhật, vui lòng đóng file!");
+             i=0;
         }
-
+        return i;
     }
 
     public void close() {
@@ -405,7 +406,7 @@ public class DAONhaXuatBan {
     }
 
     public static void main(String args[]) {
-        NXB_View test = new NXB_View(MaNV,TenNV);
+        NXB_View test = new NXB_View(MaNV, TenNV);
 
     }
 }

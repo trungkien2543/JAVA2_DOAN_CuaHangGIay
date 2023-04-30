@@ -26,9 +26,9 @@ public class BUSNhaXuatBan {
         this.nxb_view = nxb_view;
         this.daoNxb = daoNxb;
     }
-    
-    public BUSNhaXuatBan(){
-        
+
+    public BUSNhaXuatBan() {
+
     }
     DAONhaXuatBan nxbDAO = new DAONhaXuatBan();
 
@@ -44,7 +44,7 @@ public class BUSNhaXuatBan {
         String email = nxb_view.getJtextfieldEmail().getText();
         DTONhaXuatBan nxb1 = null;
         if (ma.matches("^NXB-[0-9]{1,}") == false) {
-            JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-1");
+            JOptionPane.showMessageDialog(null, "Thêm thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-001");
             return nxb1;
         }
         if (sdt.matches("[0]{1}[0-9]{9,10}") == false) {
@@ -139,11 +139,12 @@ public class BUSNhaXuatBan {
         }
     }
 
-    public void Database_Excel() {
+    public void Table_Excel() {
         try {
-            this.daoNxb.Database_Excel();
-            JOptionPane.showMessageDialog(null, "Hoàn thành cập nhật!");
-            nxb_view.getjDialogUpdate().setVisible(false);
+            if (this.daoNxb.Table_Excel()!=0) {
+                JOptionPane.showMessageDialog(null, "Hoàn thành cập nhật!");
+                nxb_view.getjDialogUpdate().setVisible(false);
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BUSNhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);
         }

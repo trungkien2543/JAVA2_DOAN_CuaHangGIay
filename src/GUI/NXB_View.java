@@ -69,9 +69,9 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     /**
      * Creates new form NhapHang
      */
-    
-    static String MaNV,TenNV;
-    public NXB_View(String MaNV,String TenNV) {
+    static String MaNV, TenNV;
+
+    public NXB_View(String MaNV, String TenNV) {
 
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
@@ -81,12 +81,11 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         initFrameEdit();
         initJDialogUpdate();
         initJDialogDelete();
-        
+
         this.MaNV = MaNV;
         this.TenNV = TenNV;
-        
-        lblHello.setText("Hi " + this.TenNV);
 
+        lblHello.setText("Hi " + this.TenNV);
 
     }
 
@@ -209,7 +208,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     }
 
     public void initJDialogUpdate() {
-        jDialogUpdate.setLayout(new GridLayout(2,1));
+        jDialogUpdate.setLayout(new GridLayout(2, 1));
         jDialogUpdate.setTitle("Cập nhật dữ liệu");
         jDialogUpdate.setSize(250, 150);
         jDialogUpdate.setResizable(false);
@@ -221,7 +220,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         this.jbutton_excel.addActionListener((ActionListener) this);
         jbutton_Database = new JButton("Vào Excel");
         jbutton_Database.setFont(font);
-        this.jbutton_Database.addActionListener((ActionListener) this);     
+        this.jbutton_Database.addActionListener((ActionListener) this);
         jPanelUpdateButton.add(jbutton_excel);
         jPanelUpdateButton.add(jbutton_Database);
         jDialogUpdate.add(jPanelUpdateTitle);
@@ -259,7 +258,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
             bus.Excel_Database();
         }
         if (e.getSource() == jbutton_Database) {
-            bus.Database_Excel();
+            bus.Table_Excel();
         }
     }
 
@@ -1019,8 +1018,6 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
         this.dao.searchNXB(this);
-
-
     }//GEN-LAST:event_txtFindKeyReleased
 
     public JTextField getTxtFind() {
@@ -1038,6 +1035,12 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int seclectedRow = jTable_NXB.getSelectedRow();
+        if (seclectedRow >= 0) {
+            id = (String) jTable_NXB.getValueAt(seclectedRow, 0);
+        } else {
+            id = null;
+        }
         if (id != null) {
             this.jDialogDelete.setVisible(true);
         } else {
@@ -1047,6 +1050,12 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+         int seclectedRow = jTable_NXB.getSelectedRow();
+        if (seclectedRow >= 0) {
+            id = (String) jTable_NXB.getValueAt(seclectedRow, 0);
+        } else {
+            id = null;
+        }
         if (id != null) {
             this.dao.loadDataList();
             for (DTONhaXuatBan nxb : this.dao.getDanhSach()) {
@@ -1078,28 +1087,28 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     private void lbNhanVien4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien4MouseClicked
         // TODO add your handling code here:
-        NhanVien_View a = new NhanVien_View(MaNV,TenNV);
+        NhanVien_View a = new NhanVien_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhanVien4MouseClicked
 
     private void lbBanSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanSach4MouseClicked
         // TODO add your handling code here:
-        BanHang_View a = new BanHang_View(MaNV,TenNV);
+        BanHang_View a = new BanHang_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbBanSach4MouseClicked
 
     private void lbNhaCungCap5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhaCungCap5MouseClicked
         // TODO add your handling code here:
-        NXB_View a = new NXB_View(MaNV,TenNV);
+        NXB_View a = new NXB_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhaCungCap5MouseClicked
 
     private void lbPhieu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu10MouseClicked
         // TODO add your handling code here:
-        PhieuNhap a = new PhieuNhap(MaNV,TenNV);
+        PhieuNhap a = new PhieuNhap(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
 
@@ -1107,28 +1116,28 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
 
     private void lbNhapSach4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhapSach4MouseClicked
         // TODO add your handling code here:
-        NhapHangView a = new NhapHangView(MaNV,TenNV);
+        NhapHangView a = new NhapHangView(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbNhapSach4MouseClicked
 
     private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
         // TODO add your handling code here:
-        KhachHang_View a = new KhachHang_View(MaNV,TenNV);
+        KhachHang_View a = new KhachHang_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbPhieu11MouseClicked
 
     private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
         // TODO add your handling code here:
-        HoaDon_View a = new HoaDon_View(MaNV,TenNV);
+        HoaDon_View a = new HoaDon_View(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblBill4MouseClicked
 
     private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
         // TODO add your handling code here:
-        KhoSachView a = new KhoSachView(MaNV,TenNV);
+        KhoSachView a = new KhoSachView(MaNV, TenNV);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BookStore4MouseClicked
@@ -1174,7 +1183,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NXB_View(MaNV,TenNV).setVisible(true);
+                new NXB_View(MaNV, TenNV).setVisible(true);
             }
         });
     }
