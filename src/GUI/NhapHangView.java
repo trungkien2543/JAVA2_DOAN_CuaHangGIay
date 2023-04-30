@@ -10,10 +10,12 @@ import DTO.DTOPhieuNhap;
 import DTO.DTOChiTietPhieuNhap;
 import BUS.BUSPhieuNhap;
 import BUS.BUSChiTietPhieuNhap;
+import BUS.BUSTaiKhoan;
 import DAO.DAOKhoSach;
 import DAO.DAONhaXuatBan;
 import DTO.DTOKhoSach;
 import DTO.DTONhaXuatBan;
+import DTO.DTOTaiKhoan;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -42,7 +44,7 @@ public class NhapHangView extends javax.swing.JFrame {
     int a;
     ArrayList<DTOKhoSach> list;
     ArrayList<DTONhaXuatBan> list_NXB;
-
+    ArrayList<DTOTaiKhoan> list_tk = new BUSTaiKhoan().getAllTaiKhoan();
     int tongtien=0;
     Locale localVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localVN);
@@ -81,6 +83,22 @@ public class NhapHangView extends javax.swing.JFrame {
         this.TenNV = TenNV;
         
         lblHello.setText("Hi " + this.TenNV);
+        
+        
+        for(DTOTaiKhoan s : list_tk){
+            if(s.getMaNhanVien().equals(MaNV)){
+                if(s.getChucVu().equals("Sale")){
+                    System.out.println(s.getChucVu());
+                    lbNhaCungCap5.setVisible(false);
+                    lbNhanVien4.setVisible(false);
+                    lbBanSach4.setVisible(false);
+                    lbKH11.setVisible(false);
+                    lbBookStore4.setVisible(false);
+                    lblBill4.setVisible(false);
+                    lbPhieu10.setVisible(false);
+                }
+            }
+        }
         
         Reset();
 
@@ -167,9 +185,9 @@ public class NhapHangView extends javax.swing.JFrame {
         lbNhaCungCap5 = new javax.swing.JLabel();
         lbPhieu10 = new javax.swing.JLabel();
         lbNhapSach4 = new javax.swing.JLabel();
-        lbPhieu11 = new javax.swing.JLabel();
+        lbKH11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
-        BookStore4 = new javax.swing.JLabel();
+        lbBookStore4 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -654,15 +672,15 @@ public class NhapHangView extends javax.swing.JFrame {
             }
         });
 
-        lbPhieu11.setBackground(new java.awt.Color(0, 204, 204));
-        lbPhieu11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbPhieu11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbPhieu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Customer.png"))); // NOI18N
-        lbPhieu11.setText("  Khách hàng");
-        lbPhieu11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbPhieu11.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbKH11.setBackground(new java.awt.Color(0, 204, 204));
+        lbKH11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbKH11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbKH11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Customer.png"))); // NOI18N
+        lbKH11.setText("  Khách hàng");
+        lbKH11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbKH11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbPhieu11MouseClicked(evt);
+                lbKH11MouseClicked(evt);
             }
         });
 
@@ -678,15 +696,15 @@ public class NhapHangView extends javax.swing.JFrame {
             }
         });
 
-        BookStore4.setBackground(new java.awt.Color(0, 204, 204));
-        BookStore4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        BookStore4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BookStore4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
-        BookStore4.setText(" Cửa hàng sách");
-        BookStore4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BookStore4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbBookStore4.setBackground(new java.awt.Color(0, 204, 204));
+        lbBookStore4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbBookStore4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbBookStore4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
+        lbBookStore4.setText(" Cửa hàng sách");
+        lbBookStore4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbBookStore4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BookStore4MouseClicked(evt);
+                lbBookStore4MouseClicked(evt);
             }
         });
 
@@ -699,12 +717,12 @@ public class NhapHangView extends javax.swing.JFrame {
             .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhaCungCap5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPhieu11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbKH11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addComponent(lbBookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addContainerGap())
         );
         ThanhMenu4Layout.setVerticalGroup(
@@ -721,13 +739,13 @@ public class NhapHangView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNhaCungCap5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPhieu11)
+                .addComponent(lbKH11)
                 .addGap(18, 18, 18)
                 .addComponent(lbPhieu10)
                 .addGap(18, 18, 18)
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
-                .addComponent(BookStore4)
+                .addComponent(lbBookStore4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1003,12 +1021,12 @@ public class NhapHangView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbNhapSach4MouseClicked
 
-    private void lbPhieu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPhieu11MouseClicked
+    private void lbKH11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbKH11MouseClicked
         // TODO add your handling code here:
         KhachHang_View a = new KhachHang_View(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_lbPhieu11MouseClicked
+    }//GEN-LAST:event_lbKH11MouseClicked
 
     private void lblBill4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBill4MouseClicked
         // TODO add your handling code here:
@@ -1017,12 +1035,12 @@ public class NhapHangView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lblBill4MouseClicked
 
-    private void BookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore4MouseClicked
+    private void lbBookStore4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBookStore4MouseClicked
         // TODO add your handling code here:
         KhoSachView a = new KhoSachView(MaNV,TenNV);
         a.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_BookStore4MouseClicked
+    }//GEN-LAST:event_lbBookStore4MouseClicked
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
@@ -1203,7 +1221,6 @@ public class NhapHangView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
-    private javax.swing.JLabel BookStore4;
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnAdd;
@@ -1237,11 +1254,12 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JPanel jpChiTietHoaDon;
     private javax.swing.JPanel jpThongTinSanPham;
     private javax.swing.JLabel lbBanSach4;
+    private javax.swing.JLabel lbBookStore4;
+    private javax.swing.JLabel lbKH11;
     private javax.swing.JLabel lbNhaCungCap5;
     private javax.swing.JLabel lbNhanVien4;
     private javax.swing.JLabel lbNhapSach4;
     private javax.swing.JLabel lbPhieu10;
-    private javax.swing.JLabel lbPhieu11;
     private javax.swing.JLabel lblBill4;
     private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblMaNV;

@@ -773,12 +773,12 @@
                   <Component id="lbNhanVien4" alignment="1" max="32767" attributes="0"/>
                   <Component id="lbNhapSach4" alignment="0" max="32767" attributes="0"/>
                   <Component id="lbNhaCungCap5" alignment="1" max="32767" attributes="0"/>
-                  <Component id="lbPhieu11" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lbKH11" alignment="1" max="32767" attributes="0"/>
                   <Component id="lbPhieu10" alignment="0" max="32767" attributes="0"/>
                   <Component id="lblBill4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BookStore4" pref="152" max="32767" attributes="0"/>
+                      <Component id="lbBookStore4" pref="152" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -797,13 +797,13 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbNhaCungCap5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lbPhieu11" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbKH11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="lbPhieu10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblBill4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BookStore4" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbBookStore4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -933,7 +933,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbNhapSach4MouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbPhieu11">
+            <Component class="javax.swing.JLabel" name="lbKH11">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="0" type="rgb"/>
@@ -951,7 +951,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbPhieu11MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbKH11MouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblBill4">
@@ -975,7 +975,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBill4MouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="BookStore4">
+            <Component class="javax.swing.JLabel" name="lbBookStore4">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="0" type="rgb"/>
@@ -993,7 +993,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BookStore4MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbBookStore4MouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
