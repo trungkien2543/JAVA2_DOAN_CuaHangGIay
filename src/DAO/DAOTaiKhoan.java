@@ -187,4 +187,21 @@ public class DAOTaiKhoan {
      public static void main(String[] args) {
         new DAOTaiKhoan();
     }
+     
+    public boolean checkMK(String MaNV,String MK){
+       String sql = "select * from TaiKhoan where MaNhanVien = ? and MatKhau=?";
+       try{
+           PreparedStatement ps = con.prepareStatement(sql);
+           ps.setString(1, MaNV);
+           ps.setString(2, MK);
+           ResultSet rs = ps.executeQuery();
+           if(rs.next()){
+               return true;
+           }
+       }
+       catch(Exception e){
+           e.printStackTrace();
+       }
+       return false;
+    } 
 }

@@ -206,16 +206,18 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtMkMoi" alignment="1" min="-2" pref="338" max="-2" attributes="0"/>
-                              <Component id="txtXacNhanMkMoi" alignment="1" min="-2" pref="338" max="-2" attributes="0"/>
-                              <Component id="txtMkCu" alignment="1" min="-2" pref="338" max="-2" attributes="0"/>
+                              <Component id="txtMkCu" min="-2" pref="348" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtXacNhanMkMoi" alignment="0" pref="340" max="32767" attributes="0"/>
+                                  <Component id="txtMkMoi" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="245" max="32767" attributes="0"/>
                           <Component id="btnXacNhanMK" min="-2" pref="104" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
                       </Group>
@@ -271,15 +273,6 @@
                     <Property name="text" type="java.lang.String" value="Nh&#x1ead;p l&#x1ea1;i m&#x1ead;t kh&#x1ea9;u m&#x1edb;i :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtMkCu">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMkCuActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtMkMoi">
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtXacNhanMkMoi">
-                </Component>
                 <Component class="javax.swing.JButton" name="btnXacNhanMK">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -293,6 +286,12 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXacNhanMKActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JPasswordField" name="txtMkCu">
+                </Component>
+                <Component class="javax.swing.JPasswordField" name="txtMkMoi">
+                </Component>
+                <Component class="javax.swing.JPasswordField" name="txtXacNhanMkMoi">
                 </Component>
               </SubComponents>
             </Container>

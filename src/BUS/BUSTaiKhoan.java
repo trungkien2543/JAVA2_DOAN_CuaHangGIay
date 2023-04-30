@@ -29,6 +29,23 @@ public class BUSTaiKhoan {
             return "Thay đổi thất bại!";
         }
         
+        
+        public String doiMatKhau(String mk,String mkMoi, String mkXN, String maNV){
+            if(mk.isEmpty() || mkMoi.isEmpty() || mkXN.isEmpty()){
+                return "Không được để trống thống tin";
+            }
+            if(tkDAO.checkMK(maNV, mk) == false){
+                return "Mật khẩu hiện tại không đúng";
+            }
+            if(!mkMoi.equals(mkXN)){
+                return "Mật khẩu mới và mật khẩu xác nhận không khớp";
+            }
+            if(tkDAO.MatKhau(mkMoi, maNV)){
+                return "Thay đổi thành công!";
+            }
+            return "Thay đổi thất bại!";
+        }
+        
         public String suaEmail(String nd,String MaNV){
             if(nd.contains("@gmail.com")==false){
                 return "Email phải chứ chuỗi @gmail.com";

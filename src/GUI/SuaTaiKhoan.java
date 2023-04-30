@@ -63,10 +63,10 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtMkCu = new javax.swing.JTextField();
-        txtMkMoi = new javax.swing.JTextField();
-        txtXacNhanMkMoi = new javax.swing.JTextField();
         btnXacNhanMK = new javax.swing.JButton();
+        txtMkCu = new javax.swing.JPasswordField();
+        txtMkMoi = new javax.swing.JPasswordField();
+        txtXacNhanMkMoi = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sửa tài khoản");
@@ -149,12 +149,6 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Nhập lại mật khẩu mới :");
 
-        txtMkCu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMkCuActionPerformed(evt);
-            }
-        });
-
         btnXacNhanMK.setBackground(new java.awt.Color(0, 204, 153));
         btnXacNhanMK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXacNhanMK.setText("Xác nhận");
@@ -178,14 +172,15 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMkMoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtXacNhanMkMoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMkCu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                    .addComponent(txtMkCu, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtXacNhanMkMoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                        .addComponent(txtMkMoi, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 245, Short.MAX_VALUE)
                 .addComponent(btnXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(233, 233, 233))
         );
@@ -264,12 +259,20 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, editNV);
     }//GEN-LAST:event_btnXacNhanTTActionPerformed
 
-    private void txtMkCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMkCuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMkCuActionPerformed
-
     private void btnXacNhanMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanMKActionPerformed
         // TODO add your handling code here:
+        String MkCu = txtMkCu.getText();
+        String MKMoi = txtMkMoi.getText();
+        String XacNhanMKMoi = txtXacNhanMkMoi.getText();
+        
+        String kq = new BUSTaiKhoan().doiMatKhau(MkCu, MKMoi, XacNhanMKMoi, MaNV);
+        
+        if(kq.equals("Thay đổi thành công!")){
+            txtMkCu.setText("");
+            txtMkMoi.setText("");
+            txtXacNhanMkMoi.setText("");
+        }
+        JOptionPane.showMessageDialog(rootPane, kq);
     }//GEN-LAST:event_btnXacNhanMKActionPerformed
 
     /**
@@ -322,10 +325,10 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtGmail;
-    private javax.swing.JTextField txtMkCu;
-    private javax.swing.JTextField txtMkMoi;
+    private javax.swing.JPasswordField txtMkCu;
+    private javax.swing.JPasswordField txtMkMoi;
     private javax.swing.JTextField txtQueQuan;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtXacNhanMkMoi;
+    private javax.swing.JPasswordField txtXacNhanMkMoi;
     // End of variables declaration//GEN-END:variables
 }
