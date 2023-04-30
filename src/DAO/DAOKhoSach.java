@@ -210,7 +210,7 @@ public class DAOKhoSach {
             }
         }
         try {
-            file = new FileOutputStream(path+"KhoSach.xlsx");
+            file = new FileOutputStream(path+".xlsx");
             wb.write(file);
             wb.close();
             file.close();
