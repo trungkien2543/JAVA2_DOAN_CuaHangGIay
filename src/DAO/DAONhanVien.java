@@ -66,7 +66,7 @@ public class DAONhanVien {
         }
         return list;
     }
-     public boolean deletedNhanvien(DTONhanVien nv) {
+    public boolean deletedNhanvien(DTONhanVien nv) {
     PreparedStatement ps1 = null;
                     boolean result = false;
                     try {
@@ -94,7 +94,20 @@ public class DAONhanVien {
                     return result;
      }
 
-    
+    public boolean editNhanVien(DTONhanVien nv){
+        String sql = "update NhanVien set TenNV=?,QueQuan=? where MaNV=?";
+        try{
+            PreparedStatement ps =  con.prepareStatement(sql);
+            ps.setString(1, nv.getTenNV());
+            ps.setString(2, nv.getQueQuan());
+            ps.setString(3, nv.getMaNV());
+            return ps.executeUpdate() > 0;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     
     public static void main(String[] args) {
         new DAONhanVien();

@@ -29,6 +29,16 @@ public class BUSTaiKhoan {
             return "Thay đổi thất bại!";
         }
         
+        public String suaEmail(String nd,String MaNV){
+            if(nd.contains("@gmail.com")==false){
+                return "Email phải chứ chuỗi @gmail.com";
+            }
+            if (tkDAO.editEmail(MaNV, nd)){
+                return "Sửa thành công";
+            }
+            return "Sửa thất bại";
+        }
+        
         public ArrayList<DTOTaiKhoan> getallTaiKhoan(){
              return tkDAO.getListTK();
             }

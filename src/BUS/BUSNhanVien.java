@@ -53,7 +53,15 @@ public class BUSNhanVien {
        return "xóa thất bại";
     }
     
-   
+    
+    public String suaNhanVien (DTONhanVien NhanVien){
+        if(daonhanvien.editNhanVien(NhanVien)){
+            return "Sửa thành công";
+        }
+        else{
+            return "Sửa thất bại";
+        }
+    }
     
 }
 

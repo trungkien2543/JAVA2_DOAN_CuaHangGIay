@@ -170,6 +170,20 @@ public class DAOTaiKhoan {
                     }
                     return result;
      }
+     
+    public boolean editEmail(String MaNV,String nd){
+        String sql = "update TaiKhoan set Email=? where MaNhanVien=?";
+        try{
+            PreparedStatement ps =  con.prepareStatement(sql);
+            ps.setString(1,nd);
+            ps.setString(2, MaNV);
+            return ps.executeUpdate() > 0;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
      public static void main(String[] args) {
         new DAOTaiKhoan();
     }

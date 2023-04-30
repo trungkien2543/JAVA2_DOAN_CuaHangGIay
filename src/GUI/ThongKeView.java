@@ -328,7 +328,7 @@ public class ThongKeView extends javax.swing.JFrame {
 
     private void lblThayDoiTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThayDoiTKMouseClicked
         // TODO add your handling code here:
-        SuaTaiKhoan a = new SuaTaiKhoan();
+        SuaTaiKhoan a = new SuaTaiKhoan(MaNV,TenNV);
         a.setVisible(true);
         a.setLocationRelativeTo(null);
         //this.setVisible(true);
