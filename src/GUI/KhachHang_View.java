@@ -7,14 +7,20 @@ package GUI;
 import BUS.BUSKhachHang;
 import DTO.DTOKhachHang;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -573,8 +579,6 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
         // TODO add your handling code here:
-        int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có muốn xuất bảng này ra file excel", "Xuất file EXCEL", JOptionPane.YES_NO_OPTION);
-        if(luaChon == JOptionPane.NO_OPTION) return;
         XSSFWorkbook wordbook = new XSSFWorkbook();
         XSSFSheet sheet = wordbook.createSheet("KhachHang");
         try {
@@ -598,32 +602,52 @@ public class KhachHang_View extends javax.swing.JFrame {
 
             cell = row.createCell(4, CellType.STRING);
             cell.setCellValue("Tích điểm");
-            
-            for(int i=0;i<tblKhachHang.getRowCount();i++){
-                row = sheet.createRow(1+i);
-                
-                cell = row.createCell(0,CellType.STRING);
+
+            for (int i = 0; i < tblKhachHang.getRowCount(); i++) {
+                row = sheet.createRow(1 + i);
+
+                cell = row.createCell(0, CellType.STRING);
                 cell.setCellValue(tblKhachHang.getValueAt(i, 0).toString());
-                
-                cell = row.createCell(1,CellType.STRING);
+
+                cell = row.createCell(1, CellType.STRING);
                 cell.setCellValue(tblKhachHang.getValueAt(i, 1).toString());
-                
-                cell = row.createCell(2,CellType.STRING);
+
+                cell = row.createCell(2, CellType.STRING);
                 cell.setCellValue(tblKhachHang.getValueAt(i, 2).toString());
-                
-                cell = row.createCell(3,CellType.STRING);
+
+                cell = row.createCell(3, CellType.STRING);
                 cell.setCellValue(tblKhachHang.getValueAt(i, 3).toString());
-                
-                cell = row.createCell(4,CellType.STRING);
+
+                cell = row.createCell(4, CellType.STRING);
                 cell.setCellValue(tblKhachHang.getValueAt(i, 4).toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("hh_mm_ss_dd_MM_YYYY");
-        String tenfile = formatter.format(new Date().getTime()) + "_KH";
-        File f = new File("ExcelFile//KhachHang//Export//"+tenfile+".xlsx");
-         try{
+           //Thao tác kiểm tra file
+        String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
+        if(tenfile.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
+            return;
+        }
+        else if (tenfile.contains(" ")){
+            JOptionPane.showMessageDialog(rootPane, "Tên file không có khoảng trắng");
+            return;
+        }
+        else if (tenfile.contains("/") || tenfile.contains("%") || tenfile.contains("#") || tenfile.contains(":") ||tenfile.contains(";") ||tenfile.contains("~") ||tenfile.contains(".") ){
+            JOptionPane.showMessageDialog(rootPane, "Tên file không chứa kí tự đặc biệt");
+        }
+        //Thực hiện ghi file
+        JFileChooser  j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        j.showSaveDialog(btnExport);
+        File f = new File(j.getSelectedFile()+"\\"+tenfile+".xlsx");
+        if(f.exists()){
+            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn ghi đè lên file này không ?") != JOptionPane.YES_OPTION){
+                return;
+            }
+        }
+        try{
             FileOutputStream fis = new FileOutputStream(f);
             wordbook.write(fis);
             fis.close();
@@ -632,18 +656,20 @@ public class KhachHang_View extends javax.swing.JFrame {
             e.printStackTrace();
             return;
         }
-         JOptionPane.showMessageDialog(rootPane, "Xuất file "+tenfile+ " thành công!\nĐược lưu tại "+ f.getPath());
         
+        JOptionPane.showMessageDialog(rootPane, "Xuất file thành công");
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_btnImportActionPerformed
 
+    public void readFileExcel() throws FileNotFoundException, IOException {
+        
+    }
     private void lblThayDoiTK2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThayDoiTK2MouseClicked
         // TODO add your handling code here:
-        SuaTaiKhoan a = new SuaTaiKhoan(MaNV,TenNV);
+        SuaTaiKhoan a = new SuaTaiKhoan(MaNV, TenNV);
         a.setVisible(true);
         a.setLocationRelativeTo(null);
         //this.setVisible(true);
