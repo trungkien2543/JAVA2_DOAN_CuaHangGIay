@@ -31,7 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class PhieuNhap extends javax.swing.JFrame {
     DefaultTableModel model;
-    ArrayList<DTOPhieuNhap> list = new ArrayList<>();
+    ArrayList<DTOPhieuNhap> list = new BUSPhieuNhap().getAllPhieuNhap();
     Locale localeVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
     /**
@@ -307,7 +307,7 @@ public class PhieuNhap extends javax.swing.JFrame {
             }
         });
 
-        cbxDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Mã hóa đơn", "Mã nhân viên", "Mã khách hàng", "Thông tin ưu đãi", "Ngày lập", "Tổng tiền" }));
+        cbxDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Mã ", "Mã nhân viên", "Mã khách hàng", "Thông tin ưu đãi", "Ngày lập", "Tổng tiền" }));
         cbxDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxDieuKienLocActionPerformed(evt);
@@ -738,7 +738,7 @@ public class PhieuNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Hay chon 1 hoa don roi xem chi tiet");
             return;
         }
-        ChiTietHoaDon_View s = new ChiTietHoaDon_View(txtFind.getText());
+        ChiTietPhieu_View s = new ChiTietPhieu_View(txtFind.getText());
         s.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed

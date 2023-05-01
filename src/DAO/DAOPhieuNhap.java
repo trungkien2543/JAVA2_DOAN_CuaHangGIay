@@ -39,10 +39,9 @@ public class DAOPhieuNhap {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 DTOPhieuNhap pn = new DTOPhieuNhap();
-                
-                pn.setMaNV(rs.getString(1));
-                pn.setMaNXB(rs.getString(2));
-                pn.setMaPhieu(rs.getInt(3));
+                pn.setMaPhieu(rs.getInt(1));
+                pn.setMaNV(rs.getString(2));
+                pn.setMaNXB(rs.getString(3));
                 pn.setNgayNhap(rs.getDate(4));
                 pn.setTongTien(rs.getInt(5));
                 

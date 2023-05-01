@@ -83,7 +83,7 @@ public class BanHang_View extends javax.swing.JFrame {
         
         for(DTOTaiKhoan s : list_tk){
             if(s.getMaNhanVien().equals(MaNV)){
-                if(s.getChucVu().equals("Sale")){
+                if(s.getChucVu().equals("nhan vien ban hang")){
                     System.out.println(s.getChucVu());
                     lbNhaCungCap5.setVisible(false);
                     lbNhanVien4.setVisible(false);

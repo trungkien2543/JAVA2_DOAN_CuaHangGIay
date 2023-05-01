@@ -87,7 +87,7 @@ public class NhapHangView extends javax.swing.JFrame {
         
         for(DTOTaiKhoan s : list_tk){
             if(s.getMaNhanVien().equals(MaNV)){
-                if(s.getChucVu().equals("Kho")){
+                if(s.getChucVu().equals("nhan vien kho")){
                     System.out.println(s.getChucVu());
                     lbNhaCungCap5.setVisible(false);
                     lbNhanVien4.setVisible(false);

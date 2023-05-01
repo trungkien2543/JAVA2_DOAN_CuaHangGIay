@@ -296,7 +296,7 @@ public class Login extends javax.swing.JFrame {
             s.setVisible(true);
             this.dispose();
         }
-        else if (a.getChucVu().equals("Sale")){
+        else if (a.getChucVu().equals("nhan vien ban hang")){
             BanHang_View s = new BanHang_View(a.getMaNhanVien(), NV.getTenNV());
             s.setVisible(true);
             this.dispose();

@@ -419,7 +419,7 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="7">
                     <StringItem index="0" value="M&#x1eb7;c &#x111;&#x1ecb;nh"/>
-                    <StringItem index="1" value="M&#xe3; h&#xf3;a &#x111;&#x1a1;n"/>
+                    <StringItem index="1" value="M&#xe3; "/>
                     <StringItem index="2" value="M&#xe3; nh&#xe2;n vi&#xea;n"/>
                     <StringItem index="3" value="M&#xe3; kh&#xe1;ch h&#xe0;ng"/>
                     <StringItem index="4" value="Th&#xf4;ng tin &#x1b0;u &#x111;&#xe3;i"/>
