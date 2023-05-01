@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import BUS.BUSChiTietHoaDon;
 import BUS.BUSHoaDon;
 import DAO.DAOHoaDon;
+import DTO.DTOChiTietHoaDon;
 import DTO.DTOHoaDon;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +36,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class HoaDon_View extends javax.swing.JFrame {
     DefaultTableModel model;
     ArrayList<DTOHoaDon> list = new ArrayList<>();
+    ArrayList<DTOChiTietHoaDon> list_cthd = new BUSChiTietHoaDon().getALLChiTietHoaDon();
     Locale localeVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
     
@@ -823,9 +826,10 @@ public class HoaDon_View extends javax.swing.JFrame {
     private void btnExActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExActionPerformed
         // TODO add your handling code here:
         XSSFWorkbook wordbook = new XSSFWorkbook();
-        XSSFSheet sheet = wordbook.createSheet("danhsach");
+        XSSFSheet sheet = wordbook.createSheet("HoaDon");
+        XSSFSheet sheet_cthd = wordbook.createSheet("ChiTietHoaDon");
         try{
-
+            //Ghi sheet hoa don
             XSSFRow row = null;
             Cell cell = null;
             
@@ -849,6 +853,30 @@ public class HoaDon_View extends javax.swing.JFrame {
             cell = row.createCell(5, CellType.STRING);
             cell.setCellValue("Tổng tiền");
             
+            
+            //Ghi sheet chi tiet hoa don
+            XSSFRow row_cthd = null;
+            Cell cell_cthd = null;
+
+            //Thanh tieu de
+            row_cthd = sheet_cthd.createRow(0);
+            cell_cthd = row_cthd.createCell(0,CellType.STRING);
+            cell_cthd.setCellValue("Mã hóa đơn");
+
+            cell_cthd = row_cthd.createCell(1, CellType.STRING);
+            cell_cthd.setCellValue("Mã sách");
+
+            cell_cthd = row_cthd.createCell(2, CellType.STRING);
+            cell_cthd.setCellValue("Tên sách");
+
+            cell_cthd = row_cthd.createCell(3, CellType.STRING);
+            cell_cthd.setCellValue("Giá sách");
+
+            cell_cthd = row_cthd.createCell(4, CellType.STRING);
+            cell_cthd.setCellValue("Số lượng");
+            
+            int j = 0;
+            
             for(int i=0;i<tblHoaDon.getRowCount();i++){
                 row = sheet.createRow(1+i);
                 
@@ -869,7 +897,38 @@ public class HoaDon_View extends javax.swing.JFrame {
 
                 cell = row.createCell(5, CellType.STRING);
                 cell.setCellValue(TongTienInt(tblHoaDon.getValueAt(i, 0).toString()));
-            }
+                
+                
+                for(DTOChiTietHoaDon s : list_cthd){
+                    if(Integer.toString(s.getMaHoaDon()).equals(tblHoaDon.getValueAt(i, 0).toString())){
+                        row_cthd = sheet_cthd.createRow(1+j);
+
+                        cell_cthd = row_cthd.createCell(0,CellType.NUMERIC);
+                        cell_cthd.setCellValue(s.getMaHoaDon());
+
+                        cell_cthd = row_cthd.createCell(1, CellType.STRING);
+                        cell_cthd.setCellValue(s.getMaSach());
+
+                        cell_cthd = row_cthd.createCell(2, CellType.STRING);
+                        cell_cthd.setCellValue(s.getTenSach());
+
+                        cell_cthd = row_cthd.createCell(3, CellType.NUMERIC);
+                        cell_cthd.setCellValue(s.getGiaSach());
+
+                        cell_cthd = row_cthd.createCell(4, CellType.NUMERIC);
+                        cell_cthd.setCellValue(s.getSLMua());
+
+                        j++;
+                    }
+
+                }
+            }    
+            
+            
+            
+                
+                
+
         }
         catch(Exception e){
             e.printStackTrace();
