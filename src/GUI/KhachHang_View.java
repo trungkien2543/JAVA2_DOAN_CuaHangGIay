@@ -6,6 +6,7 @@ package GUI;
 
 import BUS.BUSKhachHang;
 import DTO.DTOKhachHang;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,14 +16,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -62,6 +67,7 @@ public class KhachHang_View extends javax.swing.JFrame {
     }
 
     private void loadData(ArrayList<DTOKhachHang> list) {
+        tblModel.setRowCount(0);
         for (DTO.DTOKhachHang i : list) {
             tblModel.addRow(new Object[]{i.getMaKH(), i.getTenKH(), i.getDiaChi(), i.getSDT(), i.getTichDiem()});
         }
@@ -624,48 +630,134 @@ public class KhachHang_View extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-           //Thao tác kiểm tra file
+        //Thao tác kiểm tra file
         String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
-        if(tenfile.isEmpty()){
+        if (tenfile.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
             return;
-        }
-        else if (tenfile.contains(" ")){
+        } else if (tenfile.contains(" ")) {
             JOptionPane.showMessageDialog(rootPane, "Tên file không có khoảng trắng");
             return;
-        }
-        else if (tenfile.contains("/") || tenfile.contains("%") || tenfile.contains("#") || tenfile.contains(":") ||tenfile.contains(";") ||tenfile.contains("~") ||tenfile.contains(".") ){
+        } else if (tenfile.contains("/") || tenfile.contains("%") || tenfile.contains("#") || tenfile.contains(":") || tenfile.contains(";") || tenfile.contains("~") || tenfile.contains(".")) {
             JOptionPane.showMessageDialog(rootPane, "Tên file không chứa kí tự đặc biệt");
         }
         //Thực hiện ghi file
-        JFileChooser  j = new JFileChooser();
+        JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         j.showSaveDialog(btnExport);
-        File f = new File(j.getSelectedFile()+"\\"+tenfile+".xlsx");
-        if(f.exists()){
-            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn ghi đè lên file này không ?") != JOptionPane.YES_OPTION){
+        File f = new File(j.getSelectedFile() + "\\" + tenfile + ".xlsx");
+        if (f.exists()) {
+            if (JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn ghi đè lên file này không ?") != JOptionPane.YES_OPTION) {
                 return;
             }
         }
-        try{
+        try {
             FileOutputStream fis = new FileOutputStream(f);
             wordbook.write(fis);
             fis.close();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return;
         }
-        
+
         JOptionPane.showMessageDialog(rootPane, "Xuất file thành công");
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-        // TODO add your handling code here:
+        File excelFile;
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        String defaultCurrentDirectoryPath = "ExcelFile\\KhachHang\\Import";
+        JFileChooser filechooser = new JFileChooser(defaultCurrentDirectoryPath);
+//      chỉ chọn file Excel
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls","xlsx","xlsm");
+        filechooser.setFileFilter(fnef);
+//     set tiêu đề
+        filechooser.setDialogTitle("Chọn file excel");
+        int excelChooser = filechooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = filechooser.getSelectedFile();
+                fis = new FileInputStream(excelFile);
+                bis = new BufferedInputStream(fis);
+                XSSFWorkbook wb = new XSSFWorkbook(bis);
+                XSSFSheet sheet = wb.getSheetAt(0);
+                for (int row = 0; row <= sheet.getLastRowNum(); row++) {
+                    XSSFRow excelRow = sheet.getRow(row);
+                    XSSFCell excelTenKH = excelRow.getCell(0);
+                    XSSFCell excelDC = excelRow.getCell(1);
+                    XSSFCell excelSDT = excelRow.getCell(2);
+                    XSSFCell excelTichDiem = excelRow.getCell(3);
+                    if (row == 0) {
+                        if (!excelTenKH.getStringCellValue().equalsIgnoreCase("Ten KH")
+                                || !excelDC.getStringCellValue().equalsIgnoreCase("Dia chi")
+                                || !excelSDT.getStringCellValue().equalsIgnoreCase("SDT")
+                                || !excelTichDiem.getStringCellValue().equalsIgnoreCase("Tich diem")) {
+                            JOptionPane.showMessageDialog(null, "File không đúng định dạng\nXem mẫu tại ExcelFile\\KhachHang\\Import\\KhachHang.xlsx");
+                            return;
+                        }
+                        continue;
+                    }
+                    String tenKH = excelTenKH.getStringCellValue().trim();
+                    String diaChi = excelDC.getStringCellValue().trim();
+                    String SDT = excelSDT.getStringCellValue().trim();
+                    int tichDiem = (int) excelTichDiem.getNumericCellValue();
+                    if (!SDT.matches("[0]{1}[0-9]{9}")) {
+                        JOptionPane.showMessageDialog(null, "Số điện thoại không đúng định dạng tại ô [" + row + ",2]");
+                        return;
+                    } else {
+                        int obj = ktTonTaiSDT(SDT);
+                        if (obj == -1) {
+                            //add
+                            DTOKhachHang kh = new DTOKhachHang(SDT, tenKH, diaChi, SDT, tichDiem);
+                            list.add(kh);
+                            //them vao DB
+                            new BUSKhachHang().addKhachHang(kh);
+                        } else {
+                            //update
+                            updateKH(tenKH, diaChi, tichDiem, obj);
+                            new BUSKhachHang().updateKhachHang(SDT,tenKH,diaChi,tichDiem);
+                        }
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(KhachHang_View.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(KhachHang_View.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(KhachHang_View.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(KhachHang_View.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                loadData(list);
+            }
+
+        }
     }//GEN-LAST:event_btnImportActionPerformed
 
-    public void readFileExcel() throws FileNotFoundException, IOException {
-        
+    private int ktTonTaiSDT(String sdt) {
+        for (DTOKhachHang i : list) {
+            if (i.getSDT().equals(sdt)) {
+                return list.indexOf(i);
+            }
+        }
+        return -1;
+    }
+
+    private void updateKH(String tenKH, String diaChi, int tichDiem, int index) {
+        list.get(index).setTenKH(tenKH);
+        list.get(index).setDiaChi(diaChi);
+        list.get(index).setTichDiem(tichDiem);
     }
     private void lblThayDoiTK2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThayDoiTK2MouseClicked
         // TODO add your handling code here:

@@ -82,6 +82,22 @@ public class DAOKhachHang {
         }
         return false;
     }
+    
+    public boolean updateKH(String SDT,String tenKH,String diaChi,int tichDiem){
+        String sql = "UPDATE KhachHang SET TenKH=?,DiaChi=? ,TichDiem=? WHERE SDT =?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, tenKH);
+            ps.setString(2, diaChi);
+            ps.setInt(3,tichDiem);
+            ps.setString(4, SDT);
+            return ps.executeUpdate() > 0;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     public static void main(String[] args) {
         new DAOKhachHang();
     }

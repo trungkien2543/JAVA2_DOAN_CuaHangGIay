@@ -25,4 +25,11 @@ public class BUSKhachHang {
         }
         return "Thêm khách hàng thất bại";
     }
+    
+    public String updateKhachHang(String SDT,String tenKH,String diaChi,int tichDiem){
+        if(khDAO.updateKH(SDT,tenKH, diaChi, tichDiem)){
+            return "Update khách hàng thành công";
+        }
+        return "Update khách hàng thất bại";
+    }
 }
