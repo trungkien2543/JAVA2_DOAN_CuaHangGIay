@@ -4,7 +4,9 @@
  */
 package GUI;
 
+import BUS.BUSChiTietPhieuNhap;
 import BUS.BUSPhieuNhap;
+import DTO.DTOChiTietPhieuNhap;
 import DTO.DTOHoaDon;
 import DTO.DTOPhieuNhap;
 import java.io.File;
@@ -32,6 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class PhieuNhap extends javax.swing.JFrame {
     DefaultTableModel model;
     ArrayList<DTOPhieuNhap> list = new BUSPhieuNhap().getAllPhieuNhap();
+    ArrayList<DTOChiTietPhieuNhap> list_ctp = new BUSChiTietPhieuNhap().getALLChiTietPhieuNhap();
     Locale localeVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
     /**
@@ -307,7 +310,7 @@ public class PhieuNhap extends javax.swing.JFrame {
             }
         });
 
-        cbxDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Mã ", "Mã nhân viên", "Mã khách hàng", "Thông tin ưu đãi", "Ngày lập", "Tổng tiền" }));
+        cbxDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Mã phiếu", "Mã nhân viên", "Mã nhà xuất bản", "Thông tin ưu đãi", "Ngày lập", "Tổng tiền" }));
         cbxDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxDieuKienLocActionPerformed(evt);
@@ -818,7 +821,8 @@ public class PhieuNhap extends javax.swing.JFrame {
     private void btnExActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExActionPerformed
         // TODO add your handling code here:
         XSSFWorkbook wordbook = new XSSFWorkbook();
-        XSSFSheet sheet = wordbook.createSheet("danhsach");
+        XSSFSheet sheet = wordbook.createSheet("Phiếu nhập");
+        XSSFSheet sheet_ctp = wordbook.createSheet("Chi Tiết Phiếu");
         try{
 
             XSSFRow row = null;
@@ -840,6 +844,31 @@ public class PhieuNhap extends javax.swing.JFrame {
 
             cell = row.createCell(4, CellType.STRING);
             cell.setCellValue("Tổng tiền");
+            
+            
+            
+            //Ghi sheet chi tiet hoa don
+            XSSFRow row_ctp = null;
+            Cell cell_ctp = null;
+
+            //Thanh tieu de
+            row_ctp = sheet_ctp.createRow(0);
+            cell_ctp = row_ctp.createCell(0,CellType.STRING);
+            cell_ctp.setCellValue("Mã phiếu");
+
+            cell_ctp = row_ctp.createCell(1, CellType.STRING);
+            cell_ctp.setCellValue("Mã sách");
+
+            cell_ctp = row_ctp.createCell(2, CellType.STRING);
+            cell_ctp.setCellValue("Tên sách");
+
+            cell_ctp = row_ctp.createCell(3, CellType.STRING);
+            cell_ctp.setCellValue("Giá sách");
+
+            cell_ctp = row_ctp.createCell(4, CellType.STRING);
+            cell_ctp.setCellValue("Số lượng");
+            
+            int j =0;
 
             for(int i=0;i<tblHoaDon.getRowCount();i++){
                 row = sheet.createRow(1+i);
@@ -858,6 +887,32 @@ public class PhieuNhap extends javax.swing.JFrame {
 
                 cell = row.createCell(4, CellType.STRING);
                 cell.setCellValue(TongTienInt(tblHoaDon.getValueAt(i, 0).toString()));
+                
+                for(DTOChiTietPhieuNhap s : list_ctp){
+                    if(Integer.toString(s.getMaPhieu()).equals(tblHoaDon.getValueAt(i, 0).toString())){
+                        row_ctp = sheet_ctp.createRow(1+j);
+
+                        cell_ctp = row_ctp.createCell(0,CellType.NUMERIC);
+                        cell_ctp.setCellValue(s.getMaPhieu());
+
+                        cell_ctp = row_ctp.createCell(1, CellType.STRING);
+                        cell_ctp.setCellValue(s.getMaSach());
+
+                        cell_ctp = row_ctp.createCell(2, CellType.STRING);
+                        cell_ctp.setCellValue(s.getTenSach());
+
+                        cell_ctp = row_ctp.createCell(3, CellType.NUMERIC);
+                        cell_ctp.setCellValue(s.getGiaSach());
+
+                        cell_ctp = row_ctp.createCell(4, CellType.NUMERIC);
+                        cell_ctp.setCellValue(s.getSLNhap());
+
+                        j++;
+                    }
+
+                }
+                
+                
             }
         }
         catch(Exception e){
