@@ -652,7 +652,7 @@ public class PhieuNhap extends javax.swing.JFrame {
         String find = txtFind.getText();
         model.setRowCount(0);
         switch(cbx_DK){
-            case "Mã hóa đơn":{
+            case "Mã phiếu":{
                 for (DTOPhieuNhap s : list){
                     if(Integer.toString(s.getMaPhieu()).contains(find)){
                         model.addRow(new Object[]{
@@ -756,7 +756,7 @@ public class PhieuNhap extends javax.swing.JFrame {
         String From_str = ChuyenNgaySQL.format(From);
         String To_str = ChuyenNgaySQL.format(To);
         model.setRowCount(0);
-        ArrayList<DTOPhieuNhap> list_find = new BUSPhieuNhap().getListTimKiem("NgayLap",From_str,To_str);
+        ArrayList<DTOPhieuNhap> list_find = new BUSPhieuNhap().getListTimKiem("NgayNhap",From_str,To_str);
         for(DTOPhieuNhap s : list_find){
             model.addRow(new Object[]{
                 s.getMaPhieu(),s.getMaNV(),s.getMaNXB(),ChuyenNgayShow.format(s.getNgayNhap()),currencyVN.format(s.getTongTien())
@@ -833,7 +833,7 @@ public class PhieuNhap extends javax.swing.JFrame {
             cell.setCellValue("Mã nhân viên");
 
             cell = row.createCell(2, CellType.STRING);
-            cell.setCellValue("Mã khách hàng");
+            cell.setCellValue("Mã nhà xuất bản");
 
             cell = row.createCell(3, CellType.STRING);
             cell.setCellValue("Ngày nhập");
