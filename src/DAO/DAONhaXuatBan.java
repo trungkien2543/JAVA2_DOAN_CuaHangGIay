@@ -6,6 +6,7 @@ package DAO;
 
 import DTO.DTONhaXuatBan;
 import GUI.NXB_View;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,7 +20,9 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -34,6 +37,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class DAONhaXuatBan {
 
+    private NXB_View nxb_view;
     public Connection conn;
     DefaultTableModel model;
     private ArrayList<DTONhaXuatBan> danhSach = new ArrayList<DTONhaXuatBan>();
@@ -242,49 +246,55 @@ public class DAONhaXuatBan {
         String sdt = "";
         String email = "";
         String st = "";
-        FileInputStream file;
-        file = new FileInputStream("ExcelFile\\NhaXuatBan\\Export\\NXB.xlsx");
-        try (XSSFWorkbook wb = new XSSFWorkbook(file)) {
-            XSSFSheet sheet = wb.getSheetAt(0);
-            for (Row row : sheet) {
-                if (i != 1) {
-                    for (Cell cell : row) {
-                        st = cell.getStringCellValue();
-                        switch (d) {
-                            case 1 -> {
-                                ma = st;
-                                d += 1;
-                            }
-                            case 2 -> {
-                                ten = st;
-                                d += 1;
-                            }
-                            case 3 -> {
-                                diachi = st;
-                                d += 1;
-                            }
-                            case 4 -> {
-                                sdt = st;
-                                d += 1;
-                            }
-                            case 5 -> {
-                                email = st;
-                                d = 1;
-                            }
-                            default -> {
+        JFileChooser filechooser = new JFileChooser();
+        filechooser.setMultiSelectionEnabled(false);
+        int x = filechooser.showDialog(nxb_view, "Chọn");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            File f = filechooser.getSelectedFile();
+            FileInputStream file = new FileInputStream(f);
+            try (XSSFWorkbook wb = new XSSFWorkbook(file)) {
+                XSSFSheet sheet = wb.getSheetAt(0);
+                for (Row row : sheet) {
+                    if (i != 1) {
+                        for (Cell cell : row) {
+                            st = cell.getStringCellValue();
+                            switch (d) {
+                                case 1 -> {
+                                    ma = st;
+                                    d += 1;
+                                }
+                                case 2 -> {
+                                    ten = st;
+                                    d += 1;
+                                }
+                                case 3 -> {
+                                    diachi = st;
+                                    d += 1;
+                                }
+                                case 4 -> {
+                                    sdt = st;
+                                    d += 1;
+                                }
+                                case 5 -> {
+                                    email = st;
+                                    d = 1;
+                                }
+                                default -> {
+                                }
                             }
                         }
+                        DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
+                        danhSach2.add(nxb);
+                    } else {
+                        i += 1;
                     }
-                    DTONhaXuatBan nxb = new DTONhaXuatBan(ma, ten, diachi, sdt, email);
-                    danhSach2.add(nxb);
-                } else {
-                    i += 1;
-                }
 
+                }
+                wb.close();
+                file.close();
             }
-            wb.close();
-            file.close();
         }
+
     }
 
     public boolean Excel_Database() {
@@ -295,25 +305,19 @@ public class DAONhaXuatBan {
             this.readExcel();
             for (DTONhaXuatBan nxb2 : danhSach2) {
                 int i = 0;
-
                 for (DTONhaXuatBan nxb : danhSach) {
                     if (nxb2.getMa().equals(nxb.getMa())) {
                         i = i + 1;
-                        if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
-                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-001");
-                            continue;
-                        }
                         if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
                             JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, số diện thoại phải có 10 số!");
                             continue;
-                        }
-                        if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
+                        } else if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
 
                             JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
                             continue;
-                        }
-                        if (EditNXB(nxb2)) {
+                        } else if (EditNXB(nxb2)) {
                             d = d + 1;
+
                         }
 
                     }
@@ -334,8 +338,6 @@ public class DAONhaXuatBan {
                     }
                     if (addNXBToSql(nxb2)) {
                         d = d + 1;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại!");
                     }
                 }
             }
@@ -350,8 +352,7 @@ public class DAONhaXuatBan {
     }
 
     public int Table_Excel() throws FileNotFoundException {
-        int i = 0;
-        FileOutputStream file;
+        int i = 1;
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet Sheet = wb.createSheet("NXB");
         XSSFRow row = null;
@@ -380,19 +381,25 @@ public class DAONhaXuatBan {
                 cell.setCellValue(nxb.getSoDienThoai());
                 cell = row.createCell(4, CellType.STRING);
                 cell.setCellValue(nxb.getEmail());
-                i = i + 1;               
+                i = i + 1;
 
             }
         }
         try {
-            file = new FileOutputStream("ExcelFile\\NhaXuatBan\\Export\\NXB.xlsx");
-            wb.write(file);
-            wb.close();
-            file.close();
+            JFileChooser filechooser = new JFileChooser();           
+            filechooser.setMultiSelectionEnabled(false);
+            int x = filechooser.showDialog(nxb_view, "Lưu");
+            if (x == JFileChooser.APPROVE_OPTION) {
+                File f = filechooser.getSelectedFile();
+                try (FileOutputStream file = new FileOutputStream(f)) {
+                    wb.write(file);
+                    wb.close();
+                }
+            }
 
-        } catch (IOException ex) { 
+        } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Cập nhật thất bại, có thể bạn chưa đóng file khi cập nhật, vui lòng đóng file!");
-             i=0;
+            i = 0;
         }
         return i;
     }
