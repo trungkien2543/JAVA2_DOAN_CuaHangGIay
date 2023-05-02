@@ -6,29 +6,63 @@ package GUI;
 
 import BUS.BUSChiTietHoaDon;
 import DTO.DTOThongKeTheoTheLoai;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 /**
  *
  * @author ASUS
  */
 public class ThongKeView extends javax.swing.JFrame {
- 
+    
     static String MaNV, TenNV;
     
-    ArrayList<DTOThongKeTheoTheLoai> listTL = new ArrayList<>();
+    
+    ArrayList<DTOThongKeTheoTheLoai> listTL =  new BUSChiTietHoaDon().getListThongKeTheoTL();
     
     public ThongKeView(String MaNV, String TenNV) {
         initComponents();
         
-        listTL = new BUSChiTietHoaDon().getListThongKeTheoTL();
-        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
+        setDataToChart1(jpThongKeTheoTL);
         lblHello.setText("Hi " + this.TenNV);
-
+        
+        
     }
     
-    public void ThongKeTheoTL(){
-        
+    
+    public void setDataToChart1(JPanel jpnItem) {
+
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        if (listTL != null) {
+            for (DTOThongKeTheoTheLoai item : listTL) {
+                dataset.setValue(item.getTheLoai(), Double.valueOf(item.getSLMua()));
+            }
+        }
+
+        JFreeChart pieChart = ChartFactory.createPieChart(
+                "Biểu đồ thống kê số lượng học viên đăng ký".toUpperCase(),
+                dataset,  true, false, false);
+        /*
+            legend: nếu là true, hiển thị chú thích cho biểu đồ.
+            tooltips: nếu là true, hiển thị thông tin chi tiết khi di chuột vào từng phần tử của biểu đồ.
+            urls: nếu là true, cho phép click vào từng phần tử của biểu đồ để chuyển hướng đến một trang web khác.        
+        */
+
+        ChartPanel chartPanel = new ChartPanel(pieChart);
+        jpnItem.removeAll();
+        jpnItem.setLayout(new CardLayout());
+        jpnItem.add(chartPanel);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,7 +242,6 @@ public class ThongKeView extends javax.swing.JFrame {
         BookStore4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
         BookStore4.setText(" Cửa hàng sách");
         BookStore4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BookStore4.setOpaque(true);
         BookStore4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BookStore4MouseClicked(evt);
@@ -277,11 +310,11 @@ public class ThongKeView extends javax.swing.JFrame {
         jpThongKeTheoTL.setLayout(jpThongKeTheoTLLayout);
         jpThongKeTheoTLLayout.setHorizontalGroup(
             jpThongKeTheoTLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 646, Short.MAX_VALUE)
         );
         jpThongKeTheoTLLayout.setVerticalGroup(
             jpThongKeTheoTLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
+            .addGap(0, 363, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpThongKeTheoTienNhapLayout = new javax.swing.GroupLayout(jpThongKeTheoTienNhap);
@@ -469,6 +502,9 @@ public class ThongKeView extends javax.swing.JFrame {
                 
             }
         });
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
