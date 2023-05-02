@@ -6,6 +6,7 @@ package DAO;
 
 
 import DTO.DTOHoaDon;
+import DTO.DTOThongKeDoanhThu;
 import GUI.HoaDon_View;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.collections4.ArrayStack;
 /**
  *
  * @author DELL
@@ -139,6 +141,22 @@ public class DAOHoaDon {
         return list_find;
     }
     
+    public ArrayList<DTOThongKeDoanhThu> getListThongKe(){
+        ArrayList<DTOThongKeDoanhThu> list = new ArrayList<>();
+        String sql = "select MONTH(NgayLap), YEAR(NgayLap), SUM(TongTien) from HoaDon group by MONTH(NgayLap), YEAR(NgayLap)";
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                DTOThongKeDoanhThu s = new DTOThongKeDoanhThu(rs.getString(1), rs.getString(2), rs.getInt(3));
+                list.add(s);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
     public static void main(String[] args) {
         DAOHoaDon s = new DAOHoaDon();
         

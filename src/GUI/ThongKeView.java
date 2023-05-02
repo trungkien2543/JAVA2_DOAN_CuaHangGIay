@@ -5,6 +5,8 @@
 package GUI;
 
 import BUS.BUSChiTietHoaDon;
+import BUS.BUSHoaDon;
+import DTO.DTOThongKeDoanhThu;
 import DTO.DTOThongKeTheoTheLoai;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -29,12 +31,14 @@ public class ThongKeView extends javax.swing.JFrame {
     
     
     ArrayList<DTOThongKeTheoTheLoai> listTL =  new BUSChiTietHoaDon().getListThongKeTheoTL();
+    ArrayList<DTOThongKeDoanhThu> listDT = new BUSHoaDon().getListThongKe();
     
+            
     public ThongKeView(String MaNV, String TenNV) {
         initComponents();
-        
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        setDataToChartTKTheoTL(jpThongKeTheoTL);
+        setDataToChartTKTheoTL(jpThongKeTheoTheLoai);
+        setDataToChartTKTheoDT(jpThongKeTheoDoanhThu);
         lblHello.setText("Hi " + this.TenNV);
         
         
@@ -61,8 +65,28 @@ public class ThongKeView extends javax.swing.JFrame {
 
         ChartPanel chartPanel = new ChartPanel(pieChart);
         jpnItem.removeAll();
-        jpnItem.setLayout(new CardLayout());
+        jpnItem.setLayout(new BorderLayout());
         jpnItem.add(chartPanel);
+    }
+    
+    
+    public void setDataToChartTKTheoDT(JPanel jpnItem){
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        if(listDT != null){
+            for(DTOThongKeDoanhThu s : listDT){
+                dataset.addValue(s.getSoTien(), "Tổng tiền", s.getThang()+"/"+s.getNam());
+            }
+            
+            JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ biểu thị doanh thu theo tháng năm".toUpperCase(),"Thời gian", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, false);
+            
+            ChartPanel chartPanel = new ChartPanel(barChart);
+            
+            jpnItem.removeAll();
+            jpnItem.setLayout(new BorderLayout());
+            jpnItem.add(chartPanel);
+        
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,9 +115,9 @@ public class ThongKeView extends javax.swing.JFrame {
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
         BookStore5 = new javax.swing.JLabel();
-        jpThongKeTheoTL = new javax.swing.JPanel();
-        jpThongKeTheoTienNhap = new javax.swing.JPanel();
-        jpThongKeTheoTienThu = new javax.swing.JPanel();
+        jpThongKeTheoTienhNhap = new javax.swing.JPanel();
+        jpThongKeTheoTheLoai = new javax.swing.JPanel();
+        jpThongKeTheoDoanhThu = new javax.swing.JPanel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -306,36 +330,36 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addContainerGap(146, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jpThongKeTheoTLLayout = new javax.swing.GroupLayout(jpThongKeTheoTL);
-        jpThongKeTheoTL.setLayout(jpThongKeTheoTLLayout);
-        jpThongKeTheoTLLayout.setHorizontalGroup(
-            jpThongKeTheoTLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
+        javax.swing.GroupLayout jpThongKeTheoTienhNhapLayout = new javax.swing.GroupLayout(jpThongKeTheoTienhNhap);
+        jpThongKeTheoTienhNhap.setLayout(jpThongKeTheoTienhNhapLayout);
+        jpThongKeTheoTienhNhapLayout.setHorizontalGroup(
+            jpThongKeTheoTienhNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 653, Short.MAX_VALUE)
         );
-        jpThongKeTheoTLLayout.setVerticalGroup(
-            jpThongKeTheoTLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpThongKeTheoTienhNhapLayout.setVerticalGroup(
+            jpThongKeTheoTienhNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 363, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jpThongKeTheoTienNhapLayout = new javax.swing.GroupLayout(jpThongKeTheoTienNhap);
-        jpThongKeTheoTienNhap.setLayout(jpThongKeTheoTienNhapLayout);
-        jpThongKeTheoTienNhapLayout.setHorizontalGroup(
-            jpThongKeTheoTienNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpThongKeTheoTheLoaiLayout = new javax.swing.GroupLayout(jpThongKeTheoTheLoai);
+        jpThongKeTheoTheLoai.setLayout(jpThongKeTheoTheLoaiLayout);
+        jpThongKeTheoTheLoaiLayout.setHorizontalGroup(
+            jpThongKeTheoTheLoaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jpThongKeTheoTienNhapLayout.setVerticalGroup(
-            jpThongKeTheoTienNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpThongKeTheoTheLoaiLayout.setVerticalGroup(
+            jpThongKeTheoTheLoaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jpThongKeTheoTienThuLayout = new javax.swing.GroupLayout(jpThongKeTheoTienThu);
-        jpThongKeTheoTienThu.setLayout(jpThongKeTheoTienThuLayout);
-        jpThongKeTheoTienThuLayout.setHorizontalGroup(
-            jpThongKeTheoTienThuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpThongKeTheoDoanhThuLayout = new javax.swing.GroupLayout(jpThongKeTheoDoanhThu);
+        jpThongKeTheoDoanhThu.setLayout(jpThongKeTheoDoanhThuLayout);
+        jpThongKeTheoDoanhThuLayout.setHorizontalGroup(
+            jpThongKeTheoDoanhThuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jpThongKeTheoTienThuLayout.setVerticalGroup(
-            jpThongKeTheoTienThuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpThongKeTheoDoanhThuLayout.setVerticalGroup(
+            jpThongKeTheoDoanhThuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -344,15 +368,15 @@ public class ThongKeView extends javax.swing.JFrame {
         BackGroundLayout.setHorizontalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ThanhMenu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpThongKeTheoTienNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpThongKeTheoTheLoai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(BackGroundLayout.createSequentialGroup()
-                        .addComponent(jpThongKeTheoTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpThongKeTheoTienhNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpThongKeTheoTienThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jpThongKeTheoDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         BackGroundLayout.setVerticalGroup(
@@ -361,10 +385,10 @@ public class ThongKeView extends javax.swing.JFrame {
                 .addComponent(TieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpThongKeTheoTL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpThongKeTheoTienThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpThongKeTheoTienhNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpThongKeTheoDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpThongKeTheoTienNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpThongKeTheoTheLoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -517,9 +541,9 @@ public class ThongKeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jpThongKeTheoTL;
-    private javax.swing.JPanel jpThongKeTheoTienNhap;
-    private javax.swing.JPanel jpThongKeTheoTienThu;
+    private javax.swing.JPanel jpThongKeTheoDoanhThu;
+    private javax.swing.JPanel jpThongKeTheoTheLoai;
+    private javax.swing.JPanel jpThongKeTheoTienhNhap;
     private javax.swing.JLabel lbBanSach4;
     private javax.swing.JLabel lbNhaCungCap5;
     private javax.swing.JLabel lbNhanVien4;

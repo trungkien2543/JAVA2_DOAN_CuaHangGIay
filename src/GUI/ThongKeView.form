@@ -51,18 +51,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="ThanhMenu4" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ThanhMenu4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="TieuDe" max="32767" attributes="0"/>
-                      <Component id="jpThongKeTheoTienNhap" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jpThongKeTheoTheLoai" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jpThongKeTheoTL" min="-2" max="-2" attributes="0"/>
+                          <Component id="jpThongKeTheoTienhNhap" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="jpThongKeTheoTienThu" max="32767" attributes="0"/>
+                          <Component id="jpThongKeTheoDoanhThu" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -72,11 +72,11 @@
                   <Component id="TieuDe" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jpThongKeTheoTL" max="32767" attributes="0"/>
-                      <Component id="jpThongKeTheoTienThu" max="32767" attributes="0"/>
+                      <Component id="jpThongKeTheoTienhNhap" max="32767" attributes="0"/>
+                      <Component id="jpThongKeTheoDoanhThu" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jpThongKeTheoTienNhap" max="32767" attributes="0"/>
+                  <Component id="jpThongKeTheoTheLoai" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="ThanhMenu4" max="32767" attributes="0"/>
@@ -420,12 +420,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jpThongKeTheoTL">
+        <Container class="javax.swing.JPanel" name="jpThongKeTheoTienhNhap">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="646" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="653" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -435,7 +435,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jpThongKeTheoTienNhap">
+        <Container class="javax.swing.JPanel" name="jpThongKeTheoTheLoai">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -450,7 +450,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jpThongKeTheoTienThu">
+        <Container class="javax.swing.JPanel" name="jpThongKeTheoDoanhThu">
 
           <Layout>
             <DimensionLayout dim="0">
