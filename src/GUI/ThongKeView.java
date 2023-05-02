@@ -34,14 +34,14 @@ public class ThongKeView extends javax.swing.JFrame {
         initComponents();
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        setDataToChart1(jpThongKeTheoTL);
+        setDataToChartTKTheoTL(jpThongKeTheoTL);
         lblHello.setText("Hi " + this.TenNV);
         
         
     }
     
     
-    public void setDataToChart1(JPanel jpnItem) {
+    public void setDataToChartTKTheoTL(JPanel jpnItem) {
 
         DefaultPieDataset dataset = new DefaultPieDataset();
         if (listTL != null) {
@@ -51,7 +51,7 @@ public class ThongKeView extends javax.swing.JFrame {
         }
 
         JFreeChart pieChart = ChartFactory.createPieChart(
-                "Biểu đồ thống kê số lượng học viên đăng ký".toUpperCase(),
+                "Biểu đồ thống kê số lượng sách bán theo thể loại".toUpperCase(),
                 dataset,  true, false, false);
         /*
             legend: nếu là true, hiển thị chú thích cho biểu đồ.
