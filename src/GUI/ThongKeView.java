@@ -6,7 +6,8 @@ package GUI;
 
 import BUS.BUSChiTietHoaDon;
 import BUS.BUSHoaDon;
-import DTO.DTOThongKeDoanhThu;
+import BUS.BUSPhieuNhap;
+import DTO.DTOThongKeSoTien;
 import DTO.DTOThongKeTheoTheLoai;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -31,14 +32,15 @@ public class ThongKeView extends javax.swing.JFrame {
     
     
     ArrayList<DTOThongKeTheoTheLoai> listTL =  new BUSChiTietHoaDon().getListThongKeTheoTL();
-    ArrayList<DTOThongKeDoanhThu> listDT = new BUSHoaDon().getListThongKe();
-    
+    ArrayList<DTOThongKeSoTien> listDT = new BUSHoaDon().getListThongKe();
+    ArrayList<DTOThongKeSoTien> listTN = new BUSPhieuNhap().getListThongKe();
             
     public ThongKeView(String MaNV, String TenNV) {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
         setDataToChartTKTheoTL(jpThongKeTheoTheLoai);
         setDataToChartTKTheoDT(jpThongKeTheoDoanhThu);
+        setDataToChartTKTheoTN(jpThongKeTheoTienhNhap);
         lblHello.setText("Hi " + this.TenNV);
         
         
@@ -74,7 +76,7 @@ public class ThongKeView extends javax.swing.JFrame {
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if(listDT != null){
-            for(DTOThongKeDoanhThu s : listDT){
+            for(DTOThongKeSoTien s : listDT){
                 dataset.addValue(s.getSoTien(), "Tổng tiền", s.getThang()+"/"+s.getNam());
             }
             
@@ -88,6 +90,26 @@ public class ThongKeView extends javax.swing.JFrame {
         
         }
     }
+    
+    public void setDataToChartTKTheoTN(JPanel jpnItem){
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        if(listTN != null){
+            for(DTOThongKeSoTien s : listTN){
+                dataset.addValue(s.getSoTien(), "Tổng tiền", s.getThang()+"/"+s.getNam());
+            }
+            
+            JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ biểu thị tiền nhập theo tháng năm".toUpperCase(),"Thời gian", "Số tiền", dataset, PlotOrientation.VERTICAL, false, true, false);
+            
+            ChartPanel chartPanel = new ChartPanel(barChart);
+            
+            jpnItem.removeAll();
+            jpnItem.setLayout(new BorderLayout());
+            jpnItem.add(chartPanel);
+        
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -334,7 +356,7 @@ public class ThongKeView extends javax.swing.JFrame {
         jpThongKeTheoTienhNhap.setLayout(jpThongKeTheoTienhNhapLayout);
         jpThongKeTheoTienhNhapLayout.setHorizontalGroup(
             jpThongKeTheoTienhNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jpThongKeTheoTienhNhapLayout.setVerticalGroup(
             jpThongKeTheoTienhNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +396,7 @@ public class ThongKeView extends javax.swing.JFrame {
                     .addComponent(TieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpThongKeTheoTheLoai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(BackGroundLayout.createSequentialGroup()
-                        .addComponent(jpThongKeTheoTienhNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpThongKeTheoTienhNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpThongKeTheoDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())

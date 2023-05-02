@@ -6,7 +6,7 @@ package BUS;
 
 import DAO.DAOHoaDon;
 import DTO.DTOHoaDon;
-import DTO.DTOThongKeDoanhThu;
+import DTO.DTOThongKeSoTien;
 import java.util.ArrayList;
 
 /**
@@ -43,7 +43,7 @@ public class BUSHoaDon {
         return hdDAO.TimKiem(Loai, From, To);
     }
     
-    public ArrayList<DTOThongKeDoanhThu> getListThongKe(){
+    public ArrayList<DTOThongKeSoTien> getListThongKe(){
         return hdDAO.getListThongKe();
     }
 }

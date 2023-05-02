@@ -8,11 +8,11 @@ package DTO;
  *
  * @author DELL
  */
-public class DTOThongKeDoanhThu {
+public class DTOThongKeSoTien {
     private int SoTien;
     private String Thang,Nam;
 
-    public DTOThongKeDoanhThu(String Thang, String Nam, int SoTien) {
+    public DTOThongKeSoTien(String Thang, String Nam, int SoTien) {
         this.Thang = Thang;
         this.Nam = Nam;
         this.SoTien = SoTien;

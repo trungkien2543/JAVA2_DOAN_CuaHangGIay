@@ -6,12 +6,14 @@ package DAO;
 
 import DTO.DTOHoaDon;
 import DTO.DTOPhieuNhap;
+import DTO.DTOThongKeSoTien;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
+import java.sql.Statement;
 
 
 /**
@@ -116,6 +118,23 @@ public class DAOPhieuNhap {
             e.printStackTrace();
         }
         return list_find;
+    }
+    
+    public ArrayList<DTOThongKeSoTien> getListThongKe(){
+        ArrayList<DTOThongKeSoTien> list = new ArrayList<>();
+        String sql = "select MONTH(NgayNhap), YEAR(NgayNhap), SUM(TongTien) from PhieuNhap group by MONTH(NgayNhap), YEAR(NgayNhap)";
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                DTOThongKeSoTien s = new DTOThongKeSoTien(rs.getString(1), rs.getString(2), rs.getInt(3));
+                list.add(s);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
     
 }

@@ -6,7 +6,7 @@ package DAO;
 
 
 import DTO.DTOHoaDon;
-import DTO.DTOThongKeDoanhThu;
+import DTO.DTOThongKeSoTien;
 import GUI.HoaDon_View;
 import java.sql.Connection;
 import java.sql.Date;
@@ -141,14 +141,14 @@ public class DAOHoaDon {
         return list_find;
     }
     
-    public ArrayList<DTOThongKeDoanhThu> getListThongKe(){
-        ArrayList<DTOThongKeDoanhThu> list = new ArrayList<>();
+    public ArrayList<DTOThongKeSoTien> getListThongKe(){
+        ArrayList<DTOThongKeSoTien> list = new ArrayList<>();
         String sql = "select MONTH(NgayLap), YEAR(NgayLap), SUM(TongTien) from HoaDon group by MONTH(NgayLap), YEAR(NgayLap)";
         try{
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                DTOThongKeDoanhThu s = new DTOThongKeDoanhThu(rs.getString(1), rs.getString(2), rs.getInt(3));
+                DTOThongKeSoTien s = new DTOThongKeSoTien(rs.getString(1), rs.getString(2), rs.getInt(3));
                 list.add(s);
             }
         }
