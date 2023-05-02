@@ -7,6 +7,7 @@ package BUS;
 import DAO.DAOChiTietHoaDon;
 import DTO.DTOChiTietHoaDon;
 import DTO.DTOHoaDon;
+import DTO.DTOThongKeTheoTheLoai;
 import java.util.ArrayList;
 
 /**
@@ -44,5 +45,10 @@ public class BUSChiTietHoaDon {
         if(cthd_DAO.deleteChiTietHoaDon(s.getMaHD())){
             
         }
+    }
+    
+    public ArrayList<DTOThongKeTheoTheLoai> getListThongKeTheoTL(){
+        ArrayList<DTOThongKeTheoTheLoai> list = cthd_DAO.getListThongKeTL();
+        return list;
     }
 }

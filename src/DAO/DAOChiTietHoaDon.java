@@ -6,6 +6,7 @@ package DAO;
 
 import DTO.DTOChiTietHoaDon;
 import DTO.DTOHoaDon;
+import DTO.DTOThongKeTheoTheLoai;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -93,6 +94,24 @@ public class DAOChiTietHoaDon {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    
+    public ArrayList<DTOThongKeTheoTheLoai> getListThongKeTL(){
+        ArrayList<DTOThongKeTheoTheLoai> list = new ArrayList<>();
+        String sql = "Select TheLoai, SUM(SLMua) From KhoSach, ChiTietHoaDon Where KhoSach.MaSach = ChiTietHoaDon.MaSach Group by TheLoai";
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                DTOThongKeTheoTheLoai s = new DTOThongKeTheoTheLoai(rs.getString(1), rs.getInt(2));
+                list.add(s);
+            }
+        }
+        catch(Exception e){
+            
+        }
+        return list;
     }
     
 }
