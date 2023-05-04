@@ -1231,7 +1231,7 @@ if (maNV != null && !maNV.trim().equals("")) {
 
         //Thao tác kiểm tra file
         String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
-        if(tenfile.isEmpty()){
+        if(tenfile == null){
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
             return;
         }
@@ -1338,13 +1338,12 @@ if (maNV != null && !maNV.trim().equals("")) {
                 }
                  for (int row = 0; row <= sheet1.getLastRowNum(); row++) {
                     XSSFRow excelRow = sheet1.getRow(row);
-                    XSSFRow excelRowForChucVu = sheet.getRow(row);
                     
                     XSSFCell excelManv = excelRow.getCell(0); // Lấy ô đầu tiên trong hàng
                     XSSFCell excelMatkhau = excelRow.getCell(1);
                     XSSFCell excelEmail = excelRow.getCell(2);
                     XSSFCell excelTrangthai = excelRow.getCell(3);
-                    XSSFCell excelChucvu= excelRowForChucVu.getCell(4);
+                    XSSFCell excelChucvu= excelRow.getCell(4);
                     if (row == 0) {
                         if (!excelManv.getStringCellValue().equalsIgnoreCase("Mã nhân viên")
                                 || !excelMatkhau.getStringCellValue().equalsIgnoreCase("Mật khẩu")
