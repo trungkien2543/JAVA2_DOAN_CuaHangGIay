@@ -39,25 +39,25 @@ Where PhieuNhap.MaPhieu = 1]]>
 				<textElement>
 					<font size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PHIẾU NHẬP HÀNG]]></text>
+				<text><![CDATA[PHIEU NHAP HANG]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="113" splitType="Stretch">
+		<band height="115" splitType="Stretch">
 			<staticText>
 				<reportElement x="264" y="11" width="78" height="20" uuid="f8b99c6f-f012-4736-8e5b-610a558f3ba5"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Ngày nhập:]]></text>
+				<text><![CDATA[Ngay nhap:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="85" y="11" width="78" height="20" uuid="f9b5ac6a-74a8-4ed2-9fcd-cd8aee97ba1b"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Mã phiếu nhập:]]></text>
+				<text><![CDATA[Ma phieu nhap]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="164" y="11" width="100" height="20" uuid="72a87dba-36ec-4acf-b39a-3d47df3f3094"/>
@@ -72,14 +72,14 @@ Where PhieuNhap.MaPhieu = 1]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Mã NXB:]]></text>
+				<text><![CDATA[Ma NXB]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="38" y="76" width="84" height="20" uuid="0535daec-1583-4135-9a0d-870f09522fdc"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tên NXB:]]></text>
+				<text><![CDATA[Ten NXB:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="139" y="56" width="100" height="20" uuid="90b47458-f568-4695-b5ba-67368b304aa8"/>
@@ -94,14 +94,14 @@ Where PhieuNhap.MaPhieu = 1]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Mã nhân viên:]]></text>
+				<text><![CDATA[Ma nhan vien:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="328" y="76" width="84" height="20" uuid="6b503e32-42ab-4b81-912c-beb8948fc71c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tên nhân viên:]]></text>
+				<text><![CDATA[Ten nhan vien:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="429" y="76" width="100" height="20" uuid="9c4aac19-e582-462d-8f15-757b8834bf86"/>
@@ -120,35 +120,35 @@ Where PhieuNhap.MaPhieu = 1]]>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Mã sách]]></text>
+				<text><![CDATA[Ma sach]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="114" y="7" width="100" height="20" uuid="40429f16-b01a-4cde-8c21-166ec8b7794f"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tên sách]]></text>
+				<text><![CDATA[Ten sach]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="214" y="7" width="100" height="20" uuid="d199a415-8a48-448b-ae9a-7899206981f9"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Đơn giá]]></text>
+				<text><![CDATA[Don gia]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="314" y="7" width="100" height="20" uuid="e4a321f7-17bc-42e1-971e-b2a245a74092"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Số lượng]]></text>
+				<text><![CDATA[So luong]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="414" y="7" width="100" height="20" uuid="1a7e2f82-e14e-4d1f-b115-bf7127643d45"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Thành tiền]]></text>
+				<text><![CDATA[Thanh tien]]></text>
 			</staticText>
 			<line>
 				<reportElement x="14" y="6" width="500" height="1" uuid="8b06bd95-8b84-4ed4-bc8e-0da0fe88e9ad"/>
@@ -208,7 +208,7 @@ Where PhieuNhap.MaPhieu = 1]]>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tổng tiền:]]></text>
+				<text><![CDATA[Tong tien:]]></text>
 			</staticText>
 		</band>
 	</summary>
