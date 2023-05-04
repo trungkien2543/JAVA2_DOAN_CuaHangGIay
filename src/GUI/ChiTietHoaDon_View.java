@@ -381,7 +381,7 @@ public class ChiTietHoaDon_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             Hashtable map = new Hashtable();
-            JasperReport rpt = JasperCompileManager.compileReport("src\\Report\\rptHoaDon.jrxml");
+            JasperReport rpt = JasperCompileManager.compileReport("src\\Report\\reportHoaDon.jrxml");
             map.put("sMaHD", lblMaPhieu.getText());
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLCuaHangSach;user=sa;password=123456;" + "encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2;");
             JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
