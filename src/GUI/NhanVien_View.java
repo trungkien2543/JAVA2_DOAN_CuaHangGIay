@@ -1286,7 +1286,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                 bis = new BufferedInputStream(fis);
                 XSSFWorkbook wb = new XSSFWorkbook(bis);
                 XSSFSheet sheet = wb.getSheetAt(0);
-                 XSSFSheet sheet1 = wb.getSheetAt(1);
+                XSSFSheet sheet1 = wb.getSheetAt(1);
                 for (int row = 0; row <= sheet.getLastRowNum(); row++) {
                     XSSFRow excelRow = sheet.getRow(row);
                     
@@ -1338,12 +1338,13 @@ if (maNV != null && !maNV.trim().equals("")) {
                 }
                  for (int row = 0; row <= sheet1.getLastRowNum(); row++) {
                     XSSFRow excelRow = sheet1.getRow(row);
+                    XSSFRow excelRowForChucVu = sheet.getRow(row);
                     
                     XSSFCell excelManv = excelRow.getCell(0); // Lấy ô đầu tiên trong hàng
                     XSSFCell excelMatkhau = excelRow.getCell(1);
                     XSSFCell excelEmail = excelRow.getCell(2);
                     XSSFCell excelTrangthai = excelRow.getCell(3);
-                    XSSFCell excelChucvu= excelRow.getCell(4);
+                    XSSFCell excelChucvu= excelRowForChucVu.getCell(4);
                     if (row == 0) {
                         if (!excelManv.getStringCellValue().equalsIgnoreCase("Mã nhân viên")
                                 || !excelMatkhau.getStringCellValue().equalsIgnoreCase("Mật khẩu")
@@ -1372,7 +1373,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                     }
                     String email = excelEmail.getStringCellValue().trim();
                     String trangthai = excelTrangthai.getStringCellValue().trim();
-                     String chucvu = excelChucvu.getStringCellValue().trim();
+                    String chucvu = excelChucvu.getStringCellValue().trim();
                     
                     int obj= ktrmanv(manv);
                     
