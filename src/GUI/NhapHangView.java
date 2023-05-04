@@ -31,6 +31,8 @@ import javax.management.modelmbean.ModelMBean;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 
 /**
  *
@@ -905,7 +907,6 @@ public class NhapHangView extends javax.swing.JFrame {
            cbxNXB.setEnabled(false);
         }
       
-        
     }//GEN-LAST:event_btnAddActionPerformed
   
     private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
