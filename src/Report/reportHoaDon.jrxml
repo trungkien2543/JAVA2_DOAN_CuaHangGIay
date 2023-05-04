@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="795" pageHeight="625" orientation="Landscape" columnWidth="755" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="2e4839d0-f448-4796-8cb3-19d5ecb1fc48">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="63"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="MaHD" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -11,7 +11,8 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT    dbo.HoaDon.NgayLap, dbo.HoaDon.ThongTinUuDai, dbo.HoaDon.TongTien, dbo.KhachHang.MaKH, dbo.KhachHang.TenKH, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.ChiTietHoaDon.MaSach, 
-                      dbo.ChiTietHoaDon.TenSach, dbo.ChiTietHoaDon.GiaSach, dbo.ChiTietHoaDon.SLMua, dbo.HoaDon.MaHoaDon
+                      dbo.ChiTietHoaDon.TenSach, dbo.ChiTietHoaDon.GiaSach, dbo.ChiTietHoaDon.SLMua, dbo.HoaDon.MaHoaDon,
+dbo.ChiTietHoaDon.GiaSach * dbo.ChiTietHoaDon.SLMua as ThanhTien
 FROM         dbo.HoaDon INNER JOIN
                       dbo.ChiTietHoaDon ON dbo.HoaDon.MaHoaDon = dbo.ChiTietHoaDon.MaHoaDon INNER JOIN
                       dbo.NhanVien ON dbo.HoaDon.MaNV = dbo.NhanVien.MaNV INNER JOIN
@@ -30,6 +31,7 @@ WHERE dbo.HoaDon.MaHoaDon=$P{sMaHD}]]>
 	<field name="GiaSach" class="java.lang.Long"/>
 	<field name="SLMua" class="java.lang.Integer"/>
 	<field name="MaHoaDon" class="java.lang.Long"/>
+	<field name="ThanhTien" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -176,16 +178,16 @@ WHERE dbo.HoaDon.MaHoaDon=$P{sMaHD}]]>
 				</textElement>
 				<text><![CDATA[Số lượng ]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="25" width="802" height="1" uuid="5f47b6ce-f0c1-4dc2-948e-ce837c627f41"/>
+			</line>
 			<staticText>
-				<reportElement x="638" y="0" width="115" height="20" uuid="f0437880-c123-4524-97e8-b6b9a8fed532"/>
+				<reportElement x="638" y="0" width="117" height="20" uuid="3adeae46-3b0e-4324-80fd-fe556cc1d54f"/>
 				<textElement>
 					<font fontName="Arial" size="14"/>
 				</textElement>
 				<text><![CDATA[Thành tiền]]></text>
 			</staticText>
-			<line>
-				<reportElement x="0" y="25" width="802" height="1" uuid="5f47b6ce-f0c1-4dc2-948e-ce837c627f41"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -204,13 +206,6 @@ WHERE dbo.HoaDon.MaHoaDon=$P{sMaHD}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TenSach}]]></textFieldExpression>
 			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="640" y="0" width="113" height="20" uuid="86f1bc45-a3e8-46be-a480-aca73c1f55f9"/>
-				<textElement>
-					<font fontName="Arial" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{GiaSach}*$F{SLMua}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="0" y="27" width="802" height="1" uuid="42a3dc1c-690b-4823-9a2c-4ca70a091b47"/>
 			</line>
@@ -227,6 +222,13 @@ WHERE dbo.HoaDon.MaHoaDon=$P{sMaHD}]]>
 					<font fontName="Arial" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{GiaSach}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="638" y="0" width="117" height="20" uuid="d765e761-1918-4fb6-927d-5bffb4c75116"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ThanhTien}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
