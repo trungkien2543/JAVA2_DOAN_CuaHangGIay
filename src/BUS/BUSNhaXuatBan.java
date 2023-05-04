@@ -141,8 +141,11 @@ public class BUSNhaXuatBan {
 
     public void Table_Excel() {
         try {
-            if (this.daoNxb.Table_Excel()!=0) {
+            if (this.daoNxb.Table_Excel()!=1) {
                 JOptionPane.showMessageDialog(null, "Hoàn thành cập nhật!");
+                nxb_view.getjDialogUpdate().setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Cập nhật thất bại!");
                 nxb_view.getjDialogUpdate().setVisible(false);
             }
         } catch (FileNotFoundException ex) {

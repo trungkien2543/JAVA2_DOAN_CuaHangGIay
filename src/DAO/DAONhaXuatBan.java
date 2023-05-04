@@ -236,7 +236,7 @@ public class DAONhaXuatBan {
         }
     }
 
-    public void readExcel() throws IOException {
+    public boolean readExcel() throws IOException {
         danhSach2.clear();
         int i = 1;
         int d = 1;
@@ -293,8 +293,11 @@ public class DAONhaXuatBan {
                 wb.close();
                 file.close();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn file!");
+            return false;
         }
-
+        return true;
     }
 
     public boolean Excel_Database() {
@@ -302,42 +305,43 @@ public class DAONhaXuatBan {
         int d = 0;
 
         try {
-            this.readExcel();
-            for (DTONhaXuatBan nxb2 : danhSach2) {
-                int i = 0;
-                for (DTONhaXuatBan nxb : danhSach) {
-                    if (nxb2.getMa().equals(nxb.getMa())) {
-                        i = i + 1;
-                        if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
-                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, số diện thoại phải có 10 số!");
-                            continue;
-                        } else if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
+            if (this.readExcel() == true) {
+                for (DTONhaXuatBan nxb2 : danhSach2) {
+                    int i = 0;
+                    for (DTONhaXuatBan nxb : danhSach) {
+                        if (nxb2.getMa().equals(nxb.getMa())) {
+                            i = i + 1;
+                            if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
+                                JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, số diện thoại phải có 10 số!");
+                                continue;
+                            } else if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
 
-                            JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
-                            continue;
-                        } else if (EditNXB(nxb2)) {
-                            d = d + 1;
+                                JOptionPane.showMessageDialog(null, "Cập nhật mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
+                                continue;
+                            } else if (EditNXB(nxb2)) {
+                                d = d + 1;
+
+                            }
 
                         }
+                    }
+                    if (i == 0) {
+                        if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
+                            JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-001");
+                            continue;
+                        }
+                        if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
+                            JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, số điện thoại phải có 10 số!");
+                            continue;
+                        }
+                        if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
 
-                    }
-                }
-                if (i == 0) {
-                    if (nxb2.getMa().matches("^NXB-[0-9]{1,}") == false) {
-                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng mã, mã có dạng NXB-'số' VD: NXB-001");
-                        continue;
-                    }
-                    if (nxb2.getSoDienThoai().matches("[0]{1}[0-9]{9,10}") == false) {
-                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, số điện thoại phải có 10 số!");
-                        continue;
-                    }
-                    if (nxb2.getEmail().matches("[a-zA-z0-9]{1,}@gmail.com$") == false) {
-
-                        JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
-                        continue;
-                    }
-                    if (addNXBToSql(nxb2)) {
-                        d = d + 1;
+                            JOptionPane.showMessageDialog(null, "Thêm mã " + nxb2.getMa() + " thất bại, sai định dạng Email!");
+                            continue;
+                        }
+                        if (addNXBToSql(nxb2)) {
+                            d = d + 1;
+                        }
                     }
                 }
             }
@@ -386,7 +390,7 @@ public class DAONhaXuatBan {
             }
         }
         try {
-            JFileChooser filechooser = new JFileChooser();           
+            JFileChooser filechooser = new JFileChooser();
             filechooser.setMultiSelectionEnabled(false);
             int x = filechooser.showDialog(nxb_view, "Lưu");
             if (x == JFileChooser.APPROVE_OPTION) {
@@ -395,11 +399,14 @@ public class DAONhaXuatBan {
                     wb.write(file);
                     wb.close();
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn file!");
+                i = 1;
             }
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Cập nhật thất bại, có thể bạn chưa đóng file khi cập nhật, vui lòng đóng file!");
-            i = 0;
+            JOptionPane.showMessageDialog(null, "Vui lòng đóng file trước khi cập nhật!");
+            i = 1;
         }
         return i;
     }
