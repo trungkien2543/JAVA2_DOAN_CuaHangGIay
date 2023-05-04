@@ -859,7 +859,7 @@ if (maNV != null && !maNV.trim().equals("")) {
         listtk = new DAOTaiKhoan().getListTK();
         for (DTOTaiKhoan s : listtk) {
             model1.addRow(new Object[]{
-                s.getMaNhanVien(), s.getMatKhau(), s.getEmail(), s.getTrangThai()
+                s.getMaNhanVien(), s.getMatKhau(), s.getEmail(), s.getTrangThai(),s.getChucVu()
             });
         }
     }
@@ -1374,15 +1374,21 @@ if (maNV != null && !maNV.trim().equals("")) {
                     String trangthai = excelTrangthai.getStringCellValue().trim();
                     String chucvu = excelChucvu.getStringCellValue().trim();
                     
-                    int obj= ktrmanv(manv);
-                    
-                    
+                    int obj= ktrtaikhoan(manv);
+                            
+                    if(obj==-1){
+                        
                             DTOTaiKhoan tk  =new DTOTaiKhoan(manv, matkhau, email, trangthai, chucvu);
                            
                             listtk.add(tk);
                             //them vao DB
                             new BUSTaiKhoan().addTaiKhoan(tk);
-                            
+                     }else {
+                        
+                        new BUSTaiKhoan().updateTaiKhoan(manv, matkhau, email, trangthai);
+                        listtk =new BUSTaiKhoan().getAllTaiKhoan();
+                    }
+                    
                     
                          
                     
@@ -1408,7 +1414,8 @@ if (maNV != null && !maNV.trim().equals("")) {
                 }
               
             }
-
+            loadDatanv(listnv);
+             loadDatatk(listtk);
         }
  
     }//GEN-LAST:event_btnImActionPerformed
@@ -1419,6 +1426,12 @@ if (maNV != null && !maNV.trim().equals("")) {
      return -1;
       
       }
+      private int ktrtaikhoan (String manv){
+          for(DTOTaiKhoan tk: listtk)
+              if (tk.getMaNhanVien().equalsIgnoreCase(manv))
+                 return listtk.indexOf(tk);
+     return -1;
+      }
     private void updateNV(String Tennv, String quequan, String chucvu,int index) {
         listnv.get(index).setTenNV(Tennv);
         listnv.get(index).setQueQuan(quequan);
@@ -1427,50 +1440,7 @@ if (maNV != null && !maNV.trim().equals("")) {
     }
     
     
-   /* public static ArrayList<DTONhanVien> readNhanVienFromExcel(File file) throws IOException {
-    ArrayList<DTONhanVien> list = new ArrayList<>();
-    FileInputStream inputStream = new FileInputStream(file);
-    Workbook workbook = WorkbookFactory.create(inputStream);
-    Sheet sheet = workbook.getSheet("nhanvien");
-
-    for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
-        Row row = sheet.getRow(rowIndex);
-        String maNV = row.getCell(0).getStringCellValue();
-        String hoTen = row.getCell(1).getStringCellValue();
-        String quequan = row.getCell(2).getStringCellValue();
-        String chucVu = row.getCell(3).getStringCellValue();
-        DTONhanVien nv = new DTONhanVien(maNV, hoTen, quequan, 0, chucVu);
-        list.add(nv);
-    }
-
-    workbook.close();
-    inputStream.close();
-
-    return list;
-}
-
-public static ArrayList<DTOTaiKhoan> readTaiKhoanFromExcel(File file) throws IOException {
-    ArrayList<DTOTaiKhoan> list = new ArrayList<>();
-    FileInputStream inputStream = new FileInputStream(file);
-    Workbook workbook = WorkbookFactory.create(inputStream);
-    Sheet sheet = workbook.getSheet("taikhoan");
-
-    for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
-        Row row = sheet.getRow(rowIndex);
-        String Manv = row.getCell(0).getStringCellValue();
-        String matKhau = row.getCell(1).getStringCellValue();
-        String email = row.getCell(2).getStringCellValue();
-        String chucvu = row.getCell(4).getStringCellValue();
-        DTOTaiKhoan tk = new DTOTaiKhoan(Manv, matKhau, email, matKhau, chucvu);
-        list.add(tk);
-    }
-
-    workbook.close();
-    inputStream.close();
-
-    return list;
-}
-*/
+   
     private int ktManv(String manv) {
         for (DTONhanVien i : listnv) {
             if (i.getMaNV().equals(manv)) {

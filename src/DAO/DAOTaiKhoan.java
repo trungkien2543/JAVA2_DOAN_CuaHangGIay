@@ -52,9 +52,9 @@ public class DAOTaiKhoan {
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 DTOTaiKhoan s = new DTOTaiKhoan(rs.getString("MaNhanVien"), rs.getString("MatKhau"), rs.getString("Email"), rs.getString("TrangThai"),rs.getString("CongViec"));
-               if(s.getEmail()!=null&&s.getChucVu()!=null){
+               if(s.getEmail()!=null)
                 list.add(s);
-               }
+               
             }
         }
         catch(Exception e){
@@ -99,7 +99,7 @@ public class DAOTaiKhoan {
                         ps1.setString(2, tk.getEmail());
                         ps1.setString(3, "khóa");
                         ps1.setString(4, tk.getMaNhanVien() );
-                        ps1.setString(5,tk.getChucVu());
+                        
                         int rowCount = ps1.executeUpdate();
                         if (rowCount > 0) {
                             result = true;
@@ -127,7 +127,7 @@ public class DAOTaiKhoan {
                         ps1.setString(2, tk.getEmail());
                         ps1.setString(3, "mo");
                         ps1.setString(4, tk.getMaNhanVien() );
-                         ps1.setString(5,tk.getChucVu());
+                      
                         int rowCount = ps1.executeUpdate();
                         if (rowCount > 0) {
                             result = true;
@@ -149,13 +149,13 @@ public class DAOTaiKhoan {
     PreparedStatement ps1 = null;
                     boolean result = false;
                     try {
-                         ps1 = con.prepareStatement("UPDATE TaiKhoan SET  MatKhau = ?, Email = ?,TrangThai  = ? ,Chucvu=? WHERE MaNhanVien = ?");
+                         ps1 = con.prepareStatement("UPDATE TaiKhoan SET  MatKhau = ?, Email = ?,TrangThai  = ?  WHERE MaNhanVien = ?");
                        
                         ps1.setString(1, null);
                         ps1.setString(2, null);
                         ps1.setString(3, null);
-                        ps1.setString(5, tk.getMaNhanVien() );
-                         ps1.setString(4,null);
+                        ps1.setString(4, tk.getMaNhanVien() );
+                       
                         int rowCount = ps1.executeUpdate();
                         if (rowCount > 0) {
                             result = true;
