@@ -19,11 +19,19 @@ import DTO.DTOKhachHang;
 import DTO.DTONhaXuatBan;
 import DTO.DTONhanVien;
 import DTO.DTOPhieuNhap;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -354,7 +362,18 @@ public class ChiTietPhieu_View extends javax.swing.JFrame {
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
-
+        
+           try{
+            Hashtable map = new Hashtable();
+            JasperReport rpt = JasperCompileManager.compileReport("src\\Report\\rptPhieuNhap.jrxml");
+            map.put("sMaPhieu", maphieu);
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLCuaHangSach;user=sa;password=123456;" + "encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2;");
+            JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
+            JasperViewer.viewReport(p,false);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     /**
