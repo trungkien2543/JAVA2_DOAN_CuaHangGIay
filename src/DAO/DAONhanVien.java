@@ -108,7 +108,21 @@ public class DAONhanVien {
         }
         return false;
     }
-    
+     public boolean updateNV(String Manv,String tennv,String quequan,int songaylam,String congviec){
+        String sql = "UPDATE NhanVien SET TenNV=?,QueQuan=? ,Songaylam=? ,CongViec=? WHERE MaNV =?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, tennv);
+            ps.setString(2, quequan);
+            ps.setInt(3,0);
+            ps.setString(4,congviec);
+            ps.setString(5, Manv);
+            return ps.executeUpdate() > 0;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static void main(String[] args) {
         new DAONhanVien();
     }

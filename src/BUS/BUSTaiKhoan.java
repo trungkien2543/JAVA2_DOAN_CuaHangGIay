@@ -82,5 +82,10 @@ public class BUSTaiKhoan {
             return "mở khóa thành công";
         return "mở khóa thất bại";
     }
-   
+   public String updateTaiKhoan(String Manv,String matkhau,String email,String trangthai){
+        if(tkDAO.updateTK(Manv, matkhau, email,trangthai)){
+            return "Update khách hàng thành công";
+        }
+        return "Update khách hàng thất bại";
+    }
 }

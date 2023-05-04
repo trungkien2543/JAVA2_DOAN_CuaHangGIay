@@ -5,11 +5,13 @@
 package GUI;
 
 
+import BUS.BUSKhachHang;
 import BUS.BUSNhanVien;
 import BUS.BUSTaiKhoan;
 import DAO.DAOTaiKhoan;
 import DTO.DTOTaiKhoan;
 import DAO.DAONhanVien;
+import DTO.DTOKhachHang;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +23,30 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import DTO.DTONhanVien;
-
+import com.sun.jdi.connect.spi.Connection;
+import java.beans.Statement;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.*;
 /**
  *
  * @author ASUS
@@ -52,7 +77,7 @@ public class NhanVien_View extends javax.swing.JFrame {
         });
         model1 = (DefaultTableModel) dstaikhoan.getModel();
         model1.setColumnIdentifiers(new Object[]{
-            "Ma Nhan Vien", "Mật Khẩu", "Email", "Trạng Thái"
+            "Ma Nhan Vien", "Mật Khẩu", "Email", "Trạng Thái","chức vụ"
         });
         themnv.setVisible(false);
 
@@ -79,11 +104,28 @@ public class NhanVien_View extends javax.swing.JFrame {
         for (DTOTaiKhoan s : listtk) {
 
             model1.addRow(new Object[]{
-                s.getMaNhanVien(), s.getMatKhau(), s.getEmail(), s.getTrangThai()
+                s.getMaNhanVien(), s.getMatKhau(), s.getEmail(), s.getTrangThai(),s.getChucVu()
             });
         }
     }
-
+    private void loadDatanv(ArrayList<DTONhanVien> listnv) {
+        model.setRowCount(0);
+        for (DTO.DTONhanVien s : listnv) {
+            model.addRow(new Object[]{
+                s.getMaNV(), s.getTenNV(), s.getQueQuan(), s.getSoNgayLam(), s.getCongViec()
+            });
+        }
+        thongtinnv.setModel(model);
+    }
+    private void loadDatatk(ArrayList<DTOTaiKhoan> listtk) {
+        model1.setRowCount(0);
+        for (DTOTaiKhoan s : listtk) {
+            model1.addRow(new Object[]{
+                s.getMaNhanVien(), s.getMatKhau(), s.getEmail(), s.getTrangThai(),s.getChucVu()
+            });
+        }
+        thongtinnv.setModel(model1);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,6 +152,8 @@ public class NhanVien_View extends javax.swing.JFrame {
         txthienthi = new javax.swing.JTextField();
         block = new javax.swing.JButton();
         unblock = new javax.swing.JButton();
+        btnEx = new javax.swing.JButton();
+        btnIm = new javax.swing.JButton();
         TieuDe1 = new javax.swing.JPanel();
         lblThayDoiTK3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -163,10 +207,10 @@ public class NhanVien_View extends javax.swing.JFrame {
         bangds.setLayout(bangdsLayout);
         bangdsLayout.setHorizontalGroup(
             bangdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1358, Short.MAX_VALUE)
+            .addGap(0, 1278, Short.MAX_VALUE)
             .addGroup(bangdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(bangdsLayout.createSequentialGroup()
-                    .addComponent(scrollthongtin, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
+                    .addComponent(scrollthongtin, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         bangdsLayout.setVerticalGroup(
@@ -199,9 +243,9 @@ public class NhanVien_View extends javax.swing.JFrame {
         paneltaikhoan.setLayout(paneltaikhoanLayout);
         paneltaikhoanLayout.setHorizontalGroup(
             paneltaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1358, Short.MAX_VALUE)
+            .addGap(0, 1278, Short.MAX_VALUE)
             .addGroup(paneltaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(scrollacount, javax.swing.GroupLayout.DEFAULT_SIZE, 1358, Short.MAX_VALUE))
+                .addComponent(scrollacount, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE))
         );
         paneltaikhoanLayout.setVerticalGroup(
             paneltaikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,40 +346,71 @@ public class NhanVien_View extends javax.swing.JFrame {
             }
         });
 
+        btnEx.setBackground(new java.awt.Color(0, 204, 153));
+        btnEx.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEx.setText("Xuất file Excel");
+        btnEx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExActionPerformed(evt);
+            }
+        });
+
+        btnIm.setBackground(new java.awt.Color(0, 204, 153));
+        btnIm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnIm.setText("Nhập từ file Excel");
+        btnIm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BangChonLayout = new javax.swing.GroupLayout(BangChon);
         BangChon.setLayout(BangChonLayout);
         BangChonLayout.setHorizontalGroup(
             BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BangChonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txthienthi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txthienthi, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BangChonLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btnEx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(BangChonLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIm, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(unblock, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18)
+                .addComponent(unblock, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         BangChonLayout.setVerticalGroup(
             BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BangChonLayout.createSequentialGroup()
+                .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(unblock, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(BangChonLayout.createSequentialGroup()
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BangChonLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txthienthi, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boxsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(unblock, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(BangChonLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnIm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEx)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         TieuDe1.setBackground(new java.awt.Color(153, 102, 0));
@@ -460,7 +535,7 @@ public class NhanVien_View extends javax.swing.JFrame {
             .addGroup(themnvLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(addbt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addComponent(cancelbt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
             .addComponent(setcongviec, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1053,6 +1128,363 @@ if (maNV != null && !maNV.trim().equals("")) {
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void btnExActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExActionPerformed
+        // TODO add your handling code here:
+        XSSFWorkbook wordbook = new XSSFWorkbook();
+        XSSFSheet sheet = wordbook.createSheet("Thông tin nhân viên");
+        XSSFSheet sheet_tk = wordbook.createSheet("Tài khoản nhân viên");
+        try{
+            //Ghi sheet hoa don
+            XSSFRow row = null;
+            Cell cell = null;
+
+            //Thanh tieu de
+            row = sheet.createRow(0);
+            cell = row.createCell(0,CellType.STRING);
+            cell.setCellValue("Mã nhân viên");
+
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Tên nhân viên");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Quê quán");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Số ngày làm");
+
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("Công việc");
+
+           
+
+            //Ghi sheet chi tiet hoa don
+            XSSFRow row_cthd = null;
+            Cell cell_tk = null;
+
+            //Thanh tieu de
+            row_cthd = sheet_tk.createRow(0);
+            cell_tk = row_cthd.createCell(0,CellType.STRING);
+            cell_tk.setCellValue("Mã nhân viên");
+
+            cell_tk= row_cthd.createCell(1, CellType.STRING);
+            cell_tk.setCellValue("Mật khẩu");
+
+            cell_tk = row_cthd.createCell(2, CellType.STRING);
+            cell_tk.setCellValue("Email");
+
+            cell_tk = row_cthd.createCell(3, CellType.STRING);
+            cell_tk.setCellValue("Trạng thái");
+
+            cell_tk = row_cthd.createCell(4, CellType.STRING);
+            cell_tk.setCellValue("Chức vụ");
+
+            int j = 0;
+
+            for(int i=0;i<thongtinnv.getRowCount();i++){
+                row = sheet.createRow(1+i);
+
+                cell = row.createCell(0,CellType.STRING);
+                cell.setCellValue(thongtinnv.getValueAt(i, 0).toString());
+
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(thongtinnv.getValueAt(i, 1).toString());
+
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(thongtinnv.getValueAt(i, 2).toString());
+
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(thongtinnv.getValueAt(i, 3).toString());
+
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(thongtinnv.getValueAt(i, 4).toString());
+
+                
+
+                for(DTOTaiKhoan s : listtk){
+                    if(s.getMaNhanVien().equals(thongtinnv.getValueAt(i, 0).toString())){
+                        row_cthd = sheet_tk.createRow(1+j);
+
+                        cell_tk = row_cthd.createCell(0,CellType.STRING);
+                        cell_tk.setCellValue(s.getMaNhanVien());
+
+                        cell_tk = row_cthd.createCell(1, CellType.STRING);
+                        cell_tk.setCellValue(s.getMatKhau());
+
+                        cell_tk = row_cthd.createCell(2, CellType.STRING);
+                        cell_tk.setCellValue(s.getEmail());
+
+                        cell_tk = row_cthd.createCell(3, CellType.STRING);
+                        cell_tk.setCellValue(s.getTrangThai());
+                        
+                        cell_tk = row_cthd.createCell(4,CellType.STRING);
+                        cell_tk.setCellValue(s.getChucVu());
+                        j++;
+                    }
+
+                }
+            }
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        //Thao tác kiểm tra file
+        String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
+        if(tenfile.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
+            return;
+        }
+        else if (tenfile.contains(" ")){
+            JOptionPane.showMessageDialog(rootPane, "Tên file không có khoảng trắng");
+            return;
+        }
+        else if (tenfile.contains("/") || tenfile.contains("%") || tenfile.contains("#") || tenfile.contains(":") ||tenfile.contains(";") ||tenfile.contains("~") ||tenfile.contains(".") ){
+            JOptionPane.showMessageDialog(rootPane, "Tên file không chứa kí tự đặc biệt");
+        }
+
+        //Thực hiện ghi file
+        JFileChooser  j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        j.showSaveDialog(btnEx);
+        File f = new File(j.getSelectedFile()+"\\"+tenfile+".xlsx");
+            if(f.exists()){
+                if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn ghi đè lên file này không ?") != JOptionPane.YES_OPTION){
+                    return;
+                }
+            }
+            try{
+                FileOutputStream fis = new FileOutputStream(f);
+                wordbook.write(fis);
+                fis.close();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(rootPane, "Xuất file thành công");
+    }//GEN-LAST:event_btnExActionPerformed
+
+    private void btnImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImActionPerformed
+       
+              File excelFile;
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        
+        JFileChooser filechooser = new JFileChooser();
+//      chỉ chọn file Excel
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls","xlsx","xlsm");
+        filechooser.setFileFilter(fnef);
+//     set tiêu đề
+        filechooser.setDialogTitle("Chọn file excel");
+        int excelChooser = filechooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = filechooser.getSelectedFile();
+                fis = new FileInputStream(excelFile);
+                bis = new BufferedInputStream(fis);
+                XSSFWorkbook wb = new XSSFWorkbook(bis);
+                XSSFSheet sheet = wb.getSheetAt(0);
+                 XSSFSheet sheet1 = wb.getSheetAt(1);
+                for (int row = 0; row <= sheet.getLastRowNum(); row++) {
+                    XSSFRow excelRow = sheet.getRow(row);
+                    
+                    XSSFCell excelManv = excelRow.getCell(0); // Lấy ô đầu tiên trong hàng
+                    XSSFCell excelTennv = excelRow.getCell(1);
+                    XSSFCell excelQuequan = excelRow.getCell(2);
+                    XSSFCell excelSongaylam = excelRow.getCell(3);
+                    XSSFCell excelCongviec = excelRow.getCell(4);
+                    if (row == 0) {
+                        if (!excelManv.getStringCellValue().equalsIgnoreCase("Mã nhân viên")
+                                || !excelTennv.getStringCellValue().equalsIgnoreCase("Tên nhân viên")
+                                || !excelQuequan.getStringCellValue().equalsIgnoreCase("Quê quán")
+                                || !excelSongaylam.getStringCellValue().equalsIgnoreCase("Số ngày làm")
+                                || !excelCongviec.getStringCellValue().equalsIgnoreCase("Công việc")) {
+                            JOptionPane.showMessageDialog(null, "File không đúng định dạng");
+                            return;
+                        }
+                        continue;
+                    }
+                     String manv = "";
+                    if (excelManv.getCellType() == CellType.NUMERIC) {
+                        int manvNum = (int) excelManv.getNumericCellValue();
+                        manv = Integer.toString(manvNum);
+                    } else {
+                        manv = excelManv.getStringCellValue().trim();
+                    }
+
+                    String Tennv = excelTennv.getStringCellValue().trim();
+                    String quequan = excelQuequan.getStringCellValue().trim();
+                    String congviec = excelCongviec.getStringCellValue().trim();
+                    
+                    int obj= ktrmanv(manv);
+                    
+                    if(obj==-1){
+                            //add
+                            DTONhanVien nv =new DTONhanVien(manv, Tennv, quequan, 0,congviec);
+                           
+                            listnv.add(nv);
+                            //them vao DB
+                            new BUSNhanVien().themNhanVien(nv);
+                            
+                    } else {
+                        
+                        updateNV(Tennv, quequan, congviec, obj);
+                            new BUSNhanVien().updateNhanVien(Tennv, Tennv, quequan,0, congviec);
+                    }
+                         
+                    
+                }
+                 for (int row = 0; row <= sheet1.getLastRowNum(); row++) {
+                    XSSFRow excelRow = sheet1.getRow(row);
+                    
+                    XSSFCell excelManv = excelRow.getCell(0); // Lấy ô đầu tiên trong hàng
+                    XSSFCell excelMatkhau = excelRow.getCell(1);
+                    XSSFCell excelEmail = excelRow.getCell(2);
+                    XSSFCell excelTrangthai = excelRow.getCell(3);
+                    XSSFCell excelChucvu= excelRow.getCell(4);
+                    if (row == 0) {
+                        if (!excelManv.getStringCellValue().equalsIgnoreCase("Mã nhân viên")
+                                || !excelMatkhau.getStringCellValue().equalsIgnoreCase("Mật khẩu")
+                                || !excelEmail.getStringCellValue().equalsIgnoreCase("Email")
+                                || !excelTrangthai.getStringCellValue().equalsIgnoreCase("Trạng thái")
+                                || !excelChucvu.getStringCellValue().equalsIgnoreCase("Chức vụ")) {
+                            JOptionPane.showMessageDialog(null, "File không đúng định dạng");
+                            return;
+                        }
+                        continue;
+                    }
+                     String manv = "";
+                    if (excelManv.getCellType() == CellType.NUMERIC) {
+                        int manvNum = (int) excelManv.getNumericCellValue();
+                        manv = Integer.toString(manvNum);
+                    } else {
+                        manv = excelManv.getStringCellValue().trim();
+                    }
+
+                    String matkhau = "";
+                    if (excelMatkhau.getCellType() == CellType.NUMERIC) {
+                        int matkhaunum = (int) excelMatkhau.getNumericCellValue();
+                        matkhau = Integer.toString(matkhaunum);
+                    } else {
+                        matkhau = excelMatkhau.getStringCellValue().trim();
+                    }
+                    String email = excelEmail.getStringCellValue().trim();
+                    String trangthai = excelTrangthai.getStringCellValue().trim();
+                     String chucvu = excelChucvu.getStringCellValue().trim();
+                    
+                    int obj= ktrmanv(manv);
+                    
+                    
+                            DTOTaiKhoan tk  =new DTOTaiKhoan(manv, matkhau, email, trangthai, chucvu);
+                           
+                            listtk.add(tk);
+                            //them vao DB
+                            new BUSTaiKhoan().addTaiKhoan(tk);
+                            
+                    
+                         
+                    
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(NhanVien_View.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(NhanVien_View.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(NhanVien_View.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(NhanVien_View.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+              
+            }
+
+        }
+ 
+    }//GEN-LAST:event_btnImActionPerformed
+      private int ktrmanv (String manv){
+          for(DTONhanVien nv: listnv)
+              if (nv.getMaNV().equalsIgnoreCase(manv))
+                 return listnv.indexOf(nv);
+     return -1;
+      
+      }
+    private void updateNV(String Tennv, String quequan, String chucvu,int index) {
+        listnv.get(index).setTenNV(Tennv);
+        listnv.get(index).setQueQuan(quequan);
+        listnv.get(index).setSoNgayLam(0);
+        listnv.get(index).setCongViec(chucvu);
+    }
+    
+    
+   /* public static ArrayList<DTONhanVien> readNhanVienFromExcel(File file) throws IOException {
+    ArrayList<DTONhanVien> list = new ArrayList<>();
+    FileInputStream inputStream = new FileInputStream(file);
+    Workbook workbook = WorkbookFactory.create(inputStream);
+    Sheet sheet = workbook.getSheet("nhanvien");
+
+    for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+        Row row = sheet.getRow(rowIndex);
+        String maNV = row.getCell(0).getStringCellValue();
+        String hoTen = row.getCell(1).getStringCellValue();
+        String quequan = row.getCell(2).getStringCellValue();
+        String chucVu = row.getCell(3).getStringCellValue();
+        DTONhanVien nv = new DTONhanVien(maNV, hoTen, quequan, 0, chucVu);
+        list.add(nv);
+    }
+
+    workbook.close();
+    inputStream.close();
+
+    return list;
+}
+
+public static ArrayList<DTOTaiKhoan> readTaiKhoanFromExcel(File file) throws IOException {
+    ArrayList<DTOTaiKhoan> list = new ArrayList<>();
+    FileInputStream inputStream = new FileInputStream(file);
+    Workbook workbook = WorkbookFactory.create(inputStream);
+    Sheet sheet = workbook.getSheet("taikhoan");
+
+    for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+        Row row = sheet.getRow(rowIndex);
+        String Manv = row.getCell(0).getStringCellValue();
+        String matKhau = row.getCell(1).getStringCellValue();
+        String email = row.getCell(2).getStringCellValue();
+        String chucvu = row.getCell(4).getStringCellValue();
+        DTOTaiKhoan tk = new DTOTaiKhoan(Manv, matKhau, email, matKhau, chucvu);
+        list.add(tk);
+    }
+
+    workbook.close();
+    inputStream.close();
+
+    return list;
+}
+*/
+    private int ktManv(String manv) {
+        for (DTONhanVien i : listnv) {
+            if (i.getMaNV().equals(manv)) {
+                return listnv.indexOf(i);
+            }
+        }
+        return -1;
+    }
+
+    private void updateNV(int Manv, String Tennv, String quequan, String Congviec) {
+        listnv.get(Manv).setTenNV(Tennv);
+        listnv.get(Manv).setQueQuan(quequan);
+        listnv.get(Manv).setCongViec(Congviec);
+    }
     /**
      * @param args the command line arguments
      */
@@ -1099,7 +1531,6 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JPanel BangChon;
     private javax.swing.JLabel BookStore4;
     private javax.swing.JPanel ThanhMenu5;
-    private javax.swing.JPanel TieuDe;
     private javax.swing.JPanel TieuDe1;
     private javax.swing.JButton addbt;
     private javax.swing.JTextField addhometown;
@@ -1110,14 +1541,14 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JComboBox<String> boxsearch;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEx;
+    private javax.swing.JButton btnIm;
     private javax.swing.JButton cancelbt;
     private javax.swing.JTabbedPane danhsach;
     private javax.swing.JTable dstaikhoan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1131,7 +1562,6 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JLabel lbPhieu11;
     private javax.swing.JLabel lblBill4;
     private javax.swing.JLabel lblHello;
-    private javax.swing.JLabel lblThayDoiTK2;
     private javax.swing.JLabel lblThayDoiTK3;
     private javax.swing.JPanel paneltaikhoan;
     private javax.swing.JScrollPane scrollacount;

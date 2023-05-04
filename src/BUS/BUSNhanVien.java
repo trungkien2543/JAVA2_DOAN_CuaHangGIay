@@ -62,6 +62,11 @@ public class BUSNhanVien {
             return "Sửa thất bại";
         }
     }
-    
+      public String updateNhanVien(String Manv,String tennv,String quequan,int songaylam,String congviec){
+        if(daonhanvien.updateNV(Manv, tennv, quequan,songaylam, congviec)){
+            return "Update nhân viên thành công";
+        }
+        return "Update nhân viên thất bại";
+    }
 }
 
