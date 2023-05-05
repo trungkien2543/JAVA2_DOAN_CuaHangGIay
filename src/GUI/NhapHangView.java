@@ -96,6 +96,7 @@ public class NhapHangView extends javax.swing.JFrame {
                     lbBookStore4.setVisible(false);
                     lblBill4.setVisible(false);
                     lbPhieu10.setVisible(false);
+                    lblThongKe.setVisible(false);
                 }
             }
         }
@@ -184,6 +185,7 @@ public class NhapHangView extends javax.swing.JFrame {
         lbKH11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         lbBookStore4 = new javax.swing.JLabel();
+        lblThongKe = new javax.swing.JLabel();
         TieuDe2 = new javax.swing.JPanel();
         lblThayDoiTK3 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -360,10 +362,10 @@ public class NhapHangView extends javax.swing.JFrame {
                     .addGroup(jpThongTinSanPhamLayout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE))
                     .addGroup(jpThongTinSanPhamLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                         .addGap(6, 6, 6)))
                 .addGroup(jpThongTinSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpThongTinSanPhamLayout.createSequentialGroup()
@@ -377,7 +379,7 @@ public class NhapHangView extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpThongTinSanPhamLayout.createSequentialGroup()
                                 .addGap(274, 274, 274)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 270, Short.MAX_VALUE)))
+                                .addGap(0, 275, Short.MAX_VALUE)))
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpThongTinSanPhamLayout.createSequentialGroup()
                         .addComponent(jScrollPane2)
@@ -675,6 +677,14 @@ public class NhapHangView extends javax.swing.JFrame {
             }
         });
 
+        lblThongKe.setBackground(new java.awt.Color(0, 204, 204));
+        lblThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        lblThongKe.setText("  Thống kê");
+        lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThongKe.setOpaque(true);
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -686,11 +696,14 @@ public class NhapHangView extends javax.swing.JFrame {
             .addComponent(lbNhaCungCap5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbKH11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbBookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ThanhMenu4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbBookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThanhMenu4Layout.setVerticalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,6 +726,8 @@ public class NhapHangView extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(lbBookStore4)
+                .addGap(18, 18, 18)
+                .addComponent(lblThongKe)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1248,7 +1263,6 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
     private javax.swing.JPanel ThanhMenu4;
-    private javax.swing.JPanel TieuDe;
     private javax.swing.JPanel TieuDe2;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnConfirm;
@@ -1263,11 +1277,9 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1294,8 +1306,8 @@ public class NhapHangView extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaPhieu;
     private javax.swing.JLabel lblNgayNhap;
     private javax.swing.JLabel lblTenNV;
-    private javax.swing.JLabel lblThayDoiTK2;
     private javax.swing.JLabel lblThayDoiTK3;
+    private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTongHoaDon;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tbKho;

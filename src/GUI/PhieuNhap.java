@@ -100,6 +100,7 @@ public class PhieuNhap extends javax.swing.JFrame {
         lbPhieu11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
+        lblThongKe = new javax.swing.JLabel();
         BangChon = new javax.swing.JPanel();
         txtFind = new javax.swing.JTextField();
         cbxDieuKienLoc = new javax.swing.JComboBox<>();
@@ -253,6 +254,14 @@ public class PhieuNhap extends javax.swing.JFrame {
             }
         });
 
+        lblThongKe.setBackground(new java.awt.Color(0, 204, 204));
+        lblThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        lblThongKe.setText("  Thống kê");
+        lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThongKe.setOpaque(true);
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -269,6 +278,7 @@ public class PhieuNhap extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThanhMenu4Layout.setVerticalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,6 +301,8 @@ public class PhieuNhap extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(BookStore4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblThongKe)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1039,6 +1051,7 @@ public class PhieuNhap extends javax.swing.JFrame {
     private javax.swing.JLabel lblBill4;
     private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblThayDoiTK2;
+    private javax.swing.JLabel lblThongKe;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtFrom;

@@ -297,7 +297,7 @@ public class ThongKeView extends javax.swing.JFrame {
         BookStore5.setBackground(new java.awt.Color(0, 204, 204));
         BookStore5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BookStore5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BookStore.png"))); // NOI18N
+        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         BookStore5.setText("Thống kê");
         BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BookStore5.setOpaque(true);

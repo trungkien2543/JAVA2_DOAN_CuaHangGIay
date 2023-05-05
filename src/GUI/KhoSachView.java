@@ -106,6 +106,7 @@ public class KhoSachView extends javax.swing.JFrame {
         lbPhieu11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
+        BookStore5 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -392,6 +393,19 @@ public class KhoSachView extends javax.swing.JFrame {
             }
         });
 
+        BookStore5.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        BookStore5.setText("  Thống kê");
+        BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.setOpaque(true);
+        BookStore5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore5MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -408,6 +422,7 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThanhMenu4Layout.setVerticalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,6 +445,8 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(BookStore4)
+                .addGap(18, 18, 18)
+                .addComponent(BookStore5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -685,6 +702,10 @@ public class KhoSachView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BookStore5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -740,6 +761,7 @@ public class KhoSachView extends javax.swing.JFrame {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
     private javax.swing.JLabel BookStore4;
+    private javax.swing.JLabel BookStore5;
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnAdd;

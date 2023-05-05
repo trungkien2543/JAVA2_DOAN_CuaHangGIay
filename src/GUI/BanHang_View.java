@@ -92,6 +92,7 @@ public class BanHang_View extends javax.swing.JFrame {
                     lbBookStore4.setVisible(false);
                     lblBill4.setVisible(false);
                     lbPhieu10.setVisible(false);
+                    lblThongKe.setVisible(false);
                 }
             }
         }
@@ -184,6 +185,7 @@ public class BanHang_View extends javax.swing.JFrame {
         lbKH11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         lbBookStore4 = new javax.swing.JLabel();
+        lblThongKe = new javax.swing.JLabel();
         TieuDe = new javax.swing.JPanel();
         lblThayDoiTK2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -888,6 +890,19 @@ public class BanHang_View extends javax.swing.JFrame {
             }
         });
 
+        lblThongKe.setBackground(new java.awt.Color(0, 204, 204));
+        lblThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        lblThongKe.setText("Thống kê");
+        lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThongKe.setOpaque(true);
+        lblThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -904,6 +919,7 @@ public class BanHang_View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbBookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThanhMenu4Layout.setVerticalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -926,7 +942,9 @@ public class BanHang_View extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(lbBookStore4)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblThongKe)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
@@ -1686,6 +1704,10 @@ public class BanHang_View extends javax.swing.JFrame {
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void lblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblThongKeMouseClicked
     
     /**
      * @param args the command line arguments
@@ -1795,9 +1817,8 @@ public class BanHang_View extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenKH;
     private javax.swing.JLabel lblTenKH_HD;
     private javax.swing.JLabel lblTenNV;
-    private javax.swing.JLabel lblThayDoiTK;
-    private javax.swing.JLabel lblThayDoiTK1;
     private javax.swing.JLabel lblThayDoiTK2;
+    private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTichDiem;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JLabel lblTongTien_Nhap;

@@ -424,6 +424,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         lbPhieu11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
+        BookStore5 = new javax.swing.JLabel();
         TieuDe = new javax.swing.JPanel();
         lblThayDoiTK2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -886,6 +887,14 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        BookStore5.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        BookStore5.setText("  Thống kê");
+        BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.setOpaque(true);
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -895,12 +904,15 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
             .addComponent(lbNhanVien4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhapSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbNhaCungCap5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbPhieu11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbPhieu11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGroup(ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ThanhMenu4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ThanhMenu4Layout.setVerticalGroup(
@@ -918,12 +930,14 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
                 .addComponent(lbNhaCungCap5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbPhieu11)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbPhieu10)
                 .addGap(18, 18, 18)
                 .addComponent(lblBill4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BookStore4)
+                .addGap(18, 18, 18)
+                .addComponent(BookStore5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1209,6 +1223,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
     private javax.swing.JLabel BookStore4;
+    private javax.swing.JLabel BookStore5;
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnAdd;

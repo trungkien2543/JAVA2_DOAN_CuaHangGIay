@@ -120,6 +120,7 @@ public class HoaDon_View extends javax.swing.JFrame {
         lbPhieu11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
+        BookStore5 = new javax.swing.JLabel();
         TieuDe = new javax.swing.JPanel();
         lblThayDoiTK2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -463,6 +464,19 @@ public class HoaDon_View extends javax.swing.JFrame {
             }
         });
 
+        BookStore5.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        BookStore5.setText("  Thống kê");
+        BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.setOpaque(true);
+        BookStore5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore5MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
         ThanhMenu4Layout.setHorizontalGroup(
@@ -475,12 +489,13 @@ public class HoaDon_View extends javax.swing.JFrame {
             .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu4Layout.createSequentialGroup()
+                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(ThanhMenu4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                .addComponent(lblHello, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThanhMenu4Layout.setVerticalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -503,7 +518,9 @@ public class HoaDon_View extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(BookStore4)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BookStore5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
@@ -1000,6 +1017,10 @@ public class HoaDon_View extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BookStore5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1042,6 +1063,7 @@ public class HoaDon_View extends javax.swing.JFrame {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
     private javax.swing.JLabel BookStore4;
+    private javax.swing.JLabel BookStore5;
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnEx;

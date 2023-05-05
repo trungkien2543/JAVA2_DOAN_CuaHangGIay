@@ -181,6 +181,7 @@ public class NhanVien_View extends javax.swing.JFrame {
         lbPhieu11 = new javax.swing.JLabel();
         lblBill4 = new javax.swing.JLabel();
         BookStore4 = new javax.swing.JLabel();
+        BookStore5 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -678,6 +679,14 @@ public class NhanVien_View extends javax.swing.JFrame {
             }
         });
 
+        BookStore5.setBackground(new java.awt.Color(0, 204, 204));
+        BookStore5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookStore5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
+        BookStore5.setText("  Thống kê");
+        BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.setOpaque(true);
+
         javax.swing.GroupLayout ThanhMenu5Layout = new javax.swing.GroupLayout(ThanhMenu5);
         ThanhMenu5.setLayout(ThanhMenu5Layout);
         ThanhMenu5Layout.setHorizontalGroup(
@@ -691,8 +700,11 @@ public class NhanVien_View extends javax.swing.JFrame {
             .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ThanhMenu5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addGroup(ThanhMenu5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ThanhMenu5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                    .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ThanhMenu5Layout.setVerticalGroup(
@@ -716,6 +728,8 @@ public class NhanVien_View extends javax.swing.JFrame {
                 .addComponent(lblBill4)
                 .addGap(18, 18, 18)
                 .addComponent(BookStore4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BookStore5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1500,6 +1514,7 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel BangChon;
     private javax.swing.JLabel BookStore4;
+    private javax.swing.JLabel BookStore5;
     private javax.swing.JPanel ThanhMenu5;
     private javax.swing.JPanel TieuDe1;
     private javax.swing.JButton addbt;
