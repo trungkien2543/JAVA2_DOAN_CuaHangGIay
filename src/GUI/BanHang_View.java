@@ -1697,6 +1697,9 @@ public class BanHang_View extends javax.swing.JFrame {
 
     private void lblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseClicked
         // TODO add your handling code here:
+        ThongKeView tk = new ThongKeView(MaNV, TenNV);
+        tk.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblThongKeMouseClicked
     
     /**

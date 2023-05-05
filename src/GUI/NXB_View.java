@@ -7,6 +7,8 @@ package GUI;
 import BUS.BUSNhaXuatBan;
 import DAO.DAONhaXuatBan;
 import DTO.DTONhaXuatBan;
+import static GUI.BanHang_View.MaNV;
+import static GUI.BanHang_View.TenNV;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -893,6 +895,11 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         BookStore5.setText("  Thống kê");
         BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
@@ -1175,6 +1182,13 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
+        // TODO add your handling code here:
+        ThongKeView tk = new ThongKeView(MaNV, TenNV);
+        tk.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookStore5MouseClicked
 
     /**
      * @param args the command line arguments

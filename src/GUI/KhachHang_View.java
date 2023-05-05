@@ -6,6 +6,8 @@ package GUI;
 
 import BUS.BUSKhachHang;
 import DTO.DTOKhachHang;
+import static GUI.BanHang_View.MaNV;
+import static GUI.BanHang_View.TenNV;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -792,6 +794,9 @@ public class KhachHang_View extends javax.swing.JFrame {
 
     private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
         // TODO add your handling code here:
+        ThongKeView tk = new ThongKeView(MaNV, TenNV);
+        tk.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BookStore5MouseClicked
 
     /**

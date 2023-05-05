@@ -9,6 +9,8 @@ import BUS.BUSPhieuNhap;
 import DTO.DTOChiTietPhieuNhap;
 import DTO.DTOHoaDon;
 import DTO.DTOPhieuNhap;
+import static GUI.BanHang_View.MaNV;
+import static GUI.BanHang_View.TenNV;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -259,6 +261,11 @@ public class PhieuNhap extends javax.swing.JFrame {
         lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         lblThongKe.setText("  Thống kê");
         lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
@@ -952,6 +959,13 @@ public class PhieuNhap extends javax.swing.JFrame {
         l.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void lblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseClicked
+        // TODO add your handling code here:
+              ThongKeView tk = new ThongKeView(MaNV, TenNV);
+        tk.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblThongKeMouseClicked
 
     /**
      * @param args the command line arguments

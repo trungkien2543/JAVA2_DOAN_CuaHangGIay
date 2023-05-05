@@ -23,6 +23,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import DTO.DTONhanVien;
+import static GUI.BanHang_View.MaNV;
+import static GUI.BanHang_View.TenNV;
 import com.sun.jdi.connect.spi.Connection;
 import java.beans.Statement;
 import java.io.BufferedInputStream;
@@ -695,6 +697,11 @@ public class NhanVien_View extends javax.swing.JFrame {
         BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         BookStore5.setText("  Thống kê");
         BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BookStore5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookStore5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout ThanhMenu5Layout = new javax.swing.GroupLayout(ThanhMenu5);
         ThanhMenu5.setLayout(ThanhMenu5Layout);
@@ -1456,6 +1463,13 @@ if (maNV != null && !maNV.trim().equals("")) {
             unblock.setEnabled(true); 
         }
     }//GEN-LAST:event_danhsachMouseClicked
+
+    private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
+        // TODO add your handling code here:
+              ThongKeView tk = new ThongKeView(MaNV, TenNV);
+        tk.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookStore5MouseClicked
       private int ktrmanv (String manv){
           for(DTONhanVien nv: listnv)
               if (nv.getMaNV().equalsIgnoreCase(manv))

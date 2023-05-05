@@ -10,6 +10,8 @@ import DTO.DTONhaXuatBan;
 import DTO.DTOKhoSach;
 import BUS.BUSNhaXuatBan;
 import BUS.BUSKhoSach;
+import static GUI.BanHang_View.MaNV;
+import static GUI.BanHang_View.TenNV;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -723,6 +725,9 @@ public class KhoSachView extends javax.swing.JFrame {
 
     private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
         // TODO add your handling code here:
+        ThongKeView tk = new ThongKeView(MaNV, TenNV);
+        tk.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BookStore5MouseClicked
 
     /**
