@@ -377,7 +377,6 @@ public class KhachHang_View extends javax.swing.JFrame {
         BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         BookStore5.setText("  Thống kê");
         BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BookStore5.setOpaque(true);
         BookStore5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BookStore5MouseClicked(evt);

@@ -893,7 +893,6 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         BookStore5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         BookStore5.setText("  Thống kê");
         BookStore5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BookStore5.setOpaque(true);
 
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);

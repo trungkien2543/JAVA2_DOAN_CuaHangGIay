@@ -260,7 +260,6 @@ public class PhieuNhap extends javax.swing.JFrame {
         lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         lblThongKe.setText("  Thống kê");
         lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblThongKe.setOpaque(true);
 
         javax.swing.GroupLayout ThanhMenu4Layout = new javax.swing.GroupLayout(ThanhMenu4);
         ThanhMenu4.setLayout(ThanhMenu4Layout);
