@@ -118,7 +118,6 @@ public class PhieuNhap extends javax.swing.JFrame {
         txtFrom = new javax.swing.JTextField();
         txtTo = new javax.swing.JTextField();
         btnTongTien = new javax.swing.JButton();
-        btnIm = new javax.swing.JButton();
         btnEx = new javax.swing.JButton();
         TieuDe = new javax.swing.JPanel();
         lblThayDoiTK2 = new javax.swing.JLabel();
@@ -444,15 +443,6 @@ public class PhieuNhap extends javax.swing.JFrame {
             .addComponent(btnTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        btnIm.setBackground(new java.awt.Color(0, 204, 153));
-        btnIm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnIm.setText("Nhập từ file Excel");
-        btnIm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImActionPerformed(evt);
-            }
-        });
-
         btnEx.setBackground(new java.awt.Color(0, 204, 153));
         btnEx.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEx.setText("Xuất file Excel");
@@ -478,9 +468,7 @@ public class PhieuNhap extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnIm, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                    .addComponent(btnEx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnEx, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                 .addContainerGap())
@@ -493,10 +481,6 @@ public class PhieuNhap extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(BangChonLayout.createSequentialGroup()
                         .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(BangChonLayout.createSequentialGroup()
-                                .addComponent(btnIm)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEx))
                             .addComponent(jpNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -504,7 +488,8 @@ public class PhieuNhap extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BangChonLayout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(8, 8, 8)
-                                    .addComponent(cbxDieuKienLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cbxDieuKienLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnEx, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -807,20 +792,6 @@ public class PhieuNhap extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_btnTongTienActionPerformed
-
-    private void btnImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImActionPerformed
-        // TODO add your handling code here:
-        //        JFileChooser j = new JFileChooser();
-        //        j.showOpenDialog(btnIm);
-        //        String path = "" + j.getSelectedFile();
-        //        File f = new File(path);
-        //        try{
-            //
-            //        }
-        //        catch(Exception e){
-            //            e.printStackTrace();
-            //        }
-    }//GEN-LAST:event_btnImActionPerformed
     private int TongTienInt(String MaPhieu){
         for (DTOPhieuNhap s : list){
             if(Integer.toString(s.getMaPhieu()).equals(MaPhieu)){
@@ -1024,7 +995,6 @@ public class PhieuNhap extends javax.swing.JFrame {
     private javax.swing.JPanel ThanhMenu4;
     private javax.swing.JPanel TieuDe;
     private javax.swing.JButton btnEx;
-    private javax.swing.JButton btnIm;
     private javax.swing.JButton btnNgayLap;
     private javax.swing.JButton btnTongTien;
     private javax.swing.JComboBox<String> cbxDieuKienLoc;

@@ -98,6 +98,8 @@ public class BanHang_View extends javax.swing.JFrame {
         }
         
         Reset();
+        jTabbedPane1.setEnabledAt(1, false);
+        jTabbedPane1.setEnabledAt(2, false);
     }
     
 
@@ -1058,6 +1060,7 @@ public class BanHang_View extends javax.swing.JFrame {
         }
         BangChon.setVisible(false);
         jTabbedPane1.setSelectedIndex(1);
+        jTabbedPane1.setEnabledAt(1, true);
     }//GEN-LAST:event_btnConfirmActionPerformed
     
     private boolean KiemTraSach(String masach){
@@ -1355,7 +1358,7 @@ public class BanHang_View extends javax.swing.JFrame {
         
         
         jTabbedPane1.setSelectedIndex(2);
-        
+        jTabbedPane1.setEnabledAt(2, true);
         
         
     }//GEN-LAST:event_btnTiepTucActionPerformed
