@@ -54,7 +54,7 @@ public class BUSKhoSach {
     public void Database_Excel(String path) {
         try {
             this.ksDAO.Database_Excel(path);
-            JOptionPane.showMessageDialog(null, "Hoàn thành cập nhật!");
+            JOptionPane.showMessageDialog(null, "Xuất file Excel thành công!");
             return;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BUSNhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);

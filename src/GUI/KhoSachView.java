@@ -26,6 +26,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -34,7 +40,6 @@ import javax.swing.table.DefaultTableModel;
 public class KhoSachView extends javax.swing.JFrame {
     DefaultTableModel model;
     ArrayList<DTOKhoSach> list;
-    String path;
     Locale localVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localVN);
     static String MaNV, TenNV;
@@ -194,9 +199,9 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(57, 57, 57)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(40, 40, 40)
                 .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -682,14 +687,29 @@ public class KhoSachView extends javax.swing.JFrame {
 
     private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
         // TODO add your handling code here:
-        path = "";
+//        String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
+//        if(tenfile.isEmpty()){
+//            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
+//            return;
+//        }
+        String path=null,tenfile=null;
+        boolean flag;
+        do{
+            flag=false;
+            tenfile = JOptionPane.showInputDialog("Nhập tên file :");
+            if(tenfile.isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
+                flag=true;
+            }
+        }
+        while(flag);
+        
         JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int x = j.showSaveDialog(this);
         if(x == JFileChooser.APPROVE_OPTION){
-            path=j.getSelectedFile().getPath();
+            path=j.getSelectedFile().getPath()+tenfile;
         }
-        System.out.println(path);
         BUSKhoSach ks = new BUSKhoSach();
         ks.Database_Excel(path);
     }//GEN-LAST:event_btnExcelActionPerformed
