@@ -49,7 +49,7 @@ public class KhachHang_View extends javax.swing.JFrame {
     public KhachHang_View(String MaNV, String TenNV) {
         initComponents();
         initData();
-        String[] header = {"Mã khách hàng", "Tên khách hàng", "Địa chỉ", "SDT", "Tích điểm"};
+        String[] header = { "Tên khách hàng", "Địa chỉ", "SĐT", "Tích điểm"};
         tblModel = new DefaultTableModel(header, 0);
         loadData(list);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
@@ -69,7 +69,7 @@ public class KhachHang_View extends javax.swing.JFrame {
     private void loadData(ArrayList<DTOKhachHang> list) {
         tblModel.setRowCount(0);
         for (DTO.DTOKhachHang i : list) {
-            tblModel.addRow(new Object[]{i.getMaKH(), i.getTenKH(), i.getDiaChi(), i.getSDT(), i.getTichDiem()});
+            tblModel.addRow(new Object[]{i.getTenKH(), i.getDiaChi(), i.getSDT(), i.getTichDiem()});
         }
         tblKhachHang.setModel(tblModel);
     }
@@ -610,19 +610,17 @@ public class KhachHang_View extends javax.swing.JFrame {
 
             //Thanh tieu de
             row = sheet.createRow(0);
+          
             cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue("Mã khách hàng");
-
-            cell = row.createCell(1, CellType.STRING);
             cell.setCellValue("Tên khách hàng");
 
-            cell = row.createCell(2, CellType.STRING);
+            cell = row.createCell(1, CellType.STRING);
             cell.setCellValue("Địa chỉ");
 
-            cell = row.createCell(3, CellType.STRING);
+            cell = row.createCell(2, CellType.STRING);
             cell.setCellValue("SĐT");
 
-            cell = row.createCell(4, CellType.STRING);
+            cell = row.createCell(3, CellType.STRING);
             cell.setCellValue("Tích điểm");
 
             for (int i = 0; i < tblKhachHang.getRowCount(); i++) {
@@ -637,11 +635,8 @@ public class KhachHang_View extends javax.swing.JFrame {
                 cell = row.createCell(2, CellType.STRING);
                 cell.setCellValue(tblKhachHang.getValueAt(i, 2).toString());
 
-                cell = row.createCell(3, CellType.STRING);
-                cell.setCellValue(tblKhachHang.getValueAt(i, 3).toString());
-
-                cell = row.createCell(4, CellType.STRING);
-                cell.setCellValue(tblKhachHang.getValueAt(i, 4).toString());
+                cell = row.createCell(3, CellType.NUMERIC);
+                cell.setCellValue((int) tblKhachHang.getValueAt(i, 3));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -673,6 +668,7 @@ public class KhachHang_View extends javax.swing.JFrame {
             fis.close();
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Vui lòng đóng file trước khi cập nhật!");
             return;
         }
 
@@ -680,6 +676,7 @@ public class KhachHang_View extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+        String s="";
         File excelFile;
         FileInputStream fis = null;
         BufferedInputStream bis = null;
@@ -705,10 +702,10 @@ public class KhachHang_View extends javax.swing.JFrame {
                     XSSFCell excelSDT = excelRow.getCell(2);
                     XSSFCell excelTichDiem = excelRow.getCell(3);
                     if (row == 0) {
-                        if (!excelTenKH.getStringCellValue().equalsIgnoreCase("Ten KH")
-                                || !excelDC.getStringCellValue().equalsIgnoreCase("Dia chi")
-                                || !excelSDT.getStringCellValue().equalsIgnoreCase("SDT")
-                                || !excelTichDiem.getStringCellValue().equalsIgnoreCase("Tich diem")) {
+                        if (!excelTenKH.getStringCellValue().equalsIgnoreCase("Tên khách hàng")
+                                || !excelDC.getStringCellValue().equalsIgnoreCase("Địa chỉ")
+                                || !excelSDT.getStringCellValue().equalsIgnoreCase("SĐT")
+                                || !excelTichDiem.getStringCellValue().equalsIgnoreCase("Tích điểm")) {
                             JOptionPane.showMessageDialog(null, "File không đúng định dạng\nXem mẫu tại ExcelFile\\KhachHang\\Import\\KhachHang.xlsx");
                             return;
                         }
@@ -719,8 +716,8 @@ public class KhachHang_View extends javax.swing.JFrame {
                     String SDT = excelSDT.getStringCellValue().trim();
                     int tichDiem = (int) excelTichDiem.getNumericCellValue();
                     if (!SDT.matches("[0]{1}[0-9]{9}")) {
-                        JOptionPane.showMessageDialog(null, "Số điện thoại không đúng định dạng tại ô [" + row + ",2]");
-                        return;
+                        s+= row + " ";
+                        continue;
                     } else {
                         int obj = ktTonTaiSDT(SDT);
                         if (obj == -1) {
@@ -754,6 +751,9 @@ public class KhachHang_View extends javax.swing.JFrame {
                     } catch (IOException ex) {
                         Logger.getLogger(KhachHang_View.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }
+                if(!s.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không đúng định dạng tại ô dòng "+s+"Nên không import data dòng "+s);
                 }
                 loadData(list);
             }
