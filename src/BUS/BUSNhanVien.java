@@ -68,5 +68,11 @@ public class BUSNhanVien {
         }
         return "Update nhân viên thất bại";
     }
+      public boolean KtrNV(String Manv){
+        if(daonhanvien.checkNV(Manv)){
+            return true;
+        }
+        return false;
+    }
 }
 

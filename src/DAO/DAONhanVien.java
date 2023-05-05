@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import DTO.DTONhanVien;
+import java.sql.*;
 import static groovy.sql.Sql.NULL;
 
 /**
@@ -29,6 +30,7 @@ public class DAONhanVien {
     }
     
     public boolean addNhanvien(DTONhanVien s){
+        if(!checkNV(s.getMaNV())){
         String sql = "INSERT INTO NhanVien(MaNv,TenNV,QueQuan,SoNgayLam,CongViec) VALUES(?,?,?,0,?)";
         try{
             
@@ -40,6 +42,7 @@ public class DAONhanVien {
             return ps.executeUpdate() > 0;
         }
         catch(SQLException e){
+        }
         }
         return false;
     }
@@ -123,6 +126,24 @@ public class DAONhanVien {
         }
         return false;
     }
+     
+     
+     public boolean checkNV(String Manv) {
+    String sql = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = ?";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, Manv);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        return count > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+
     public static void main(String[] args) {
         new DAONhanVien();
     }

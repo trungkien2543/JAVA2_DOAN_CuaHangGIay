@@ -88,4 +88,10 @@ public class BUSTaiKhoan {
         }
         return "Update tài khoản thất bại";
     }
+   public boolean KtrTK(String Manv){
+        if(tkDAO.checkTK(Manv)){
+            return true;
+        }
+        return false;
+    }
 }

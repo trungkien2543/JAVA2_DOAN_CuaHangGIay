@@ -29,6 +29,7 @@ public class DAOTaiKhoan {
     }
     
      public boolean addTaiKhoan(DTOTaiKhoan s){
+    if (!checkTK(s.getMaNhanVien())) {
         String sql = "INSERT INTO TaiKhoan(MaNhanVien,MatKhau,Email,TrangThai) VALUES(?,?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -41,8 +42,10 @@ public class DAOTaiKhoan {
         catch(Exception e){
             e.printStackTrace();
         }
-        return false;
     }
+    return false;
+}
+
      
      public ArrayList<DTOTaiKhoan> getListTK(){
         ArrayList<DTOTaiKhoan> list = new ArrayList<>();
@@ -221,4 +224,19 @@ public class DAOTaiKhoan {
         }
         return false;
     }
+     public boolean checkTK(String Manv) {
+    String sql = "SELECT COUNT(*) FROM TaiKhoan WHERE MaNhanVien = ?";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, Manv);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        return count > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
 }
