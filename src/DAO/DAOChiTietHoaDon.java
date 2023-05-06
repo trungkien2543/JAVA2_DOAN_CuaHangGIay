@@ -104,8 +104,11 @@ public class DAOChiTietHoaDon {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                DTOThongKeTheoTheLoai s = new DTOThongKeTheoTheLoai(rs.getString(1), rs.getInt(2));
-                list.add(s);
+                if(rs.getString(1) != null){
+                    DTOThongKeTheoTheLoai s = new DTOThongKeTheoTheLoai(rs.getString(1), rs.getInt(2));
+                    list.add(s);
+                }
+
             }
         }
         catch(Exception e){
