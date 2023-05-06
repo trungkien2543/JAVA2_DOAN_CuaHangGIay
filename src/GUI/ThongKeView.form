@@ -168,15 +168,17 @@
                   <Component id="lbBanSach4" alignment="1" max="32767" attributes="0"/>
                   <Component id="lbNhanVien4" alignment="1" max="32767" attributes="0"/>
                   <Component id="lbNhapSach4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="lbNhaCungCap5" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lbNhaCungCap5" alignment="1" pref="174" max="32767" attributes="0"/>
                   <Component id="lbPhieu11" alignment="1" max="32767" attributes="0"/>
                   <Component id="lbPhieu10" alignment="0" max="32767" attributes="0"/>
                   <Component id="lblBill4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="BookStore4" pref="162" max="32767" attributes="0"/>
-                          <Component id="BookStore5" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BookStore5" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="BookStore4" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
