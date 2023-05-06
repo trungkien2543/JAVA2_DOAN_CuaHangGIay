@@ -73,11 +73,11 @@ public class NhanVien_View extends javax.swing.JFrame {
 
         model = (DefaultTableModel) thongtinnv.getModel();
         model.setColumnIdentifiers(new Object[]{
-            "Ma Nhan Vien", "Ten Nhan Vien", "Que Quan", "So Ngay Lam", "Cong Viec Chinh"
+            "Mã nhân viên", "Tên nhân viên", "Quê quán", "Số ngày làm", "Công việc"
         });
         model1 = (DefaultTableModel) dstaikhoan.getModel();
         model1.setColumnIdentifiers(new Object[]{
-            "Ma Nhan Vien", "Mật Khẩu", "Email", "Trạng Thái","chức vụ"
+            "Ma Nhan Vien", "Mật Khẩu", "Email", "Trạng Thái","Công việc"
         });
         themnv.setVisible(false);
 
@@ -87,6 +87,11 @@ public class NhanVien_View extends javax.swing.JFrame {
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         
+        btnAdd.setEnabled(true);
+        btnDelete.setEnabled(true);
+        unlock.setEnabled(false);
+        lock.setEnabled(false);
+            
         lblHello.setText("Hi " + this.TenNV);
 
     }
@@ -135,8 +140,8 @@ public class NhanVien_View extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         boxsearch = new javax.swing.JComboBox<>();
         txthienthi = new javax.swing.JTextField();
-        block = new javax.swing.JButton();
-        unblock = new javax.swing.JButton();
+        lock = new javax.swing.JButton();
+        unlock = new javax.swing.JButton();
         btnEx = new javax.swing.JButton();
         btnIm = new javax.swing.JButton();
         TieuDe1 = new javax.swing.JPanel();
@@ -173,6 +178,12 @@ public class NhanVien_View extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BackGround.setBackground(new java.awt.Color(204, 204, 204));
+
+        danhsach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                danhsachMouseClicked(evt);
+            }
+        });
 
         thongtinnv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -300,35 +311,35 @@ public class NhanVien_View extends javax.swing.JFrame {
             }
         });
 
-        block.setBackground(new java.awt.Color(0, 204, 153));
-        block.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        block.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/padlock.png"))); // NOI18N
-        block.setText("block");
-        block.setBorder(null);
-        block.addItemListener(new java.awt.event.ItemListener() {
+        lock.setBackground(new java.awt.Color(0, 204, 153));
+        lock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/padlock.png"))); // NOI18N
+        lock.setText("block");
+        lock.setBorder(null);
+        lock.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                blockItemStateChanged(evt);
+                lockItemStateChanged(evt);
             }
         });
-        block.addActionListener(new java.awt.event.ActionListener() {
+        lock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                blockActionPerformed(evt);
+                lockActionPerformed(evt);
             }
         });
 
-        unblock.setBackground(new java.awt.Color(0, 204, 153));
-        unblock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        unblock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/unblock.png"))); // NOI18N
-        unblock.setText("unblock");
-        unblock.setBorder(null);
-        unblock.addItemListener(new java.awt.event.ItemListener() {
+        unlock.setBackground(new java.awt.Color(0, 204, 153));
+        unlock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        unlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/unblock.png"))); // NOI18N
+        unlock.setText("unblock");
+        unlock.setBorder(null);
+        unlock.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                unblockItemStateChanged(evt);
+                unlockItemStateChanged(evt);
             }
         });
-        unblock.addActionListener(new java.awt.event.ActionListener() {
+        unlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unblockActionPerformed(evt);
+                unlockActionPerformed(evt);
             }
         });
 
@@ -371,9 +382,9 @@ public class NhanVien_View extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lock, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(unblock, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(unlock, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         BangChonLayout.setVerticalGroup(
             BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,8 +392,8 @@ public class NhanVien_View extends javax.swing.JFrame {
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(unblock, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lock, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(unlock, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(BangChonLayout.createSequentialGroup()
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -816,13 +827,13 @@ if (maNV != null && !maNV.trim().equals("")) {
         // TODO add your handling code here:
     }//GEN-LAST:event_boxsearchActionPerformed
 
-    private void blockItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_blockItemStateChanged
+    private void lockItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lockItemStateChanged
 
 
-    }//GEN-LAST:event_blockItemStateChanged
+    }//GEN-LAST:event_lockItemStateChanged
 
     @SuppressWarnings("StringEquality")
-    private void blockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockActionPerformed
+    private void lockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lockActionPerformed
        // TODO add your handling code here:
        int selected = dstaikhoan.getSelectedRow();
        if (selected == -1) {
@@ -851,7 +862,7 @@ if (maNV != null && !maNV.trim().equals("")) {
        }
 
        showResult1();
-    }//GEN-LAST:event_blockActionPerformed
+    }//GEN-LAST:event_lockActionPerformed
     public void showResult1() {
         model1.setRowCount(0);
         listtk = new DAOTaiKhoan().getListTK();
@@ -903,13 +914,13 @@ if (maNV != null && !maNV.trim().equals("")) {
         tk.setEmail(txtemail.getText());
         tk.setMatKhau("1");
         tk.setTrangThai("mo");
-        
+        tk.setChucVu((String) setcongviec.getSelectedItem());
         new BUSNhanVien().themNhanVien(nv);
         new BUSTaiKhoan().themTaiKhoan(tk);
            
             listtk.add(tk);
             listnv.add(nv);
-         JOptionPane.showMessageDialog(rootPane, "add success");
+        JOptionPane.showMessageDialog(rootPane, "add success");
         addma.setText("");
         addten.setText("");
         addhometown.setText("");
@@ -925,9 +936,9 @@ if (maNV != null && !maNV.trim().equals("")) {
         model.addRow(new Object[]{
             s.getMaNV(), s.getTenNV(), s.getQueQuan(), s.getSoNgayLam(), s.getCongViec()
         });
-         DTOTaiKhoan tk = listtk.get(listtk.size() - 1);
+        DTOTaiKhoan tk = listtk.get(listtk.size() - 1);
         model1.addRow(new Object[]{
-           tk.getMaNhanVien(),tk.getMatKhau(),tk.getEmail(),tk.getTrangThai()
+           tk.getMaNhanVien(),tk.getMatKhau(),tk.getEmail(),tk.getTrangThai(),tk.getChucVu()
         });
     }
     private void themnvAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_themnvAncestorAdded
@@ -1016,11 +1027,11 @@ if (maNV != null && !maNV.trim().equals("")) {
         // TODO add your handling code here:
     }//GEN-LAST:event_addtenActionPerformed
 
-    private void unblockItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_unblockItemStateChanged
+    private void unlockItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_unlockItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_unblockItemStateChanged
+    }//GEN-LAST:event_unlockItemStateChanged
 
-    private void unblockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unblockActionPerformed
+    private void unlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unlockActionPerformed
         // TODO add your handling code here:
            int selected = dstaikhoan.getSelectedRow();
        if (selected == -1) {
@@ -1053,7 +1064,7 @@ if (maNV != null && !maNV.trim().equals("")) {
 
        showResult1();
         
-    }//GEN-LAST:event_unblockActionPerformed
+    }//GEN-LAST:event_unlockActionPerformed
 
     private void lbNhanVien5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbNhanVien5MouseClicked
         // TODO add your handling code here:
@@ -1423,6 +1434,22 @@ if (maNV != null && !maNV.trim().equals("")) {
         tk.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblThongKeMouseClicked
+
+    private void danhsachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danhsachMouseClicked
+        // TODO add your handling code here:
+        if(danhsach.getSelectedIndex()==0){
+            btnAdd.setEnabled(true);
+            btnDelete.setEnabled(true);
+            unlock.setEnabled(false);
+            lock.setEnabled(false);
+        }
+        else{
+            btnAdd.setEnabled(false);
+            btnDelete.setEnabled(false);
+            unlock.setEnabled(true);
+            lock.setEnabled(true);
+        }
+    }//GEN-LAST:event_danhsachMouseClicked
   
 
    
@@ -1481,7 +1508,6 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JTextField addma;
     private javax.swing.JTextField addten;
     private javax.swing.JPanel bangds;
-    private javax.swing.JButton block;
     private javax.swing.JComboBox<String> boxsearch;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
@@ -1508,6 +1534,7 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JLabel lblHello;
     private javax.swing.JLabel lblThayDoiTK3;
     private javax.swing.JLabel lblThongKe;
+    private javax.swing.JButton lock;
     private javax.swing.JPanel paneltaikhoan;
     private javax.swing.JScrollPane scrollacount;
     private javax.swing.JScrollPane scrollthongtin;
@@ -1517,7 +1544,7 @@ if (maNV != null && !maNV.trim().equals("")) {
     private javax.swing.JTable thongtinnv;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txthienthi;
-    private javax.swing.JButton unblock;
+    private javax.swing.JButton unlock;
     // End of variables declaration//GEN-END:variables
 
 }

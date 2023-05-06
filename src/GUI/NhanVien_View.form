@@ -110,6 +110,9 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="danhsach">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="danhsachMouseClicked"/>
+              </Events>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
@@ -257,9 +260,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnDelete" min="-2" pref="131" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="block" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="lock" min="-2" pref="129" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="unblock" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="unlock" min="-2" pref="129" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -269,8 +272,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAdd" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
                           <Component id="btnDelete" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="block" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="unblock" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
+                          <Component id="lock" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
+                          <Component id="unlock" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
@@ -360,7 +363,7 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txthienthiKeyReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="block">
+            <Component class="javax.swing.JButton" name="lock">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="cc" red="0" type="rgb"/>
@@ -377,11 +380,11 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="blockItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="blockActionPerformed"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="lockItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lockActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="unblock">
+            <Component class="javax.swing.JButton" name="unlock">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="cc" red="0" type="rgb"/>
@@ -398,8 +401,8 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="unblockItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unblockActionPerformed"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="unlockItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unlockActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnEx">
