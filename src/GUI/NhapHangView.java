@@ -995,8 +995,12 @@ public class NhapHangView extends javax.swing.JFrame {
         }
         else{
             do{
+                flag = false;
                 str = JOptionPane.showInputDialog("Nhập số lượng");
-                if(str  == null){
+                if(str == null){
+                    return;
+                }
+                if(str.isEmpty()){
                     JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập số lượng sách!");
                     flag=true;
                 }

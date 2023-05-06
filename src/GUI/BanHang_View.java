@@ -18,6 +18,7 @@ import DTO.DTOKhachHang;
 import DTO.DTOKhoSach;
 import DTO.DTOHoaDon;
 import DTO.DTOTaiKhoan;
+import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -73,7 +74,7 @@ public class BanHang_View extends javax.swing.JFrame {
         txtSDT_NHAP.setEditable(false);
         tblHoaDon.setEnabled(false);
         
-        
+        tblBanSach.setEditingColumn(-1);
         
         this.MaNV = MaNV;
         this.TenNV = TenNV;
@@ -200,7 +201,15 @@ public class BanHang_View extends javax.swing.JFrame {
 
         BangChon.setBackground(new java.awt.Color(0, 153, 153));
 
-        txtFind.setText("nhap ma sach");
+        txtFind.setText("Nhập mã sách");
+        txtFind.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFindFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFindFocusLost(evt);
+            }
+        });
         txtFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFindActionPerformed(evt);
@@ -304,10 +313,18 @@ public class BanHang_View extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblBanSachMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblBanSachMouseEntered(evt);
+            }
+        });
+        tblBanSach.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblBanSachKeyPressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tblBanSach);
 
-        jPanel4.add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
+        jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Tong Tien:");
@@ -1031,6 +1048,22 @@ public class BanHang_View extends javax.swing.JFrame {
             return;
         }
         
+        try{
+            int SDT_int = Integer.parseInt(SDT);
+            
+            if(SDT_int < 0){
+                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không chứa kí tự chữ hoặc kí tự đặc biệt");
+                return;
+            }
+            
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(rootPane, "Số điện thoại không chứa kí tự chữ hoặc kí tự đặc biệt");
+            return;
+        }
+        
+        
+        
         for(DTOKhachHang s : list_kh){
             if(s.getMaKH().equals(SDT)){
                 lblMaKH.setText(s.getMaKH());
@@ -1073,7 +1106,7 @@ public class BanHang_View extends javax.swing.JFrame {
         String masach = txtFind.getText();
         int sl_int=0;
        
-        if(masach.equals("nhap ma hang")){
+        if(masach.equals("Nhập mã sách")){
             JOptionPane.showMessageDialog(rootPane, "Chua nhap ma hang");
             txtFind.requestFocus();
             return;
@@ -1086,7 +1119,7 @@ public class BanHang_View extends javax.swing.JFrame {
                         String sl = JOptionPane.showInputDialog("Nhap so luong khach mua");
                         //Kiem tra nguoi dung co muon thoat khoi muc nhap so luong khong
                         if(sl == null){
-                            txtFind.setText("nhap ma sach");
+                            txtFind.setText("Nhập mã sách");
                             txtFind.requestFocus();
                             return;
                         }
@@ -1107,6 +1140,11 @@ public class BanHang_View extends javax.swing.JFrame {
                             continue;
                         }
                         
+                        if(sl_int <= 0){
+                            JOptionPane.showMessageDialog(rootPane, "So luong phai lon hon 0");
+                            continue;
+                        }
+                        
                         //kiem tra xem du so luong de ban hay khong
                         
                         if(sl_int > s.getSl()){
@@ -1120,7 +1158,7 @@ public class BanHang_View extends javax.swing.JFrame {
                                 }
                                 catch(ArithmeticException e){
                                     JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
-                                    txtFind.setText("nhap ma sach");
+                                    txtFind.setText("Nhập mã sách");
                                     txtFind.requestFocus();
                                     return ;
                                 }
@@ -1138,7 +1176,7 @@ public class BanHang_View extends javax.swing.JFrame {
                     });
 
                     lblTongTien_Nhap.setText(currencyVN.format(TongTien_int));
-                    txtFind.setText("nhap ma sach");
+                    txtFind.setText("Nhập mã sách");
                     txtFind.requestFocus();
                     return;
                 }
@@ -1156,14 +1194,7 @@ public class BanHang_View extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
-                
-        if(txtFind.getText().contains("nhap ma sach")== true && evt.getKeyCode() != KeyEvent.VK_ENTER){
-        String str = txtFind.getText();
-        txtFind.setText(str.charAt(12) + "");
-        }
-        if(txtFind.getText().isEmpty()){
-            txtFind.setText("nhap ma sach");
-        }
+
     }//GEN-LAST:event_txtFindKeyReleased
 
     private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
@@ -1175,7 +1206,7 @@ public class BanHang_View extends javax.swing.JFrame {
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             String masach = txtFind.getText();
             int sl_int=0;
-            if(masach.equals("nhap ma hang")){
+            if(masach.equals("Nhập mã sách")){
                 JOptionPane.showMessageDialog(rootPane, "Chua nhap ma hang");
                 txtFind.requestFocus();
                 return;
@@ -1188,7 +1219,7 @@ public class BanHang_View extends javax.swing.JFrame {
                             String sl = JOptionPane.showInputDialog("Nhap so luong khach mua");
                             //Kiem tra nguoi dung co muon thoat khoi muc nhap so luong khong
                             if(sl == null){
-                                txtFind.setText("nhap ma sach");
+                                txtFind.setText("Nhập mã sách");
                                 txtFind.requestFocus();
                                 return;
                             }
@@ -1204,6 +1235,12 @@ public class BanHang_View extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(rootPane, "So luong nhap sai cu phap");
                                 continue;
                             }
+                            
+                            if(sl_int <= 0){
+                                JOptionPane.showMessageDialog(rootPane, "So luong phai lon hon 0");
+                                continue;
+                            }
+
                             //kiem tra xem du so luong de ban hay khong
                             if(sl_int > s.getSl()){
                                 JOptionPane.showMessageDialog(rootPane, "So luong khong du");
@@ -1216,7 +1253,7 @@ public class BanHang_View extends javax.swing.JFrame {
                                 }
                                 catch(ArithmeticException e){
                                     JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
-                                    txtFind.setText("nhap ma sach");
+                                    txtFind.setText("Nhập mã sách");
                                     txtFind.requestFocus();
                                     return ;
                                 }
@@ -1232,7 +1269,7 @@ public class BanHang_View extends javax.swing.JFrame {
                         });
 
                         lblTongTien_Nhap.setText(currencyVN.format(TongTien_int));
-                        txtFind.setText("nhap ma sach");
+                        txtFind.setText("Nhập mã sách");
                         txtFind.requestFocus();
                         return;
                     }
@@ -1267,7 +1304,7 @@ public class BanHang_View extends javax.swing.JFrame {
             
             
             model.removeRow(row);
-            txtFind.setText("nhap ma sach");
+            txtFind.setText("Nhập mã sách");
             txtFind.requestFocus();
             return ;
         }
@@ -1279,6 +1316,8 @@ public class BanHang_View extends javax.swing.JFrame {
         int row = tblBanSach.getSelectedRow();
         
         txtFind.setText(tblBanSach.getValueAt(row, 0).toString());
+        
+        
     }//GEN-LAST:event_tblBanSachMouseClicked
 
     private void btnAddKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKHActionPerformed
@@ -1305,7 +1344,7 @@ public class BanHang_View extends javax.swing.JFrame {
     private void GiamGia(){
         switch (Integer.parseInt(lblTichDiem.getText())){
             case 5 :{
-                if(CheckGiamGia("giam 7% cho 1 hoa don") < 1){
+                if(CheckGiamGia("giam 7% cho 1 hoa don",lblMaKH.getText()) < 1){
                     lblMaGiamGia.setText("giam 7% cho 1 hoa don");
                     SoTienTra = (int) Math.round(TongTien_int - TongTien_int * 0.07) ;
                     lblSoTienTra.setText(currencyVN.format(SoTienTra));
@@ -1318,7 +1357,7 @@ public class BanHang_View extends javax.swing.JFrame {
                 break;
             }
             case 15 :{
-                if(CheckGiamGia("giam 7% cho 3 hoa don") < 3){
+                if(CheckGiamGia("giam 7% cho 3 hoa don",lblMaKH.getText()) < 3){
                     lblMaGiamGia.setText("giam 7% cho 3 hoa don");
                     SoTienTra = (int) Math.round(TongTien_int - TongTien_int * 0.07) ;
                     lblSoTienTra.setText(currencyVN.format(SoTienTra));
@@ -1331,7 +1370,7 @@ public class BanHang_View extends javax.swing.JFrame {
                 break;
             }
             case 50 :{
-                if(CheckGiamGia("giam 7% cho 5 hoa don") < 5){
+                if(CheckGiamGia("giam 7% cho 5 hoa don",lblMaKH.getText()) < 5){
                     lblMaGiamGia.setText("giam 7% cho 5 hoa don");
                     SoTienTra = (int) Math.round(TongTien_int - TongTien_int * 0.07) ;
                     lblSoTienTra.setText(currencyVN.format(SoTienTra)); 
@@ -1393,7 +1432,7 @@ public class BanHang_View extends javax.swing.JFrame {
     //Reset ung dung sau khi thanh toan
     private void Reset(){
         model.setRowCount(0);
-        
+        txtFind.setText("Nhập mã sách");
         lblMaPhieu.setText("");
         lblDiaChiKH.setText("");
         lblMaGiamGia.setText("");
@@ -1428,10 +1467,10 @@ public class BanHang_View extends javax.swing.JFrame {
         
     }
     
-    private int CheckGiamGia(String a){
+    private int CheckGiamGia(String a,String MaKH){
         int dem = 0;
         for (DTOHoaDon s : list_hd){
-            if(s.getThongTinUuDai().equals(a) == true){
+            if(s.getThongTinUuDai().equals(a) == true && s.getMaKH().equals(MaKH) ){
                 dem ++;
             }
         }
@@ -1443,19 +1482,19 @@ public class BanHang_View extends javax.swing.JFrame {
         int DiemDaTich = Integer.parseInt(lblTichDiem.getText());
         switch (DiemDaTich){
             case 5:{
-                if(CheckGiamGia("giam 7% cho 1 hoa don") < 1){
+                if(CheckGiamGia("giam 7% cho 1 hoa don",lblMaKH.getText()) < 1){
                     return;
                 }
                 break;
             }
             case 15:{
-                if (CheckGiamGia("giam 7% cho 3 hoa don") < 3){
+                if (CheckGiamGia("giam 7% cho 3 hoa don",lblMaKH.getText()) < 3){
                     return;
                 }
                 break;
             }
             case 50:{
-                if(CheckGiamGia("giam 7% cho 5 hoa don") < 5){
+                if(CheckGiamGia("giam 7% cho 5 hoa don",lblMaKH.getText()) < 5){
                     return ;
                 }
                 break;
@@ -1546,7 +1585,7 @@ public class BanHang_View extends javax.swing.JFrame {
                         String sl = JOptionPane.showInputDialog("Nhap so luong khach mua");
                         //Kiem tra nguoi dung co muon thoat khoi muc nhap so luong khong
                         if(sl == null){
-                            txtFind.setText("nhap ma sach");
+                            txtFind.setText("Nhập mã sách");
                             txtFind.requestFocus();
                             return;
                         }
@@ -1590,7 +1629,7 @@ public class BanHang_View extends javax.swing.JFrame {
                     model.setValueAt(currencyVN.format(s.thanhtien(sl_int)), selected_row, 4);
 
                     lblTongTien_Nhap.setText(currencyVN.format(TongTien_int));
-                    txtFind.setText("nhap ma sach");
+                    txtFind.setText("Nhập mã sách");
                     txtFind.requestFocus();
                     return;
                 }
@@ -1638,6 +1677,20 @@ public class BanHang_View extends javax.swing.JFrame {
 
             if(SDT.length() != 10){
                 JOptionPane.showMessageDialog(rootPane, "So dien thoai phai co 10 chu so");
+                return;
+            }
+            
+            try{
+                int SDT_int = Integer.parseInt(SDT);
+
+                if(SDT_int < 0){
+                    JOptionPane.showMessageDialog(rootPane, "Số điện thoại không chứa kí tự chữ hoặc kí tự đặc biệt");
+                    return;
+                }
+
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không chứa kí tự chữ hoặc kí tự đặc biệt");
                 return;
             }
 
@@ -1738,6 +1791,31 @@ public class BanHang_View extends javax.swing.JFrame {
         tk.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblThongKeMouseClicked
+
+    private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
+        // TODO add your handling code here:
+        if(txtFind.getText().trim().equals("Nhập mã sách")){
+            txtFind.setText("");
+            txtFind.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_txtFindFocusGained
+
+    private void txtFindFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusLost
+        // TODO add your handling code here:
+        if(txtFind.getText().trim().equals("")){
+            txtFind.setText("Nhập mã sách");
+            txtFind.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtFindFocusLost
+
+    private void tblBanSachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblBanSachKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblBanSachKeyPressed
+
+    private void tblBanSachMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBanSachMouseEntered
+        // TODO add your handling code here:
+   
+    }//GEN-LAST:event_tblBanSachMouseEntered
     
     /**
      * @param args the command line arguments
