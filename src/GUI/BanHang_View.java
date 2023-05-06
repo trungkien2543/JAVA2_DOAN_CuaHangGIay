@@ -60,8 +60,8 @@ public class BanHang_View extends javax.swing.JFrame {
     public BanHang_View(String MaNV, String TenNV) {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        String[] header = {"Ma Sach", "Ten Sach", "Gia Sach", "So Luong", "Thanh tien"};
-        model = new DefaultTableModel(header,0);
+        //String[] header = {"Ma Sach", "Ten Sach", "Gia Sach", "So Luong", "Thanh tien"};
+        model = (DefaultTableModel) tblBanSach.getModel();
         tblBanSach.setModel(model);
         
         //Truy van ra arraylist da bao gom trong ham Reset()
@@ -308,7 +308,15 @@ public class BanHang_View extends javax.swing.JFrame {
             new String [] {
                 "Mã sách", "Tên sách", "Giá tiền", "Số lượng", "Thành tiền"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblBanSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblBanSachMouseClicked(evt);

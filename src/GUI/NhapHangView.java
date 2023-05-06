@@ -59,10 +59,10 @@ public class NhapHangView extends javax.swing.JFrame {
      */
     public NhapHangView(String MaNV, String TenNV) {
         initComponents();
-        String[] header_kho = {"Ma sach", "Ten sach", "Nam xuat ban", "Ten tac gia", "Nha xuat ban", "So luong", "Gia", "The loai"};
-        model_kho = new DefaultTableModel(header_kho, 0);
-        String[] header_nhap = {"Ma sach", "Ten sach", "So luong", "Gia", "Thanh tien"};
-        model_nhap = new DefaultTableModel(header_nhap, 0);
+       // String[] header_kho = {"Ma sach", "Ten sach", "Nam xuat ban", "Ten tac gia", "Nha xuat ban", "So luong", "Gia", "The loai"};
+        model_kho = (DefaultTableModel) tbKho.getModel();
+      //  String[] header_nhap = {"Ma sach", "Ten sach", "So luong", "Gia", "Thanh tien"};
+        model_nhap = (DefaultTableModel) tbNhap.getModel();
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
 
         tbKho.setModel(model_kho);
@@ -308,15 +308,23 @@ public class NhapHangView extends javax.swing.JFrame {
 
         tbKho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã sách", "Tên sách", "Nãm xuất bản", "Tên tác giả", "Số lượng tồn kho", "Giá", "Thể loại"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbKho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbKhoMouseClicked(evt);
@@ -326,15 +334,23 @@ public class NhapHangView extends javax.swing.JFrame {
 
         tbNhap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã sách", "Tên sách", "Số lượng", "Giá", "Thành tiền"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbNhap);
 
         btnConfirm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

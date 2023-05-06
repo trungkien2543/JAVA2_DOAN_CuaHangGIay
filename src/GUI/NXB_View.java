@@ -78,6 +78,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
         dao.loadDataListToTable(this);
+        
         this.setVisible(true);
         initJFrameAdd();
         initFrameEdit();
@@ -669,7 +670,15 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
             new String [] {
                 "Mã", "Tên", "Địa chỉ", "Số điện thoại", "Ghi chú"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable_NXB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_NXBMouseClicked(evt);

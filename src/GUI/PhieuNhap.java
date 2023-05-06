@@ -60,8 +60,8 @@ public class PhieuNhap extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        String[] header = {"Mã hóa đơn", "Mã nhân viên", "Mã nhà xuất bản", "Ngày nhập","Tổng tiền"};
-        model = new DefaultTableModel(header, 0);
+        //String[] header = {"Mã hóa đơn", "Mã nhân viên", "Mã nhà xuất bản", "Ngày nhập","Tổng tiền"};
+        model = (DefaultTableModel) tblHoaDon.getModel();
         tblHoaDon.setModel(model);
         txtFind.requestFocus();
         
@@ -146,9 +146,17 @@ public class PhieuNhap extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Ma Hoa Don", "Ma Nhan Vien", "Ma Khach Hang", "Ngay Lap", "Tong Tien"
+                "Mã phiếu nhập", "Mã nhân viên", "Mã nhà xuất bản", "Ngày lập", "Tổng tiền"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHoaDonMouseClicked(evt);

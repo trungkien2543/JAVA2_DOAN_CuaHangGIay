@@ -63,8 +63,8 @@ public class KhoSachView extends javax.swing.JFrame {
     
     public KhoSachView(String MaNV, String TenNV) {
         initComponents();
-        String[] header = {"MaSach", "TenSach", "NamXuatBan", "TenTacGia", "NhaXuatBan", "SoLuongTonKho","Gia","TheLoai"};
-        model = new DefaultTableModel(header, 0);
+        //String[] header = {"MaSach", "TenSach", "NamXuatBan", "TenTacGia", "NhaXuatBan", "SoLuongTonKho","Gia","TheLoai"};
+        model = (DefaultTableModel) tbKhoSach.getModel();
         tbKhoSach.setModel(model);
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
@@ -300,9 +300,17 @@ public class KhoSachView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "MaSach", "TenSach", "NamXuatBan", "TenTacGia", "NhaXuatBan", "SoLuongTonKho", " Gia", "TheLoai"
+                "Mã sách", "Tên sách", "Năm xuất bản", "Tên tác giả", "Nhà xuất bản", "Số lượng tồn kho", "Giá", "Thể loại"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbKhoSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbKhoSachMouseClicked(evt);

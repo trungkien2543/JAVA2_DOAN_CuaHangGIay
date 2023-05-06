@@ -60,8 +60,8 @@ public class HoaDon_View extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
-        String[] header = {"Mã hóa đơn", "Mã nhân viên", "Mã khách hàng", "Ngày lập","Thông tin ưu đãi","Tổng tiền"};
-        model = new DefaultTableModel(header, 0);
+        //String[] header = {"Mã hóa đơn", "Mã nhân viên", "Mã khách hàng", "Ngày lập","Thông tin ưu đãi","Tổng tiền"};
+        model = (DefaultTableModel) tblHoaDon.getModel();
         tblHoaDon.setModel(model);
         txtFind.requestFocus();
         list = new DAOHoaDon().getListHoaDon();
@@ -331,15 +331,23 @@ public class HoaDon_View extends javax.swing.JFrame {
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Ma Hoa Don", "Ma Nhan Vien", "Ma Khach Hang", "Ngay Lap", "Tong Tien"
+                "Mã hóa đơn", "Mã nhân viên", "Mã khách hàng", "Thông tin ưu đãi", "Ngày lập", "Tổng tiền"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHoaDonMouseClicked(evt);
