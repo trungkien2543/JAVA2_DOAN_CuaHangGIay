@@ -867,9 +867,7 @@ public class NhapHangView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFindKeyReleased
 
-    public int tinhthanhtien(int sl,int gia){
-        return sl*gia;
-    }
+
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -915,8 +913,14 @@ public class NhapHangView extends javax.swing.JFrame {
         }
         for(DTOKhoSach s : list){
             if(s.getMaSach().equals(tbKho.getValueAt(selectedrow, 0))){
-                thanhtien = tinhthanhtien(sl, s.getGia());
-                tongtien +=thanhtien;
+                try{
+                    thanhtien = Math.multiplyExact(sl, s.getGia());
+                    tongtien =  Math.addExact(tongtien,thanhtien);
+                }
+                catch(ArithmeticException e){
+                    JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
+                    return ;
+                }
             }
         }
         model_nhap.addRow(new Object[]{
@@ -985,7 +989,7 @@ public class NhapHangView extends javax.swing.JFrame {
         else{
             do{
                 str = JOptionPane.showInputDialog("Nhập số lượng");
-                if(str.isEmpty()){
+                if(str  == null){
                     JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập số lượng sách!");
                     flag=true;
                 }
@@ -1012,10 +1016,25 @@ public class NhapHangView extends javax.swing.JFrame {
                     a = s.getGia();
                 }
             }
+        
+        
+        
+        //kiem tra su kien tran so
+        int thanhtien;
+        try{
+            thanhtien = Math.multiplyExact(sl, a);
+            tongtien += Math.addExact(tongtien,thanhtien);
+            
+        }
+        catch(ArithmeticException e){
+            JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
+            return ;
+        }
+        
         tongtien -= (int)tbNhap.getValueAt(selectedrow, 2) * a;
         model_nhap.setValueAt(sl, selectedrow, 2);
-        model_nhap.setValueAt(currencyVN.format(tinhthanhtien(sl, a)), selectedrow, 4);
-        tongtien += (int)tbNhap.getValueAt(selectedrow, 2) * a;
+        model_nhap.setValueAt(currencyVN.format(thanhtien) ,selectedrow, 4);
+        
         lblTongTien.setText(currencyVN.format(tongtien));
     }//GEN-LAST:event_btnEditActionPerformed
 
