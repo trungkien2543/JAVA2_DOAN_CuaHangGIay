@@ -33,7 +33,7 @@ public class BUSKhoSach {
             }
         }
         else{
-            if(ksDAO.editSach(ks)){
+            if(ksDAO.editSachDaXoa(ks)){
                 return "Thêm thành công";
             }
         }
@@ -50,14 +50,5 @@ public class BUSKhoSach {
             return "Sửa thành công";
         }
         return "Sửa thất bại";
-    }
-    public void Database_Excel(String path) {
-        try {
-            this.ksDAO.Database_Excel(path);
-            JOptionPane.showMessageDialog(null, "Xuất file Excel thành công!");
-            return;
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(BUSNhaXuatBan.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

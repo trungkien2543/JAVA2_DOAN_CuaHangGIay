@@ -58,7 +58,7 @@ public class ThongKeView extends javax.swing.JFrame {
 
         JFreeChart pieChart = ChartFactory.createPieChart(
                 "Biểu đồ thống kê số lượng sách bán theo thể loại".toUpperCase(),
-                dataset,  true, false, false);
+                dataset,  true, true, false);
         /*
             legend: nếu là true, hiển thị chú thích cho biểu đồ.
             tooltips: nếu là true, hiển thị thông tin chi tiết khi di chuột vào từng phần tử của biểu đồ.
@@ -96,6 +96,7 @@ public class ThongKeView extends javax.swing.JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if(listTN != null){
             for(DTOThongKeSoTien s : listTN){
+                System.out.println(s.getSoTien());
                 dataset.addValue(s.getSoTien(), "Tổng tiền", s.getThang()+"/"+s.getNam());
             }
             
@@ -319,13 +320,8 @@ public class ThongKeView extends javax.swing.JFrame {
             .addComponent(lbPhieu11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbPhieu10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblBill4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                .addGroup(ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ThanhMenu4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(BookStore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BookStore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThanhMenu4Layout.setVerticalGroup(
             ThanhMenu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

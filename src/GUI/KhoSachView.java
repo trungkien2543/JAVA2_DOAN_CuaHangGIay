@@ -15,6 +15,12 @@ import static GUI.BanHang_View.TenNV;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,17 +30,25 @@ import java.sql.Statement;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-
 /**
  *
  * @author ASUS
@@ -96,6 +110,7 @@ public class KhoSachView extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnExcel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         TieuDe = new javax.swing.JPanel();
         lblThayDoiTK = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -183,10 +198,20 @@ public class KhoSachView extends javax.swing.JFrame {
         btnExcel.setBackground(new java.awt.Color(0, 204, 153));
         btnExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/update.png"))); // NOI18N
-        btnExcel.setText("Excel");
+        btnExcel.setText("Export");
         btnExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcelActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(0, 204, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exximport.jpg"))); // NOI18N
+        jButton1.setText("Import");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -195,7 +220,7 @@ public class KhoSachView extends javax.swing.JFrame {
         BangChonLayout.setHorizontalGroup(
             BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BangChonLayout.createSequentialGroup()
-                .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFind, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
                 .addGap(54, 54, 54)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
@@ -203,20 +228,26 @@ public class KhoSachView extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnExcel)
+                .addGap(33, 33, 33)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
         BangChonLayout.setVerticalGroup(
             BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BangChonLayout.createSequentialGroup()
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(BangChonLayout.createSequentialGroup()
+                        .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtFind)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         TieuDe.setBackground(new java.awt.Color(153, 102, 0));
@@ -248,7 +279,7 @@ public class KhoSachView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TieuDeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1018, Short.MAX_VALUE)
                 .addComponent(lblThayDoiTK)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -457,7 +488,7 @@ public class KhoSachView extends javax.swing.JFrame {
         BackGroundLayout.setHorizontalGroup(
             BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackGroundLayout.createSequentialGroup()
-                .addComponent(ThanhMenu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ThanhMenu4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BangChon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -496,119 +527,6 @@ public class KhoSachView extends javax.swing.JFrame {
 
         txtFind.setText((String) tbKhoSach.getValueAt(selectedrow, 0));
     }//GEN-LAST:event_tbKhoSachMouseClicked
-
-    private void txtFindMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFindMouseReleased
-        
-    }//GEN-LAST:event_txtFindMouseReleased
-
-    private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindActionPerformed
-
-    private void txtFindKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindKeyPressed
-
-    private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
-        // TODO add your handling code here:
-        model.setRowCount(0);
-        String find = txtFind.getText();
-        
-   
-        
-        for(DTOKhoSach s : list){
-            if(s.getTenSach()==null){
-                continue;
-            }
-            if(s.getMaSach().contains(find) || s.getTenSach().contains(find) || String.valueOf(s.getNam()).contains(find) || s.getTenTacGia().contains(find) 
-            || s.getNhaXuatBan().contains(find) || String.valueOf(s.getSl()).contains(find) || String.valueOf(s.getGia()).contains(find) || s.getTheLoai().contains(find)){
-                model.addRow(new Object[]{
-                    s.getMaSach(), s.getTenSach(), s.getNam(), s.getTenTacGia(), s.getNhaXuatBan(), s.getSl(), currencyVN.format(s.getGia()),s.getTheLoai()
-            });
-            }
-        }
-                
-    }//GEN-LAST:event_txtFindKeyReleased
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        String str;
-        boolean flag = false;
-        do{
-            flag = false;
-            str = JOptionPane.showInputDialog("Nhap ma sach");
-            if(str == null){
-                txtFind.requestFocus();
-                return;
-            }
-            if (str.isEmpty()){
-                JOptionPane.showMessageDialog(rootPane, "Chua nhap ma sach");
-                flag = true;
-            }
-            
-            for(DTOKhoSach s : list){
-                if(s.getMaSach().equals(str) &&s.getTenSach()!=null){
-                    JOptionPane.showMessageDialog(this, "Ma sach da ton tai");
-                    flag = true;
-                }
-            }
-        }
-        while (flag);
-        NhapThongTinSach a = new NhapThongTinSach(str);
-        a.setVisible(true);
-        a.setLocationRelativeTo(null);
-        a.addWindowListener(new WindowAdapter() {
-            public void windowClosed(WindowEvent e) {
-                 ShowTable();
-            }   
-        });
-        
-        
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        String str=txtFind.getText();
-        int row = tbKhoSach.getSelectedRow();
-        if (row == -1 ){
-            JOptionPane.showMessageDialog(rootPane, "Hay chon 1 dong roi an nut sua");
-            return;
-        }
-        else{
-            SuaThongTinSach a = new SuaThongTinSach(str);
-            a.setVisible(true);
-            a.setLocationRelativeTo(null);
-            a.addWindowListener(new WindowAdapter() {
-                public void windowClosed(WindowEvent e) {
-                     ShowTable();
-                }   
-            });
-        }
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int row = tbKhoSach.getSelectedRow();
-        if (row == -1 ){
-            JOptionPane.showMessageDialog(rootPane, "Hay chon 1 dong roi an nut xoa");
-            return ;
-        }
-        else{
-            int dk=JOptionPane.showConfirmDialog(this,"Ban co muon xoa" , "Confirm", JOptionPane.YES_NO_OPTION);
-            if(dk!=JOptionPane.YES_OPTION){
-            return;
-            }
-            if(new DAOKhoSach().deleteSach((String) tbKhoSach.getValueAt(row, 0))){
-                JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong!");
-                list = new DAOKhoSach().getListSach();
-                txtFind.setText("");
-                ShowTable();
-                return ;   
-            }
-     
-        }
-        
-    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void lblThayDoiTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThayDoiTKMouseClicked
         // TODO add your handling code here:
@@ -674,47 +592,6 @@ public class KhoSachView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BookStore4MouseClicked
 
-    private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_txtFindFocusGained
-
-    private void txtFindFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindFocusLost
-
-    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
-        // TODO add your handling code here:
-//        String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
-//        if(tenfile.isEmpty()){
-//            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
-//            return;
-//        }
-        String path=null,tenfile=null;
-        boolean flag;
-        do{
-            flag=false;
-            tenfile = JOptionPane.showInputDialog("Nhập tên file :");
-            if(tenfile == null){
-                return;
-            }
-            if(tenfile.isEmpty()){
-                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
-                flag=true;
-            }
-        }
-        while(flag);
-        
-        JFileChooser j = new JFileChooser();
-        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int x = j.showSaveDialog(this);
-        if(x == JFileChooser.APPROVE_OPTION){
-            path=j.getSelectedFile().getPath()+tenfile;
-        }
-        BUSKhoSach ks = new BUSKhoSach();
-        ks.Database_Excel(path);
-    }//GEN-LAST:event_btnExcelActionPerformed
-
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
         Login l = new Login();
@@ -729,6 +606,354 @@ public class KhoSachView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BookStore5MouseClicked
 
+    public int giasach(String masach){
+        for(DTOKhoSach s : list){
+            if(s.getMaSach().equals(masach)){
+                return s.getGia();
+            }
+        }
+        return 0;
+    }
+    
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        String path=null,tenfile=null;
+        boolean flag;
+        do{
+            flag=false;
+            tenfile = JOptionPane.showInputDialog("Nhập tên file :");
+            if(tenfile == null){
+
+                return;
+            }
+            if(tenfile.isEmpty()){
+
+                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
+                flag=true;
+            }
+            else if (tenfile.contains(" ")){
+                JOptionPane.showMessageDialog(rootPane, "Tên file không có khoảng trắng");
+                flag=true;
+            }
+            else if (tenfile.contains("/") || tenfile.contains("%") || tenfile.contains("#") || tenfile.contains(":") ||tenfile.contains(";") ||tenfile.contains("~") ||tenfile.contains(".") ){
+                JOptionPane.showMessageDialog(rootPane, "Tên file không chứa kí tự đặc biệt");
+                flag=true;
+            }
+        }
+        while(flag);
+        
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x = j.showSaveDialog(this);
+        if(x == JFileChooser.APPROVE_OPTION){
+            path=j.getSelectedFile().getPath()+"//"+tenfile;
+        }
+        FileOutputStream file;
+
+        XSSFWorkbook wb = new XSSFWorkbook();
+        XSSFSheet Sheet = wb.createSheet("KhoSach");
+        XSSFRow row = null;
+        Cell cell = null;
+        row = Sheet.createRow(0);
+        cell = row.createCell(0, CellType.STRING);
+        cell.setCellValue("Mã sách");
+        cell = row.createCell(1, CellType.STRING);
+        cell.setCellValue("Tên sách");
+        cell = row.createCell(2, CellType.STRING);
+        cell.setCellValue("Năm xuất bản");
+        cell = row.createCell(3, CellType.STRING);
+        cell.setCellValue("Tên tác giả");
+        cell = row.createCell(4, CellType.STRING);
+        cell.setCellValue("Nhà xuất bản");
+        cell = row.createCell(5, CellType.STRING);
+        cell.setCellValue("Số lượng tồn kho");
+        cell = row.createCell(6, CellType.STRING);
+        cell.setCellValue("Giá");
+        cell = row.createCell(7, CellType.STRING);
+        cell.setCellValue("Thể loại");
+        
+        for(int i=0;i<tbKhoSach.getRowCount();i++) {
+            row = Sheet.createRow(i+1);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue(tbKhoSach.getValueAt(i, 0).toString());
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue(tbKhoSach.getValueAt(i, 1).toString());
+            cell = row.createCell(2, CellType.NUMERIC);
+            cell.setCellValue((int) tbKhoSach.getValueAt(i, 2));
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue(tbKhoSach.getValueAt(i, 3).toString());
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue(tbKhoSach.getValueAt(i, 4).toString());
+            cell = row.createCell(5, CellType.NUMERIC);
+            cell.setCellValue((int) tbKhoSach.getValueAt(i, 5));
+            cell = row.createCell(6, CellType.NUMERIC);
+            cell.setCellValue((int) giasach(tbKhoSach.getValueAt(i, 0).toString()));
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue(tbKhoSach.getValueAt(i, 7).toString());
+        }
+        try {
+            file = new FileOutputStream(path+".xlsx");
+            wb.write(file);
+            wb.close();
+            file.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(DAOKhoSach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(path != null){
+            JOptionPane.showMessageDialog(rootPane, "Xuất file Excel thành công");
+        }
+    }//GEN-LAST:event_btnExcelActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        String str=txtFind.getText();
+        int row = tbKhoSach.getSelectedRow();
+        if (row == -1 ){
+            JOptionPane.showMessageDialog(rootPane, "Hay chon 1 dong roi an nut sua");
+            return;
+        }
+        else{
+            SuaThongTinSach a = new SuaThongTinSach(str);
+            a.setVisible(true);
+            a.setLocationRelativeTo(null);
+            a.addWindowListener(new WindowAdapter() {
+                public void windowClosed(WindowEvent e) {
+                    ShowTable();
+                }
+            });
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int row = tbKhoSach.getSelectedRow();
+        if (row == -1 ){
+            JOptionPane.showMessageDialog(rootPane, "Hay chon 1 dong roi an nut xoa");
+            return ;
+        }
+        else{
+            if((int)tbKhoSach.getValueAt(row, 5) != 0){
+                JOptionPane.showMessageDialog(rootPane, "Sách đang có hàng trong kho. Không thể xóa!");
+                return ;
+            }
+            int dk=JOptionPane.showConfirmDialog(this,"Ban co muon xoa" , "Confirm", JOptionPane.YES_NO_OPTION);
+            if(dk!=JOptionPane.YES_OPTION){
+                return;
+            }
+            if(new DAOKhoSach().deleteSach((String) tbKhoSach.getValueAt(row, 0))){
+                JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong!");
+                list = new DAOKhoSach().getListSach();
+                txtFind.setText("");
+                ShowTable();
+                return ;
+            }
+
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        String str;
+        boolean flag = false;
+        do{
+            flag = false;
+            str = JOptionPane.showInputDialog("Nhap ma sach");
+            if(str == null){
+                txtFind.requestFocus();
+                return;
+            }
+            if (str.isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "Chua nhap ma sach");
+                flag = true;
+            }
+
+            for(DTOKhoSach s : list){
+                if(s.getMaSach().equals(str) &&s.getTenSach()!=null){
+                    JOptionPane.showMessageDialog(this, "Ma sach da ton tai");
+                    flag = true;
+                }
+            }
+        }
+        while (flag);
+        NhapThongTinSach a = new NhapThongTinSach(str);
+        a.setVisible(true);
+        a.setLocationRelativeTo(null);
+        a.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                ShowTable();
+            }
+        });
+
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
+        // TODO add your handling code here:
+        model.setRowCount(0);
+        String find = txtFind.getText();
+
+        for(DTOKhoSach s : list){
+            if(s.getTenSach()==null){
+                continue;
+            }
+            if(s.getMaSach().contains(find) || s.getTenSach().contains(find) || String.valueOf(s.getNam()).contains(find) || s.getTenTacGia().contains(find)
+                || s.getNhaXuatBan().contains(find) || String.valueOf(s.getSl()).contains(find) || String.valueOf(s.getGia()).contains(find) || s.getTheLoai().contains(find)){
+                model.addRow(new Object[]{
+                    s.getMaSach(), s.getTenSach(), s.getNam(), s.getTenTacGia(), s.getNhaXuatBan(), s.getSl(), currencyVN.format(s.getGia()),s.getTheLoai()
+                });
+            }
+        }
+
+    }//GEN-LAST:event_txtFindKeyReleased
+
+    private void txtFindKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindKeyPressed
+
+    private void txtFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindActionPerformed
+
+    private void txtFindMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFindMouseReleased
+
+    }//GEN-LAST:event_txtFindMouseReleased
+
+    private void txtFindFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindFocusLost
+
+    private void txtFindFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFindFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtFindFocusGained
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        File excelFile;
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        String defaultCurrentDirectoryPath = "ExcelFile\\KhoSach\\Import";
+        JFileChooser filechooser = new JFileChooser(defaultCurrentDirectoryPath);
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILE", "xls","xlsx","xlsm");
+        filechooser.setFileFilter(fnef);
+        filechooser.setDialogTitle("Chọn file excel");
+        int excelChooser = filechooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION){
+            try {
+                excelFile = filechooser.getSelectedFile();
+                System.out.println(excelFile);
+                fis = new FileInputStream(excelFile);
+                bis = new BufferedInputStream(fis);
+                XSSFWorkbook wb = new XSSFWorkbook(bis);
+                XSSFSheet sheet = wb.getSheetAt(0);
+                for (int row = 0; row <= sheet.getLastRowNum(); row++) {
+                    XSSFRow excelRow = sheet.getRow(row);
+                    XSSFCell excelMaSach = excelRow.getCell(0);
+                    XSSFCell excelTenSach = excelRow.getCell(1);
+                    XSSFCell excelNamXuatBan = excelRow.getCell(2);
+                    XSSFCell excelTenTacGia = excelRow.getCell(3);
+                    XSSFCell excelNhaXuatBan = excelRow.getCell(4);
+                    XSSFCell excelSoLuongTonKho = excelRow.getCell(5);
+                    XSSFCell excelGia = excelRow.getCell(6);
+                    XSSFCell excelTheLoai = excelRow.getCell(7);
+                    if (row == 0) {
+                        if (!excelMaSach.getStringCellValue().equalsIgnoreCase("Mã sách")
+                                || !excelTenSach.getStringCellValue().equalsIgnoreCase("Tên sách")
+                                || !excelNamXuatBan.getStringCellValue().equalsIgnoreCase("Năm xuất bản")
+                                || !excelTenTacGia.getStringCellValue().equalsIgnoreCase("Tên tác giả")
+                                || !excelNhaXuatBan.getStringCellValue().equalsIgnoreCase("Nhà xuất bản")
+                                || !excelSoLuongTonKho.getStringCellValue().equalsIgnoreCase("Số lượng tồn kho")
+                                || !excelGia.getStringCellValue().equalsIgnoreCase("Giá")
+                                || !excelTheLoai.getStringCellValue().equalsIgnoreCase("Thể loại")
+                           ){
+                            JOptionPane.showMessageDialog(this, "File không đúng định dạng");
+                            return;
+                        }
+                        continue;
+                    }
+                    String MaSach = excelMaSach.getStringCellValue().trim();
+                    String TenSach = excelTenSach.getStringCellValue().trim();
+                    int NamXuatBan = (int) excelNamXuatBan.getNumericCellValue();
+                    String TenTacGia = excelTenTacGia.getStringCellValue().trim();
+                    String NhaXuatBan = excelNhaXuatBan.getStringCellValue().trim();
+                    int SoLuongTonKho = (int) excelSoLuongTonKho.getNumericCellValue();
+                    int Gia = (int) excelGia.getNumericCellValue();
+                    String TheLoai = excelTheLoai.getStringCellValue().trim();
+                    
+//                    int obj = ktTonTaiSDT(SDT);
+//                    if (obj == -1) {
+//                        //add
+//                        DTOKhachHang kh = new DTOKhachHang(SDT, tenKH, diaChi, SDT, tichDiem);
+//                        list.add(kh);
+//                        //them vao DB
+//                        new BUSKhachHang().addKhachHang(kh);
+//                    } else {
+//                        //update
+//                        updateKH(tenKH, diaChi, tichDiem, obj);
+//                        new BUSKhachHang().updateKhachHang(SDT,tenKH,diaChi,tichDiem);
+//                    }
+                    int obj = ktTonTaiMaSach(MaSach);
+                    if(obj == -1){
+                        //add:
+                        DTOKhoSach ks = new DTOKhoSach();
+                        ks.setMaSach(MaSach);
+                        ks.setTenSach(TenSach);
+                        ks.setNam(NamXuatBan);
+                        ks.setTenTacGia(TenTacGia);
+                        ks.setNhaXuatBan(NhaXuatBan);
+                        ks.setSl(SoLuongTonKho);
+                        ks.setGia(Gia);
+                        ks.setTheLoai(TheLoai);
+                        new BUSKhoSach().addSach(ks,"add" );
+                    }
+                    else{
+                        DTOKhoSach ks = new DTOKhoSach();
+                        ks.setMaSach(MaSach);
+                        ks.setTenSach(TenSach);
+                        ks.setNam(NamXuatBan);
+                        ks.setTenTacGia(TenTacGia);
+                        ks.setNhaXuatBan(NhaXuatBan);
+                        ks.setSl(SoLuongTonKho);
+                        ks.setGia(Gia);
+                        ks.setTheLoai(TheLoai);
+                        new BUSKhoSach().editSach(ks);
+                    }
+                    
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(KhoSachView.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(KhoSachView.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(KhoSachView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(KhoSachView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                ShowTable();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private int ktTonTaiMaSach(String MaSach) {
+        for (DTOKhoSach i : list) {
+            if (i.getMaSach().equals(MaSach)) {
+                return list.indexOf(i);
+            }
+        }
+        return -1;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -791,6 +1016,7 @@ public class KhoSachView extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnExcel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuItem1;

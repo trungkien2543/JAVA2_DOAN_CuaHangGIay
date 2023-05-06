@@ -67,7 +67,7 @@ public class DAOKhoSach {
     }
     
      public boolean deleteSach(String masach){
-        String sql = "update  KhoSach set TenSach=NULL,NamXuatBan=NULL,TenTacGia=NULL,NhaXuatBan=NULl,SoLuongTonKho=NULL,Gia=NULL,TheLoai=NULL"+" where MaSach=?";
+        String sql = "update  KhoSach set TenSach=NULL,NamXuatBan=NULL,TenTacGia=NULL,NhaXuatBan=NULl,SoLuongTonKho=NULL,Gia=NULL"+" where MaSach=?";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, masach);
@@ -80,7 +80,27 @@ public class DAOKhoSach {
     }
     
      public boolean editSach(DTOKhoSach s){
-        String sql = "update  KhoSach set TenSach = ?,NamXuatBan=?,TenTacGia=?,NhaXuatBan=?,SoLuongTonKho = 0,Gia=?,TheLoai=? where MaSach=?";
+        String sql = "update  KhoSach set TenSach = ?,NamXuatBan=?,TenTacGia=?,NhaXuatBan=?, Gia=?,TheLoai=? where MaSach=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, s.getTenSach());
+            ps.setInt(2, s.getNam());
+            ps.setString(3, s.getTenTacGia());
+            ps.setString(4, s.getNhaXuatBan());
+            ps.setInt(5, s.getGia());
+            ps.setString(6, s.getTheLoai());
+            ps.setString(7, s.getMaSach());
+            return ps.executeUpdate() > 0;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+     }
+    
+     
+     public boolean editSachDaXoa(DTOKhoSach s){
+        String sql = "update  KhoSach set TenSach = ?,NamXuatBan=?,TenTacGia=?,NhaXuatBan=?,SoLuongTonKho=0, Gia=?,TheLoai=? where MaSach=?";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, s.getTenSach());
@@ -158,68 +178,7 @@ public class DAOKhoSach {
     }
     
     
-    public void Database_Excel(String path) throws FileNotFoundException {
-        ArrayList<DTOKhoSach> list = new ArrayList<>();
-        list = getListSach();
-        FileOutputStream file;
-
-        XSSFWorkbook wb = new XSSFWorkbook();
-        XSSFSheet Sheet = wb.createSheet("KhoSach");
-        XSSFRow row = null;
-        Cell cell = null;
-        row = Sheet.createRow(0);
-        int i = 0;
-        cell = row.createCell(0, CellType.STRING);
-        cell.setCellValue("Mã sách");
-        cell = row.createCell(1, CellType.STRING);
-        cell.setCellValue("Tên sách");
-        cell = row.createCell(2, CellType.STRING);
-        cell.setCellValue("Năm xuất bản");
-        cell = row.createCell(3, CellType.STRING);
-        cell.setCellValue("Tên tác giả");
-        cell = row.createCell(4, CellType.STRING);
-        cell.setCellValue("Nhà xuất bản");
-        cell = row.createCell(5, CellType.STRING);
-        cell.setCellValue("Số lượng tồn kho");
-        cell = row.createCell(6, CellType.STRING);
-        cell.setCellValue("Giá ");
-        cell = row.createCell(7, CellType.STRING);
-        cell.setCellValue("Thể loại");
-        for (DTOKhoSach ks : list) {
-            if (ks.getTenSach()!= null) {
-                i = i + 1;
-                //System.out.println(nxb.getMa());
-                row = Sheet.createRow(i);
-                cell = row.createCell(0, CellType.STRING);
-                cell.setCellValue(ks.getMaSach());
-                cell = row.createCell(1, CellType.STRING);
-                cell.setCellValue(ks.getTenSach());
-                cell = row.createCell(2, CellType.STRING);
-                cell.setCellValue(ks.getNam());
-                cell = row.createCell(3, CellType.STRING);
-                cell.setCellValue(ks.getTenTacGia());
-                cell = row.createCell(4, CellType.STRING);
-                cell.setCellValue(ks.getNhaXuatBan());
-                cell = row.createCell(5, CellType.STRING);
-                cell.setCellValue(ks.getSl());
-                cell = row.createCell(6, CellType.STRING);
-                cell.setCellValue(ks.getGia());
-                cell = row.createCell(7, CellType.STRING);
-                cell.setCellValue(ks.getTheLoai());
-
-            }
-        }
-        try {
-            file = new FileOutputStream(path+".xlsx");
-            wb.write(file);
-            wb.close();
-            file.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(DAOKhoSach.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+    
     
     public static void main(String[] args) {
         new DAOKhoSach();
