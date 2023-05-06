@@ -1090,11 +1090,15 @@ public class BanHang_View extends javax.swing.JFrame {
                             txtFind.requestFocus();
                             return;
                         }
-
+                        
 
 
                         //Cac loi sai ve so luong de de nguoi dung nhap lai so luong
                         //Kiem tra xem nguoi dung co nhap so luong la ki tu hay khong
+                        if(sl.isEmpty()){
+                            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập số lượng");
+                            continue;
+                        }
                         try{
                             sl_int = Integer.parseInt(sl);
                         }
@@ -1102,18 +1106,33 @@ public class BanHang_View extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(rootPane, "So luong nhap sai cu phap");
                             continue;
                         }
+                        
                         //kiem tra xem du so luong de ban hay khong
+                        
                         if(sl_int > s.getSl()){
                             JOptionPane.showMessageDialog(rootPane, "So luong khong du");
                             continue;
                         }
                         else{
-                            TongTien_int += s.thanhtien(sl_int);
-                            break;
+                            try{
+                                    int test1 = Math.multiplyExact(sl_int, s.getGia());
+                                    int test2 = Math.addExact(TongTien_int,test1);
+                                }
+                                catch(ArithmeticException e){
+                                    JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
+                                    txtFind.setText("nhap ma sach");
+                                    txtFind.requestFocus();
+                                    return ;
+                                }
+                
+                                TongTien_int += s.thanhtien(sl_int);
+                                break;
                         }
+                            
                     }
                     while(true);
-
+             
+                    
                     model.addRow(new Object[]{
                         s.getMaSach(),s.getTenSach(),s.getGia(),sl_int,currencyVN.format(s.thanhtien(sl_int))
                     });
@@ -1156,7 +1175,6 @@ public class BanHang_View extends javax.swing.JFrame {
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             String masach = txtFind.getText();
             int sl_int=0;
-
             if(masach.equals("nhap ma hang")){
                 JOptionPane.showMessageDialog(rootPane, "Chua nhap ma hang");
                 txtFind.requestFocus();
@@ -1192,6 +1210,17 @@ public class BanHang_View extends javax.swing.JFrame {
                                 continue;
                             }
                             else{
+                                try{
+                                    int test1 = Math.multiplyExact(sl_int, s.getGia());
+                                    int test2 = Math.addExact(TongTien_int,test1);
+                                }
+                                catch(ArithmeticException e){
+                                    JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
+                                    txtFind.setText("nhap ma sach");
+                                    txtFind.requestFocus();
+                                    return ;
+                                }
+                
                                 TongTien_int += s.thanhtien(sl_int);
                                 break;
                             }
@@ -1539,6 +1568,17 @@ public class BanHang_View extends javax.swing.JFrame {
                             continue;
                         }
                         else{
+                            
+                            try{
+                                int test1 = Math.multiplyExact(sl_int, s.getGia());
+                                int test2 = Math.addExact(TongTien_int,test1);
+                            }
+                            catch(ArithmeticException e){
+                                JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
+                                return ;
+                            }
+                
+                            
                             TongTien_int -=s.thanhtien(Integer.parseInt(tblBanSach.getValueAt(selected_row, 3).toString()));
                             TongTien_int += s.thanhtien(sl_int);
                             break;

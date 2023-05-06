@@ -890,8 +890,10 @@ public class NhapHangView extends javax.swing.JFrame {
             do{
                 flag=false;
                 str = JOptionPane.showInputDialog("Nhập số lượng");
-                System.out.println(str);
-                if( str.isEmpty() ){
+                if(str == null){
+                    return;
+                }
+                if( str.isEmpty()){
                     JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập số lượng sách!");
                     flag=true;
                 }
@@ -914,13 +916,18 @@ public class NhapHangView extends javax.swing.JFrame {
         for(DTOKhoSach s : list){
             if(s.getMaSach().equals(tbKho.getValueAt(selectedrow, 0))){
                 try{
-                    thanhtien = Math.multiplyExact(sl, s.getGia());
-                    tongtien =  Math.addExact(tongtien,thanhtien);
+                    int test1 = Math.multiplyExact(sl, s.getGia());
+                    int test2 = Math.addExact(tongtien,test1);
+                    System.out.println(test2);
                 }
                 catch(ArithmeticException e){
                     JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
                     return ;
                 }
+                
+                thanhtien = sl*s.getGia();
+                
+                tongtien += thanhtien;
             }
         }
         model_nhap.addRow(new Object[]{
@@ -1020,11 +1027,10 @@ public class NhapHangView extends javax.swing.JFrame {
         
         
         //kiem tra su kien tran so
-        int thanhtien;
+        int thanhtien = 0;
         try{
-            thanhtien = Math.multiplyExact(sl, a);
-            tongtien += Math.addExact(tongtien,thanhtien);
-            
+            int test1 = Math.multiplyExact(sl, a);
+            int test2 = Math.addExact(tongtien,test1);
         }
         catch(ArithmeticException e){
             JOptionPane.showMessageDialog(rootPane, "Bạn nhập số lượng quá lớn dẫn tới bị tràn số hay nhập lại số lượng\n Nếu muốn nhập số lượng lớn thì hãy nhập nhiều lần");
@@ -1032,6 +1038,9 @@ public class NhapHangView extends javax.swing.JFrame {
         }
         
         tongtien -= (int)tbNhap.getValueAt(selectedrow, 2) * a;
+        thanhtien = sl * a;
+        tongtien+= thanhtien;
+        
         model_nhap.setValueAt(sl, selectedrow, 2);
         model_nhap.setValueAt(currencyVN.format(thanhtien) ,selectedrow, 4);
         
