@@ -11,17 +11,25 @@ import DTO.DTOChiTietHoaDon;
 import DTO.DTOHoaDon;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -662,8 +670,17 @@ public class HoaDon_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Hay chon 1 hoa don roi xem chi tiet");
             return;
         }
-        ChiTietHoaDon_View s = new ChiTietHoaDon_View(txtFind.getText());
-        s.setVisible(true);
+        try{
+            Hashtable map = new Hashtable();
+            JasperReport rpt = JasperCompileManager.compileReport("src\\Report\\reportHoaDon.jrxml");
+            map.put("sMaHD", txtFind.getText());
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLCuaHangSach;user=sa;password=123456;" + "encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2;");
+            JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
+            JasperViewer.viewReport(p,false);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
