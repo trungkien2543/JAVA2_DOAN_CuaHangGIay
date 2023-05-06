@@ -51,8 +51,8 @@ public class KhachHang_View extends javax.swing.JFrame {
     public KhachHang_View(String MaNV, String TenNV) {
         initComponents();
         initData();
-        String[] header = { "Tên khách hàng", "Địa chỉ", "SĐT", "Tích điểm"};
-        tblModel = new DefaultTableModel(header, 0);
+//        String[] header = { "Tên khách hàng", "Địa chỉ", "SĐT", "Tích điểm"};
+        tblModel = (DefaultTableModel) tblKhachHang.getModel();
         loadData(list);
         setExtendedState(JFrame.MAXIMIZED_BOTH);//phat toan man hinh
         this.setLocationRelativeTo(null);
@@ -253,18 +253,31 @@ public class KhachHang_View extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã KH", "Tên KH", "Địa chỉ", "SĐT", "Tích điểm"
+                "Tên khách hàng", "Địa chỉ", "SĐT", "Tích điểm"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane3.setViewportView(tblKhachHang);
+        if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
+            tblKhachHang.getColumnModel().getColumn(0).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(1).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         ThanhMenu5.setBackground(new java.awt.Color(0, 153, 153));
 
