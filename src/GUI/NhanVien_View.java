@@ -73,7 +73,7 @@ public class NhanVien_View extends javax.swing.JFrame {
 
         model = (DefaultTableModel) thongtinnv.getModel();
         model.setColumnIdentifiers(new Object[]{
-            "Mã nhân viên", "Tên nhân viên", "Quê quán", "Số ngày làm", "Công việc"
+            "Mã nhân viên", "Tên nhân viên", "Quê quán", "Công việc"
         });
         model1 = (DefaultTableModel) dstaikhoan.getModel();
         model1.setColumnIdentifiers(new Object[]{
@@ -101,7 +101,7 @@ public class NhanVien_View extends javax.swing.JFrame {
         for (DTONhanVien s : listnv) {
 
             model.addRow(new Object[]{
-                s.getMaNV(), s.getTenNV(), s.getQueQuan(), s.getSoNgayLam(), s.getCongViec()
+                s.getMaNV(), s.getTenNV(), s.getQueQuan(), s.getCongViec()
             });
         }
     }
@@ -934,7 +934,7 @@ if (maNV != null && !maNV.trim().equals("")) {
     public void showResult() {
         DTONhanVien s = listnv.get(listnv.size() - 1);
         model.addRow(new Object[]{
-            s.getMaNV(), s.getTenNV(), s.getQueQuan(), s.getSoNgayLam(), s.getCongViec()
+            s.getMaNV(), s.getTenNV(), s.getQueQuan(), s.getCongViec()
         });
         DTOTaiKhoan tk = listtk.get(listtk.size() - 1);
         model1.addRow(new Object[]{
@@ -976,7 +976,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                 model.setRowCount(0);
                 for (DTONhanVien nv : listnv) {
                     if (nv.getTenNV().contains(txthienthi.getText())) {
-                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getCongViec()};
                         model.addRow(rowData);
                     }
                 }
@@ -986,7 +986,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                 model.setRowCount(0);
                 for (DTONhanVien nv : listnv) {
                     if (nv.getQueQuan().contains(txthienthi.getText())) {
-                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getCongViec()};
                         model.addRow(rowData);
                     }
                 }
@@ -995,7 +995,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                 model.setRowCount(0);
                 for (DTONhanVien nv : listnv) {
                     if (nv.getCongViec().contains(txthienthi.getText())) {
-                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getCongViec()};
                         model.addRow(rowData);
                     }
                 }
@@ -1004,7 +1004,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                 model.setRowCount(0);
                 for (DTONhanVien nv : listnv) {
                     if (nv.getMaNV().contains(txthienthi.getText())) {
-                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getSoNgayLam(), nv.getCongViec()};
+                        Object[] rowData = {nv.getMaNV(), nv.getTenNV(), nv.getQueQuan(), nv.getCongViec()};
                         model.addRow(rowData);
                     }
                 }
@@ -1159,9 +1159,6 @@ if (maNV != null && !maNV.trim().equals("")) {
             cell.setCellValue("Quê quán");
 
             cell = row.createCell(3, CellType.STRING);
-            cell.setCellValue("Số ngày làm");
-
-            cell = row.createCell(4, CellType.STRING);
             cell.setCellValue("Công việc");
 
            
@@ -1203,9 +1200,6 @@ if (maNV != null && !maNV.trim().equals("")) {
 
                 cell = row.createCell(3, CellType.STRING);
                 cell.setCellValue(thongtinnv.getValueAt(i, 3).toString());
-
-                cell = row.createCell(4, CellType.STRING);
-                cell.setCellValue(thongtinnv.getValueAt(i, 4).toString());
 
                 
 
@@ -1302,13 +1296,11 @@ if (maNV != null && !maNV.trim().equals("")) {
                     XSSFCell excelManv = excelRow.getCell(0); // Lấy ô đầu tiên trong hàng
                     XSSFCell excelTennv = excelRow.getCell(1);
                     XSSFCell excelQuequan = excelRow.getCell(2);
-                   
-                    XSSFCell excelCongviec = excelRow.getCell(4);
+                    XSSFCell excelCongviec = excelRow.getCell(3);
                     if (row == 0) {
                         if (!excelManv.getStringCellValue().equalsIgnoreCase("Mã nhân viên")
                                 || !excelTennv.getStringCellValue().equalsIgnoreCase("Tên nhân viên")
                                 || !excelQuequan.getStringCellValue().equalsIgnoreCase("Quê quán")
-                           
                                 || !excelCongviec.getStringCellValue().equalsIgnoreCase("Công việc")) {
                             JOptionPane.showMessageDialog(null, "File không đúng định dạng");
                             return;
@@ -1331,7 +1323,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                     
                     if(!new BUSNhanVien().KtrNV(manv)){
                             //add
-                            DTONhanVien nv =new DTONhanVien(manv, Tennv, quequan, 0,congviec);
+                            DTONhanVien nv =new DTONhanVien(manv, Tennv, quequan,congviec);
                            
                             listnv.add(nv);
                             //them vao DB
@@ -1340,7 +1332,7 @@ if (maNV != null && !maNV.trim().equals("")) {
                     } else {
                         
                        
-                            new BUSNhanVien().updateNhanVien(manv, Tennv, quequan,0, congviec);
+                            new BUSNhanVien().updateNhanVien(manv, Tennv, quequan, congviec);
                             listnv= new BUSNhanVien().getAllNhanVien();
                     }
                          

@@ -31,7 +31,7 @@ public class DAONhanVien {
     
     public boolean addNhanvien(DTONhanVien s){
         if(!checkNV(s.getMaNV())){
-        String sql = "INSERT INTO NhanVien(MaNv,TenNV,QueQuan,SoNgayLam,CongViec) VALUES(?,?,?,0,?)";
+        String sql = "INSERT INTO NhanVien(MaNv,TenNV,QueQuan,CongViec) VALUES(?,?,?,?)";
         try{
             
             PreparedStatement ps = con.prepareStatement(sql);
@@ -58,7 +58,6 @@ public class DAONhanVien {
                 a.setMaNV(rs.getString("MaNV"));
                 a.setTenNV(rs.getString("TenNV"));
                 a.setQueQuan(rs.getString("QueQuan"));
-                a.setSoNgayLam(rs.getInt("SoNgayLam"));
                 a.setCongViec(rs.getString("CongViec"));
               if(a.getTenNV() != null) {
                 list.add(a);
@@ -73,12 +72,11 @@ public class DAONhanVien {
     PreparedStatement ps1 = null;
                     boolean result = false;
                     try {
-                        ps1 = con.prepareStatement("UPDATE nhanvien SET tenNV = ?, queQuan = ?, soNgayLam = ?, congViec = ? WHERE maNV = ?");
+                        ps1 = con.prepareStatement("UPDATE nhanvien SET tenNV = ?, queQuan = ?, congViec = ? WHERE maNV = ?");
                         ps1.setString(1,null );
                         ps1.setString(2, null);
-                        ps1.setInt(3, 0);
-                        ps1.setString(4, null);
-                        ps1.setString(5, nv.getMaNV());
+                        ps1.setString(3, null);
+                        ps1.setString(4, nv.getMaNV());
                         int rowCount = ps1.executeUpdate();
                         if (rowCount > 0) {
                             result = true;
@@ -111,15 +109,14 @@ public class DAONhanVien {
         }
         return false;
     }
-     public boolean updateNV(String Manv,String tennv,String quequan,int songaylam,String congviec){
-        String sql = "UPDATE NhanVien SET TenNV=?,QueQuan=? ,Songaylam=? ,CongViec=? WHERE MaNV =?";
+     public boolean updateNV(String Manv,String tennv,String quequan,String congviec){
+        String sql = "UPDATE NhanVien SET TenNV=?,QueQuan=? ,CongViec=? WHERE MaNV =?";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, tennv);
             ps.setString(2, quequan);
-            ps.setInt(3,0);
-            ps.setString(4,congviec);
-            ps.setString(5, Manv);
+            ps.setString(3,congviec);
+            ps.setString(4, Manv);
             return ps.executeUpdate() > 0;
         }catch(Exception e){
             e.printStackTrace();

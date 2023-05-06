@@ -242,7 +242,7 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
             return;
         }
         
-        DTONhanVien nv = new DTONhanVien(MaNV, ten, quequan, 0, "");
+        DTONhanVien nv = new DTONhanVien(MaNV, ten, quequan, "");
         String editNV = new BUSNhanVien().suaNhanVien(nv);
         String editEmail = new BUSTaiKhoan().suaEmail(email, MaNV);
         

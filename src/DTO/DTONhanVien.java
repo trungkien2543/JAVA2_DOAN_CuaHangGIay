@@ -9,25 +9,21 @@ package DTO;
  * @author triet
  */
 public class DTONhanVien {
-       private int SoNgayLam;
        private String Manv,TenNV,QueQuan,CongViec;
        
       public DTONhanVien (){
         this.Manv = null;
         this.TenNV = null;
         this.QueQuan = null;
-        this.SoNgayLam = 0;
         this.CongViec = null;
        
       };
       
-      public DTONhanVien (String manv ,String ten,String que,int songaylam,String cvc){
-         
+      public DTONhanVien (String manv ,String ten,String que,String cvc){
           this.Manv=manv;
           this.TenNV=ten;
           this.QueQuan=que;
-           this.SoNgayLam=songaylam;
-           this.CongViec=cvc;
+          this.CongViec=cvc;
       }
 
     public String getMaNV() {
@@ -53,13 +49,7 @@ public class DTONhanVien {
     public void setQueQuan(String QueQuan) {
         this.QueQuan = QueQuan;
     }
-     public int getSoNgayLam() {
-        return SoNgayLam;
-    }
 
-    public void setSoNgayLam(int SoNgayLam) {
-        this.SoNgayLam = SoNgayLam;
-    }
     public String getCongViec() {
         return CongViec;
     }
