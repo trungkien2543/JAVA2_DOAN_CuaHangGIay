@@ -954,6 +954,9 @@ public class HoaDon_View extends javax.swing.JFrame {
         
         //Thao tác kiểm tra file
         String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
+        if(tenfile == null){
+            return;
+        }
         if(tenfile.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
             return;

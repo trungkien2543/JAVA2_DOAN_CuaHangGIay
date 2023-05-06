@@ -695,6 +695,9 @@ public class KhoSachView extends javax.swing.JFrame {
         do{
             flag=false;
             tenfile = JOptionPane.showInputDialog("Nhập tên file :");
+            if(tenfile == null){
+                return;
+            }
             if(tenfile.isEmpty()){
                 JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
                 flag=true;

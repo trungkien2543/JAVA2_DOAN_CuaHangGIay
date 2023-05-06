@@ -206,7 +206,7 @@ public class NXB_View extends javax.swing.JFrame implements ActionListener {
         jPanelEdit2.add(jlabelEditEmail);
         jPanelEdit2.add(JtextfieldEditEmail);
         jPanelEdit3.add(jButton_ok3);
-
+        JtextfieldEditMa.setEnabled(false);
     }
 
     public void initJDialogUpdate() {

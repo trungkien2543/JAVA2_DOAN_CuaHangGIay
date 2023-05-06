@@ -335,7 +335,7 @@ public class PhieuNhap extends javax.swing.JFrame {
             }
         });
 
-        cbxDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Mã phiếu", "Mã nhân viên", "Mã nhà xuất bản", "Thông tin ưu đãi", "Ngày lập", "Tổng tiền" }));
+        cbxDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Mã phiếu", "Mã nhân viên", "Mã nhà xuất bản", "Ngày lập", "Tổng tiền" }));
         cbxDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxDieuKienLocActionPerformed(evt);
@@ -927,6 +927,9 @@ public class PhieuNhap extends javax.swing.JFrame {
 
         //Thao tác kiểm tra file
         String tenfile = JOptionPane.showInputDialog("Nhập tên file ");
+        if(tenfile == null){
+            return;
+        }
         if(tenfile.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên file");
             return;
