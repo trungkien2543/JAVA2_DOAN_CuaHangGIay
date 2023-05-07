@@ -778,7 +778,7 @@ public class PhieuNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if(jDateFrom.getDate() == null || jDateTo.getDate()==null){
-            JOptionPane.showMessageDialog(rootPane, "Không để trống lựa chọn");
+            JOptionPane.showMessageDialog(rootPane, "Không để trống lựa chọn hoặc nhập sai cú pháp");
             return;
         }
         Date From = jDateFrom.getDate();
