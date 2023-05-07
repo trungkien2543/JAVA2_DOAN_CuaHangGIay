@@ -1603,6 +1603,12 @@ public class BanHang_View extends javax.swing.JFrame {
                         //Kiem tra xem nguoi dung co nhap so luong la ki tu hay khong
                         try{
                             sl_int = Integer.parseInt(sl);
+                            
+                            if(sl_int <= 0){
+                                JOptionPane.showMessageDialog(rootPane, "So luong phai lon hon 0");
+                                continue;
+                            }
+                            
                         }
                         catch(NumberFormatException e){
                             JOptionPane.showMessageDialog(rootPane, "So luong nhap sai cu phap");
