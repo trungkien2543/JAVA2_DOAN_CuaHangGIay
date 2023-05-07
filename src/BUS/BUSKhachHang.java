@@ -32,4 +32,12 @@ public class BUSKhachHang {
         }
         return "Update khách hàng thất bại";
     }
+    
+    public boolean TichDiem(int TichDiem, String MaKhach){
+        if(khDAO.TichDiem(TichDiem, MaKhach)){
+            return true;
+        }
+        return false;
+    }
+  
 }

@@ -74,8 +74,6 @@ public class BanHang_View extends javax.swing.JFrame {
         txtSDT_NHAP.setEditable(false);
         tblHoaDon.setEnabled(false);
         
-        tblBanSach.setEditingColumn(-1);
-        
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         
@@ -99,8 +97,6 @@ public class BanHang_View extends javax.swing.JFrame {
         }
         
         Reset();
-        jTabbedPane1.setEnabledAt(1, false);
-        jTabbedPane1.setEnabledAt(2, false);
     }
     
 
@@ -1218,7 +1214,7 @@ public class BanHang_View extends javax.swing.JFrame {
             String masach = txtFind.getText();
             int sl_int=0;
             if(masach.equals("Nhập mã sách")){
-                JOptionPane.showMessageDialog(rootPane, "Chua nhap ma hang");
+                JOptionPane.showMessageDialog(rootPane, "Chưa nhập mã sách");
                 txtFind.requestFocus();
                 return;
             }
@@ -1515,7 +1511,7 @@ public class BanHang_View extends javax.swing.JFrame {
         }
         if(SoTienTra >= 200000){
             int TichDiem =  DiemDaTich + 1;
-            if(new DAOKhachHang().TichDiem(TichDiem, lblMaKH_HD.getText()));
+            if(new BUSKhachHang().TichDiem(TichDiem, lblMaKH_HD.getText()));
             JOptionPane.showMessageDialog(rootPane, "Khach hang duoc tich diem");
             
         }
@@ -1544,7 +1540,7 @@ public class BanHang_View extends javax.swing.JFrame {
         for (int i = 0; i < tblHoaDon.getRowCount();i++){
             for (DTOKhoSach slTonKho : list){
                 if(slTonKho.getMaSach().equals(tblHoaDon.getValueAt(i, 0))){
-                        if(new DAOKhoSach().TruSLBanHang(slTonKho.getMaSach(), slTonKho.getSl(), (int) tblHoaDon.getValueAt(i, 3))){
+                        if(new BUSKhoSach().TruSLBanHang(slTonKho.getMaSach(), slTonKho.getSl(), (int) tblHoaDon.getValueAt(i, 3))){
                             slTonKho.setSl(slTonKho.getSl() - (int) tblHoaDon.getValueAt(i, 3));
                         }
                 }

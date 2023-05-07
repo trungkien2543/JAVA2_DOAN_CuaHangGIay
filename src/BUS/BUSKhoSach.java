@@ -51,4 +51,11 @@ public class BUSKhoSach {
         }
         return "Sửa thất bại";
     }
+    
+    public boolean TruSLBanHang(String masach, int SLTonKho, int SLMua){
+        if(ksDAO.TruSLBanHang(masach, SLTonKho, SLMua)){
+            return true;
+        }
+        return false;
+    }
 }
