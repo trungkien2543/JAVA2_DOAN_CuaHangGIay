@@ -865,7 +865,7 @@ if (maNV != null && !maNV.trim().equals("")) {
     }//GEN-LAST:event_lockActionPerformed
     public void showResult1() {
         model1.setRowCount(0);
-        listtk = new DAOTaiKhoan().getListTK();
+        listtk = new BUSTaiKhoan().getAllTaiKhoan();
         for (DTOTaiKhoan s : listtk) {
             model1.addRow(new Object[]{
                 s.getMaNhanVien(), s.getMatKhau(), s.getEmail(), s.getTrangThai(),s.getChucVu()

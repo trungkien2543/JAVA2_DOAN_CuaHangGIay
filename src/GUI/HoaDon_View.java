@@ -64,7 +64,7 @@ public class HoaDon_View extends javax.swing.JFrame {
         model = (DefaultTableModel) tblHoaDon.getModel();
         tblHoaDon.setModel(model);
         txtFind.requestFocus();
-        list = new DAOHoaDon().getListHoaDon();
+        list = new BUSHoaDon().getAllHoaDon();
         
         ShowTable();
         jpNgayLap.setVisible(false);

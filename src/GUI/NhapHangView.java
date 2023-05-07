@@ -10,6 +10,7 @@ import DTO.DTOPhieuNhap;
 import DTO.DTOChiTietPhieuNhap;
 import BUS.BUSPhieuNhap;
 import BUS.BUSChiTietPhieuNhap;
+import BUS.BUSKhoSach;
 import BUS.BUSTaiKhoan;
 import DAO.DAOKhoSach;
 import DAO.DAONhaXuatBan;
@@ -68,7 +69,7 @@ public class NhapHangView extends javax.swing.JFrame {
         tbKho.setModel(model_kho);
         tbNhap.setModel(model_nhap);
 //        txtFind.setText("Nhap nha xuat ban");
-        list = new DAOKhoSach().getListSach();
+        list = new BUSKhoSach().getAllsach();
         list_NXB = new DAONhaXuatBan().getListNXB();
         for(DTONhaXuatBan s : list_NXB){
             cbxNXB.addItem(s.getTen());
@@ -111,7 +112,7 @@ public class NhapHangView extends javax.swing.JFrame {
 
     public void ShowTableKho() {
         model_kho.setRowCount(0);
-        list = new DAOKhoSach().getListSach();
+        list = new BUSKhoSach().getAllsach();
         for (DTOKhoSach s : list) {
             if (s.getTenSach() == null) {
                 continue;

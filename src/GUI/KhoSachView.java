@@ -751,7 +751,7 @@ public class KhoSachView extends javax.swing.JFrame {
             }
             if(new DAOKhoSach().deleteSach((String) tbKhoSach.getValueAt(row, 0))){
                 JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong!");
-                list = new DAOKhoSach().getListSach();
+                list = new BUSKhoSach().getAllsach();
                 txtFind.setText("");
                 ShowTable();
                 return ;
