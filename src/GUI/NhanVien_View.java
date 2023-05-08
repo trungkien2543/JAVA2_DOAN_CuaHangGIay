@@ -903,8 +903,15 @@ if (maNV != null && !maNV.trim().equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "email không đúng định dạng mời bạn nhập lại!");
                     themnv.setVisible(true);
                    return;
-                   
-                }
+                }else{
+             for(DTOTaiKhoan taikhoan : listtk){
+                 if(taikhoan.getEmail().equals(txtemail.getText())){
+                     JOptionPane.showMessageDialog(rootPane, "email đã tồn tại");
+                    themnv.setVisible(true);
+                      return;
+                 }
+             }
+         }
         nv.setMaNV(addma.getText());
         nv.setTenNV(addten.getText());
         nv.setQueQuan(addhometown.getText());

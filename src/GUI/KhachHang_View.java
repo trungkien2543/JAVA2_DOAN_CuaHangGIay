@@ -683,7 +683,6 @@ public class KhachHang_View extends javax.swing.JFrame {
             fis.close();
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Vui lòng đóng file trước khi cập nhật!");
             return;
         }
 

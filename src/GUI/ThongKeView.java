@@ -161,6 +161,11 @@ public class ThongKeView extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         jLabel4.setText("jLabel3");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout TieuDeLayout = new javax.swing.GroupLayout(TieuDe);
         TieuDe.setLayout(TieuDeLayout);
@@ -487,6 +492,13 @@ public class ThongKeView extends javax.swing.JFrame {
     private void BookStore5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookStore5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_BookStore5MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();   
+    }//GEN-LAST:event_jLabel4MouseClicked
 
    
     
