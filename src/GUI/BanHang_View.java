@@ -1518,6 +1518,11 @@ public class BanHang_View extends javax.swing.JFrame {
     }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
+        if(lblMaPhieu.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Khong the tao phieu do thieu thong tin");
+            Reset();
+            return;
+        }
         DTOHoaDon s = new DTOHoaDon();
         
         s.setMaHD(Integer.parseInt(lblMaPhieu.getText()));
