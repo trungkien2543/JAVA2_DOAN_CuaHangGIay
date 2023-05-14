@@ -69,7 +69,7 @@ public class ThongKeView extends javax.swing.JFrame {
         jpnItem.removeAll();
         jpnItem.setLayout(new BorderLayout());
         jpnItem.add(chartPanel);
-    }
+    } 
     
     
     public void setDataToChartTKTheoDT(JPanel jpnItem){

@@ -96,7 +96,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="btnEx" pref="182" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" pref="113" max="32767" attributes="0"/>
+                      <Component id="btnXemChiTiet" pref="113" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -107,7 +107,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jpTongTien" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnXemChiTiet" alignment="0" max="32767" attributes="0"/>
                           <Component id="jpNgayLap" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -169,7 +169,7 @@
                 <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec1;u ki&#x1ec7;n l&#x1ecd;c:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnXemChiTiet">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="cc" red="0" type="rgb"/>
@@ -183,7 +183,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXemChiTietActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="jpNgayLap">

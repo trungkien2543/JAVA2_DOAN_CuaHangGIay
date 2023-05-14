@@ -1068,7 +1068,7 @@ public class BanHang_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Số điện thoại không chứa kí tự chữ hoặc kí tự đặc biệt");
             return;
         }
-        
+
         
         
         for(DTOKhachHang s : list_kh){
@@ -1159,7 +1159,7 @@ public class BanHang_View extends javax.swing.JFrame {
                             continue;
                         }
                         else{
-                            try{
+                                try{
                                     int test1 = Math.multiplyExact(sl_int, s.getGia());
                                     int test2 = Math.addExact(TongTien_int,test1);
                                 }
@@ -1584,7 +1584,6 @@ public class BanHang_View extends javax.swing.JFrame {
             return;
         }
         else{
-            System.out.println();
              for (DTOKhoSach s : list){
                 if(s.getMaSach().equals(masach)){
                     do{

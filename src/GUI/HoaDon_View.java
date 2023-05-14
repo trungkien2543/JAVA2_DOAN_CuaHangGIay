@@ -101,7 +101,7 @@ public class HoaDon_View extends javax.swing.JFrame {
         txtFind = new javax.swing.JTextField();
         cbxDieuKienLoc = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnXemChiTiet = new javax.swing.JButton();
         jpNgayLap = new javax.swing.JPanel();
         jDateFrom = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
@@ -164,13 +164,13 @@ public class HoaDon_View extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Điều kiện lọc:");
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Xem chi tiết");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnXemChiTiet.setBackground(new java.awt.Color(0, 204, 153));
+        btnXemChiTiet.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnXemChiTiet.setText("Xem chi tiết");
+        btnXemChiTiet.setBorder(null);
+        btnXemChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnXemChiTietActionPerformed(evt);
             }
         });
 
@@ -305,7 +305,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEx, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addComponent(btnXemChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                 .addContainerGap())
         );
         BangChonLayout.setVerticalGroup(
@@ -314,7 +314,7 @@ public class HoaDon_View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXemChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpNgayLap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(BangChonLayout.createSequentialGroup()
                         .addGroup(BangChonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,7 +671,7 @@ public class HoaDon_View extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtFindKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
         // TODO add your handling code here:
         int Selected_Row = tblHoaDon.getSelectedRow();
         if(Selected_Row==-1){
@@ -690,7 +690,7 @@ public class HoaDon_View extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnXemChiTietActionPerformed
 
     private void cbxDieuKienLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDieuKienLocActionPerformed
         // TODO add your handling code here:
@@ -1070,8 +1070,8 @@ public class HoaDon_View extends javax.swing.JFrame {
     private javax.swing.JButton btnEx;
     private javax.swing.JButton btnNgayLap;
     private javax.swing.JButton btnTongTien;
+    private javax.swing.JButton btnXemChiTiet;
     private javax.swing.JComboBox<String> cbxDieuKienLoc;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateFrom;
     private com.toedter.calendar.JDateChooser jDateTo;
     private javax.swing.JLabel jLabel1;
